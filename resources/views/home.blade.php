@@ -90,8 +90,30 @@ Association for Alternative Development
         </div>
 
         <div class="row p-3">
+            @if(isset($programs) && count($programs) > 0)
+                @foreach($programs as $program)
+                <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1 px-0 ">
+                    <a href="{{ route('programs.view', $program->id) }}">
+                        <div class="featuredImage">
+                            @if($program->image)
+                            <img src="{{ asset('images/programs/'.$program->image) }}" alt="{{ $program->title }}">
+                            @else
+                            <img src="https://images.pexels.com/photos/1371360/pexels-photo-1371360.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="{{ $program->title }}">
+                            @endif
+                            <div class="overlay">
+                                <p class="h4">{{ $program->title }}</p>
+                                <p class="textmuted">{{ Str::limit($program->description, 150) }}</p>
+                                @if($program->status)
+                                <span class="badge badge-{{ $program->status == 'active' ? 'success' : ($program->status == 'completed' ? 'secondary' : 'info') }}">{{ ucfirst($program->status) }}</span>
+                                @endif
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                @endforeach
+            @else
             <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1 px-0 ">
-                <a href="{{ route('programs.view') }}">
+                <a href="#">
                     <div class="featuredImage">
                         <img src="https://images.pexels.com/photos/1371360/pexels-photo-1371360.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
                         <div class="overlay">
@@ -123,43 +145,11 @@ Association for Alternative Development
                     </div>
                 </a>
             </div>
-            <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1 px-0 ">
-                <a href="#">
-                    <div class="featuredImage">
-                        <img src="https://images.pexels.com/photos/4577718/pexels-photo-4577718.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="">
-                        <div class="overlay">
-                            <p class="h4">Environmental Sustainability Project</p>
-                            <p class="textmuted">Promoting sustainable practices, conservation efforts, and environmental education to safeguard natural resources and mitigate climate change impacts.</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1 px-0 ">
-                <a href="#">
-                    <div class="featuredImage">
-                        <img src="https://images.pexels.com/photos/3449662/pexels-photo-3449662.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="">
-                        <div class="overlay">
-                            <p class="h4">Community Resilience Initiative</p>
-                            <p class="textmuted">Building resilient communities through disaster preparedness, infrastructure development, and livelihood support to enhance local capacities and reduce vulnerabilities.</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1 px-0 ">
-                <a href="#">
-                    <div class="featuredImage">
-                        <img src="https://images.pexels.com/photos/417344/pexels-photo-417344.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="">
-                        <div class="overlay">
-                            <p class="h4">Education for All Campaign</p>
-                            <p class="textmuted">Ensuring access to quality education for children from marginalized backgrounds through scholarships, school support programs, and educational resources.</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
+            @endif
         </div>
 
         <div class="d-flex justify-content-center pt-5 pb-3">
-            <a href="#" class="btn btn-danger"><i class="fa-solid fa-eye"></i> View all Programs</a>
+            <a href="{{ route('programs.all') }}" class="btn btn-danger"><i class="fa-solid fa-eye"></i> View all Programs</a>
         </div>
         <hr class="py-3 mt-4 m-0">
     </div>

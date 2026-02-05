@@ -19,8 +19,9 @@ Route::get('/', function () {
     $news = DB::table('latest_news')->take(6)->get();
     $gallery = DB::table('gallery')->take(6)->get();
     $application = DB::table('applications')->get()->first();
+    $programs = DB::table('programs')->orderBy('created_at', 'desc')->take(6)->get();
 
-    return view('home',compact('slider','project','news','gallery','application'));
+    return view('home',compact('slider','project','news','gallery','application','programs'));
 });
 
 Route::post('user/subscribe',[frontController::class,'subscribe'])->name('user.subscribe');
