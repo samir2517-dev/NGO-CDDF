@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<!--favicon-->
-	<link rel="icon" href="{{ asset('img/logo.png') }}" type="image/png" />
+	<link rel="icon" href="{{ asset('images/application/'.application()->fav_icon) }}" type="image/png" />
 	<!--plugins-->
 	<link href="{{ asset('admin/assets/plugins/vectormap/jquery-jvectormap-2.0.2.css') }}" rel="stylesheet"/>
 	<link href="{{ asset('admin/assets/plugins/simplebar/css/simplebar.css') }}" rel="stylesheet" />
@@ -35,7 +35,7 @@
 		<div class="sidebar-wrapper" data-simplebar="true">
 			<div class="sidebar-header">
 				<div>
-					<img src="{{ asset('img/logo.png') }}" class="logo-icon" alt="logo icon">
+					<img src="{{ asset('images/application/'.application()->fav_icon) }}" class="logo-icon" alt="logo icon">
 				</div>
 				<div>
 					<h4 class="logo-text text-danger">AFADBD</h4>

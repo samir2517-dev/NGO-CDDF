@@ -24,9 +24,9 @@ class applicationController extends Controller
                 'image' => ['mimes:jpeg,png,jpg', 'max:500'],
             ]);
 
-            if(!empty($application) && file_exists(public_path($application->main_logo)))
+            if(!empty($application) && file_exists(public_path('images/application/' . $application->main_logo)))
             {
-                @unlink($application->main_logo);
+                @unlink(public_path('images/application/' . $application->main_logo));
             }
             $main_logo_path = public_path('images/application/');
             $main_logo_name = rand(100000, 999999)."main_logo." . $main_logo->getClientOriginalExtension();
@@ -41,7 +41,7 @@ class applicationController extends Controller
             }
             else
             {
-                $main_logo_path_name = NULL;
+                $main_logo_path_name = '';
             }
 
         }
@@ -53,9 +53,9 @@ class applicationController extends Controller
                 'image' => ['mimes:jpeg,png,jpg', 'max:500'],
             ]);
 
-            if(!empty($application) && file_exists(public_path($application->fav_icon)))
+            if(!empty($application) && file_exists(public_path('images/application/' . $application->fav_icon)))
             {
-                @unlink($application->fev_icon);
+                @unlink(public_path('images/application/' . $application->fav_icon));
             }
             $fev_icon_path = public_path('images/application/');
             $fev_icon_name= rand(100000, 999999)."fev_icon." . $fev_icon->getClientOriginalExtension();
@@ -64,13 +64,13 @@ class applicationController extends Controller
         }
         else
         {
-            if(!empty($application) && isset($application->fev_icon))
+            if(!empty($application) && isset($application->fav_icon))
             {
-                $fev_icon_path_name = $application->fev_icon;
+                $fev_icon_path_name = $application->fav_icon;
             }
             else
             {
-                $fev_icon_path_name = NULL;
+                $fev_icon_path_name = '';
             }
 
         }

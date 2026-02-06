@@ -5,8 +5,7 @@
             {{-- logo and short description --}}
             <div class="col-md-4 d-flex align-items-center">
                 <div>
-                    <img src="{{ asset('img/main_logo.jpg') }}" alt="Logo" width="75%">
-                    {{-- <img src="{{ asset('images/application/'.application()->main_logo) }}" alt="Logo" width="100px;"> --}}
+                    <img src="{{ asset('images/application/'.application()->main_logo) }}" alt="Logo" width="75%">
                     <p class="py-3 text-justified text-white" style="font-size: 14px;">
                         AFAD is a women led organization working in norther Bangladesh since 1999. AFAD is registered (No. 2443) with NGO Affair’s Bureau (NGOAB) of Prime Minister’s Office of of People's Republic of Government of Bangladesh.
                     </p>
