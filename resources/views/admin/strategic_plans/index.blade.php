@@ -7,12 +7,6 @@
         <hr/>
         <div class="card">
             <div class="card-body">
-                @if (session()->has('success'))
-                    <div class="alert alert-success">
-                        {{ session()->get('success') }}
-                    </div>
-                @endif
-
                 <div class="mb-3">
                     <a href="{{ route('strategic_plans.create') }}" class="btn btn-primary">
                         <i class="bx bx-plus"></i> Add Strategic Plan
@@ -51,11 +45,11 @@
                                     <td class="align-middle">{{ date('M d, Y', strtotime($strategicPlan->created_at)) }}</td>
                                     <td class="text-center align-middle">
                                         <div class="d-flex align-items-center justify-content-center gap-1">
-                                            <a href="{{ route('strategic_plans.edit', $strategicPlan->id) }}" class="btn btn-sm btn-primary text-white" title="Edit">
-                                                <i class="fadeIn animated bx bx-edit"></i>
+                                            <a href="{{ route('strategic_plans.edit', $strategicPlan->id) }}" class="btn btn-outline-primary btn-sm me-1" title="Edit">
+                                                <i class="mdi mdi-pencil"></i>
                                             </a>
-                                            <a href="{{ route('strategic_plans.delete', $strategicPlan->id) }}" class="btn btn-sm btn-danger text-white" title="Delete">
-                                                <i class="fadeIn animated bx bx-trash-alt"></i>
+                                            <a href="{{ route('strategic_plans.delete', $strategicPlan->id) }}" class="btn btn-outline-danger btn-sm delete-confirm" title="Delete">
+                                                <i class="mdi mdi-delete"></i>
                                             </a>
                                         </div>
                                     </td>

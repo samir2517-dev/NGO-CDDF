@@ -7,11 +7,6 @@
         <hr/>
         <div class="card">
             <div class="card-body">
-                @if (session()->has('success'))
-                    <div class="alert alert-danger">
-                        {{ session()->get('success') }}
-                    </div>
-                @endif
                 <div class="p-4 border rounded table-responsive">
                     <table class="table table-hover table-striped">
                         <thead>
@@ -31,11 +26,11 @@
                                     <img src="{{ asset('images/partner/'.$partner->image) }}" alt="" width="50">
                                 </td>
                                 <td class="text-center align-middle">
-                                    <a href="{{ route('partner.edit',$partner->id) }}" class="btn btn-sm btn-primary text-white text-center">
-                                        <i class="fadeIn animated bx bx-edit"></i>
+                                    <a href="{{ route('partner.edit',$partner->id) }}" class="btn btn-outline-primary btn-sm me-1" title="Edit">
+                                        <i class="mdi mdi-pencil"></i>
                                     </a>
-                                    <a href="{{ route('partner.delete',$partner->id) }}" class="btn btn-sm btn-danger text-white text-center">
-                                        <i class="fadeIn animated bx bx-trash-alt"></i>
+                                    <a href="{{ route('partner.delete',$partner->id) }}" class="btn btn-outline-danger btn-sm delete-confirm" title="Delete">
+                                        <i class="mdi mdi-delete"></i>
                                     </a>
                                 </td>
                             </tr>

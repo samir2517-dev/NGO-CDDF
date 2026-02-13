@@ -26,13 +26,6 @@
                 </div>
             </div>
             <div class="card-body">
-                @if (session()->has('success'))
-                    <div class="alert alert-success alert-dismissible fade show">
-                        {{ session()->get('success') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    </div>
-                @endif
-                
                 <div class="table-responsive">
                     <table class="table table-hover table-striped align-middle">
                         <thead class="table-light">

@@ -7,11 +7,7 @@
         <hr/>
         <div class="card">
             <div class="card-body">
-                @if(session()->has('success'))
-                    <div class="alert alert-danger">
-                        {{ session()->get('success') }}
-                    </div>
-                @endif
+
                 <div class="p-4 border rounded table-responsive">
                     <table class="table">
                         <thead>

@@ -1,957 +1,679 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-	<!-- Required meta tags -->
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="csrf-token" content="{{ csrf_token() }}">
-	<!--favicon-->
-	<link rel="icon" href="{{ asset('images/application/'.application()->fav_icon) }}" type="image/png" />
-	<!--plugins-->
-	<link href="{{ asset('admin/assets/plugins/vectormap/jquery-jvectormap-2.0.2.css') }}" rel="stylesheet"/>
-	<link href="{{ asset('admin/assets/plugins/simplebar/css/simplebar.css') }}" rel="stylesheet" />
-	<link href="{{ asset('admin/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css') }}" rel="stylesheet" />
-	<link href="{{ asset('admin/assets/plugins/metismenu/css/metisMenu.min.css') }}" rel="stylesheet" />
-	<!-- loader-->
-	<link href="{{ asset('admin/assets/css/pace.min.css') }}" rel="stylesheet" />
-	<script src="{{ asset('admin/assets/js/pace.min.js') }}"></script>
-	<!-- Bootstrap CSS -->
-	<link href="{{ asset('admin/assets/css/bootstrap.min.css') }}" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-	<link href="{{ asset('admin/assets/css/app.css') }}" rel="stylesheet">
-	<link href="{{ asset('admin/assets/css/icons.css') }}" rel="stylesheet">
-	<!-- Theme Style CSS -->
-	<link rel="stylesheet" href="{{ asset('admin/assets/css/dark-theme.css') }}" />
-	<link rel="stylesheet" href="{{ asset('admin/assets/css/semi-dark.css') }}" />
-	<link rel="stylesheet" href="{{ asset('admin/assets/css/header-colors.css') }}" />
-	<title>AFADBD | Admin</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>BMS | Admin Dashboard</title>
+    
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="{{ asset('admin-assets/vendors/mdi/css/materialdesignicons.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin-assets/vendors/ti-icons/css/themify-icons.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin-assets/vendors/css/vendor.bundle.base.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin-assets/vendors/font-awesome/css/font-awesome.min.css') }}">
+    
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="{{ asset('admin-assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css') }}">
+    
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="{{ asset('admin-assets/css/style.css') }}">
+    
+    <!-- Favicon -->
+    @if(function_exists('application') && application() && isset(application()->fav_icon))
+        <link rel="shortcut icon" href="{{ asset('images/application/'.application()->fav_icon) }}" />
+    @else
+        <link rel="shortcut icon" href="{{ asset('admin-assets/images/favicon.png') }}" />
+    @endif
+    
+    @stack('styles')
 </head>
-
 <body>
-	<!--wrapper-->
-	<div class="wrapper">
-		<!--sidebar wrapper -->
-		<div class="sidebar-wrapper" data-simplebar="true">
-			<div class="sidebar-header">
-				<div>
-					<img src="{{ asset('images/application/'.application()->fav_icon) }}" class="logo-icon" alt="logo icon">
-				</div>
-				<div>
-					<h4 class="logo-text text-danger">AFADBD</h4>
-				</div>
-				<div class="toggle-icon ms-auto"><i class='bx bx-arrow-to-left text-danger'></i>
-				</div>
-			</div>
-			<!--navigation-->
-			<ul class="metismenu" id="menu">
-				<li>
-					<a href="{{ route('admin.home') }}">
-						<div class="parent-icon"><i class='bx bx-home-circle'></i>
-						</div>
-						<div class="menu-title">Dashboard</div>
-					</a>
-				</li>
-				<li>
-					<a href="javascript:;" class="has-arrow">
-						<div class="parent-icon"><i class="fadeIn animated bx bx-slider-alt"></i>
-						</div>
-						<div class="menu-title">Slider</div>
-					</a>
-					<ul>
-						<li>
-                            <a href="{{ route('slider.add') }}"><i class="bx bx-right-arrow-alt"></i>Add Slider</a>
-						</li>
-						<li>
-                            <a href="{{ route('slider.index') }}"><i class="bx bx-right-arrow-alt"></i>All Slider</a>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<a href="javascript:;" class="has-arrow">
-						<div class="parent-icon"><i class="fadeIn animated bx bx-shape-square"></i>
-						</div>
-						<div class="menu-title">Ongoing Project</div>
-					</a>
-					<ul>
-						<li>
-                            <a href="{{ route('project.add') }}"><i class="bx bx-right-arrow-alt"></i>Add Project</a>
-						</li>
-						<li>
-                            <a href="{{ route('project.index') }}"><i class="bx bx-right-arrow-alt"></i>All Project</a>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<a href="javascript:;" class="has-arrow">
-						<div class="parent-icon"><i class="fadeIn animated bx bx-news"></i>
-						</div>
-						<div class="menu-title">Latest News</div>
-					</a>
-					<ul>
-						<li>
-                            <a href="{{ route('news.add') }}"><i class="bx bx-right-arrow-alt"></i>Add News</a>
-						</li>
-						<li>
-                            <a href="{{ route('news.index') }}"><i class="bx bx-right-arrow-alt"></i>All News</a>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<a href="javascript:;" class="has-arrow">
-						<div class="parent-icon"><i class="lni lni-image"></i>
-						</div>
-						<div class="menu-title">Photo Gallery</div>
-					</a>
-					<ul>
-						<li>
-                            <a href="{{ route('gallery.add') }}"><i class="bx bx-right-arrow-alt"></i>Add Photo</a>
-						</li>
-						<li>
-                            <a href="{{ route('gallery.index') }}"><i class="bx bx-right-arrow-alt"></i>All Photo</a>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<a href="javascript:;" class="has-arrow">
-						<div class="parent-icon"><i class="fadeIn animated bx bx-bell"></i>
-						</div>
-						<div class="menu-title">Subscribe</div>
-					</a>
-					<ul>
-						<li>
-                            <a href="{{ route('subscribe.all') }}"><i class="bx bx-right-arrow-alt"></i>All Subscribe</a>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<a href="javascript:;" class="has-arrow">
-						<div class="parent-icon"><i class="fadeIn animated bx bx-donate-heart"></i>
-						</div>
-						<div class="menu-title">Donate Now</div>
-					</a>
-					<ul>
-						<li>
-                            <a href="{{ route('admin.payment_methods.add') }}"><i class="bx bx-right-arrow-alt"></i>Add Payment Method</a>
-						</li>
-						<li>
-                            <a href="{{ route('admin.payment_methods.index') }}"><i class="bx bx-right-arrow-alt"></i>All Payment Methods</a>
-						</li>
-						<li>
-                            <a href="{{ route('admin.donations.index') }}"><i class="bx bx-right-arrow-alt"></i>All Donations</a>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<a href="javascript:;" class="has-arrow">
-						<div class="parent-icon"><i class="fadeIn animated bx bx-target-lock"></i>
-						</div>
-						<div class="menu-title">Key Focus Area</div>
-					</a>
-					<ul>
-						<li>
-							<a href="{{ route('admin.focus_areas.add') }}"><i class="bx bx-right-arrow-alt"></i>Add Focus Area</a>
-						</li>
-						<li>
-							<a href="{{ route('admin.focus_areas.index') }}"><i class="bx bx-right-arrow-alt"></i>All Focus Areas</a>
-						</li>
-					</ul>
-				</li>
-				{{-- <li>
-					<a href="{{ route('logo.create') }}">
-						<div class="parent-icon"><i class='bx bx-cookie'></i>
-						</div>
-						<div class="menu-title">Application</div>
-					</a>
-				</li> --}}
-				<li>
-					<a href="{{ route('logo.create') }}">
-						<div class="parent-icon"><i class='bx bx-folder'></i>
-						</div>
-						<div class="menu-title">Application</div>
-					</a>
-				</li>
-				<li>
-					<a href="{{ route('about.us.create') }}">
-						<div class="parent-icon"><i class='bx bx-folder'></i>
-						</div>
-						<div class="menu-title">About us</div>
-					</a>
-				</li>
-				<li>
-					<a href="{{ route('mission.vision.create') }}">
-						<div class="parent-icon"><i class='fadeIn animated bx bx-calendar-star'></i>
-						</div>
-						<div class="menu-title">Mission Vision</div>
-					</a>
-				</li>
-				<li>
-					<a href="javascript:;" class="has-arrow">
-						<div class="parent-icon"><i class='fadeIn animated bx bx-detail'></i>
-						</div>
-						<div class="menu-title">Origin & Legal Affilation</div>
-					</a>
-					<ul>
-						<li>
-                            <a href="{{ route('origin.legal_affilation.create') }}"><i class="bx bx-right-arrow-alt"></i>Add Affilation</a>
-						</li>
-						<li>
-                            <a href="{{ route('origin.legal_affilation.index') }}"><i class="bx bx-right-arrow-alt"></i>All Affilation</a>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<a href="javascript:;" class="has-arrow">
-						<div class="parent-icon"><i class='fadeIn animated bx bx-user-circle'></i>
-						</div>
-						<div class="menu-title">Executive Committee</div>
-					</a>
-					<ul>
-						<li>
-                            <a href="{{ route('executive.add') }}"><i class="bx bx-right-arrow-alt"></i>Add Member</a>
-						</li>
-						<li>
-                            <a href="{{ route('executive.index') }}"><i class="bx bx-right-arrow-alt"></i>All Members</a>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<a href="javascript:;" class="has-arrow">
-						<div class="parent-icon"><i class='fadeIn animated bx bx-group'></i>
-						</div>
-						<div class="menu-title">Team Members</div>
-					</a>
-					<ul>
-						<li>
-                            <a href="{{ route('team.add') }}"><i class="bx bx-right-arrow-alt"></i>Add Member</a>
-						</li>
-						<li>
-                            <a href="{{ route('team.index') }}"><i class="bx bx-right-arrow-alt"></i>All Members</a>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<a href="javascript:;" class="has-arrow">
-						<div class="parent-icon"><i class='fadeIn animated bx bx-briefcase'></i>
-						</div>
-						<div class="menu-title">Programs</div>
-					</a>
-					<ul>
-						<li>
-                            <a href="{{ route('programs.add') }}"><i class="bx bx-right-arrow-alt"></i>Add Program</a>
-						</li>
-						<li>
-                            <a href="{{ route('programs.index') }}"><i class="bx bx-right-arrow-alt"></i>All Programs</a>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<a href="javascript:;" class="has-arrow">
-						<div class="parent-icon"><i class='fadeIn animated bx bx-trending-up'></i>
-						</div>
-						<div class="menu-title">Impact Metrics</div>
-					</a>
-					<ul>
-						<li>
-                            <a href="{{ route('impact.add') }}"><i class="bx bx-right-arrow-alt"></i>Add Impact</a>
-						</li>
-						<li>
-                            <a href="{{ route('impact.index') }}"><i class="bx bx-right-arrow-alt"></i>All Impact</a>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<a href="javascript:;" class="has-arrow">
-						<div class="parent-icon"><i class='fadeIn animated bx bx-book-heart'></i>
-						</div>
-						<div class="menu-title">Success Stories</div>
-					</a>
-					<ul>
-						<li>
-                            <a href="{{ route('stories.add') }}"><i class="bx bx-right-arrow-alt"></i>Add Story</a>
-						</li>
-						<li>
-                            <a href="{{ route('stories.index') }}"><i class="bx bx-right-arrow-alt"></i>All Stories</a>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<a href="javascript:;" class="has-arrow">
-						<div class="parent-icon"><i class='lni lni-network'></i>
-						</div>
-						<div class="menu-title">Chief Executive Message</div>
-					</a>
-					<ul>
-						<li>
-                            <a href="{{ route('chief.message.add') }}"><i class="bx bx-right-arrow-alt"></i>Add Message</a>
-						</li>
-						<li>
-                            <a href="{{ route('chief.message.index') }}"><i class="bx bx-right-arrow-alt"></i>All Message</a>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<a href="javascript:;" class="has-arrow">
-						<div class="parent-icon"><i class='fadeIn animated bx bx-help-circle'></i>
-						</div>
-						<div class="menu-title">FAQ</div>
-					</a>
-					<ul>
-						<li>
-                            <a href="{{ route('faq.add') }}"><i class="bx bx-right-arrow-alt"></i>Add FAQ</a>
-						</li>
-						<li>
-                            <a href="{{ route('faq.index') }}"><i class="bx bx-right-arrow-alt"></i>All FAQ</a>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<a href="javascript:;" class="has-arrow">
-						<div class="parent-icon"><i class='fadeIn animated bx bx-heart'></i>
-						</div>
-						<div class="menu-title">Volunteers</div>
-					</a>
-					<ul>
-						<li>
-                            <a href="{{ route('volunteers.add') }}"><i class="bx bx-right-arrow-alt"></i>Add Opportunity</a>
-						</li>
-						<li>
-                            <a href="{{ route('volunteers.index') }}"><i class="bx bx-right-arrow-alt"></i>All Opportunities</a>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<a href="javascript:;" class="has-arrow">
-						<div class="parent-icon"><i class='fadeIn animated bx bx-message-rounded-dots'></i>
-						</div>
-						<div class="menu-title">User Message</div>
-					</a>
-					<ul>
-						<li>
-                            <a href="{{ route('message.index') }}"><i class="bx bx-right-arrow-alt"></i>All Message</a>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<a href="javascript:;" class="has-arrow">
-						<div class="parent-icon"><i class='fadeIn animated bx bx-user-check'></i>
-						</div>
-						<div class="menu-title">Partners & Donor</div>
-					</a>
-					<ul>
-						<li>
-                            <a href="{{ route('partner.create') }}"><i class="bx bx-right-arrow-alt"></i>Add Partners & Donor</a>
-						</li>
-						<li>
-                            <a href="{{ route('partner.index') }}"><i class="bx bx-right-arrow-alt"></i>All Partners & Donor</a>
-						</li>
-					</ul>
-				</li>
-				{{-- <li>
-					<a href="javascript:;" class="has-arrow">
-						<div class="parent-icon"><i class='fadeIn animated bx bx-area'></i>
-						</div>
-						<div class="menu-title">Key Focus Ares</div>
-					</a>
-					<ul>
-						<li>
-                            <a href="#"><i class="bx bx-right-arrow-alt"></i>Add</a>
-						</li>
-						<li>
-                            <a href="#"><i class="bx bx-right-arrow-alt"></i>All</a>
-						</li>
-					</ul>
-				</li> --}}
-				<li>
-					<a href="javascript:;" class="has-arrow">
-						<div class="parent-icon"><i class='fadeIn animated bx bx-notification'></i>
-						</div>
-						<div class="menu-title">Project Archive</div>
-					</a>
-					<ul>
-						<li>
-                            <a href="{{ route('project.archive.create') }}"><i class="bx bx-right-arrow-alt"></i>Add Project</a>
-						</li>
-						<li>
-                            <a href="{{ route('project.archive.index') }}"><i class="bx bx-right-arrow-alt"></i>All Project</a>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<a href="javascript:;" class="has-arrow">
-						<div class="parent-icon"><i class='fadeIn animated bx bx-file'></i>
-						</div>
-						<div class="menu-title">Strategic Plan</div>
-					</a>
-					<ul>
-						<li>
-							<a href="{{ route('strategic_plans.create') }}"><i class="bx bx-right-arrow-alt"></i>Add Strategic Plan</a>
-						</li>
-						<li>
-							<a href="{{ route('strategic_plans.index') }}"><i class="bx bx-right-arrow-alt"></i>All Strategic Plan</a>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<a href="javascript:;" class="has-arrow">
-						<div class="parent-icon"><i class='fadeIn animated bx bx-file'></i>
-						</div>
-						<div class="menu-title">Policy and Guideline</div>
-					</a>
-					<ul>
-						<li>
-                            <a href="{{ route('policy.create') }}"><i class="bx bx-right-arrow-alt"></i>Add Policy and Guideline</a>
-						</li>
-						<li>
-                            <a href="{{ route('policy.index') }}"><i class="bx bx-right-arrow-alt"></i>All Policy and Guideline</a>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<a href="javascript:;" class="has-arrow">
-						<div class="parent-icon"><i class='fadeIn animated bx bx-file'></i>
-						</div>
-						<div class="menu-title">Publication</div>
-					</a>
-					<ul>
-						<li>
-                            <a href="{{ route('publications.add') }}"><i class="bx bx-right-arrow-alt"></i>Add Publication</a>
-						</li>
-						<li>
-                            <a href="{{ route('publications.index') }}"><i class="bx bx-right-arrow-alt"></i>All Publications</a>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<a href="javascript:;" class="has-arrow">
-						<div class="parent-icon"><i class='fadeIn animated bx bx-star'></i>
-						</div>
-						<div class="menu-title">Career</div>
-					</a>
-					<ul>
-						<li>
-                            <a href="{{ route('invoked.create') }}"><i class="bx bx-right-arrow-alt"></i>Add Career</a>
-						</li>
-						<li>
-                            <a href="{{ route('invoked.index') }}"><i class="bx bx-right-arrow-alt"></i>All Career</a>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<a href="javascript:;" class="has-arrow">
-						<div class="parent-icon"><i class='fadeIn animated bx bx-phone-call'></i>
-						</div>
-						<div class="menu-title">Contact</div>
-					</a>
-					<ul>
-						<li>
-                            <a href="{{ route('contact.add') }}"><i class="bx bx-right-arrow-alt"></i>Add Contact</a>
-						</li>
-						<li>
-                            <a href="{{ route('contact.index') }}"><i class="bx bx-right-arrow-alt"></i>All Contact</a>
-						</li>
-					</ul>
-				</li>
-			</ul>
-			<!--end navigation-->
-		</div>
-		<!--end sidebar wrapper -->
-		<!--start header -->
-		<header>
-			<div class="topbar d-flex align-items-center">
-				<nav class="navbar navbar-expand">
-
-					<div class="mobile-toggle-menu"><i class='bx bx-menu'></i>
-					</div>
-					<div class="search-bar flex-grow-1">
-						<div class="position-relative search-bar-box">
-							<input type="text" class="form-control search-control" placeholder="Type to search..."> <span class="position-absolute top-50 search-show translate-middle-y"><i class='bx bx-search'></i></span>
-							<span class="position-absolute top-50 search-close translate-middle-y"><i class='bx bx-x'></i></span>
-						</div>
-					</div>
-					<div class="top-menu ms-auto">
-						<ul class="navbar-nav align-items-center">
-							<li class="nav-item mobile-search-icon">
-								<a class="nav-link" href="#">	<i class='bx bx-search'></i>
-								</a>
-							</li>
-							{{-- <li class="nav-item dropdown dropdown-large">
-								<a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">	<i class='bx bx-category'></i>
-								</a>
-								<div class="dropdown-menu dropdown-menu-end">
-									<div class="row row-cols-3 g-3 p-3">
-										<div class="col text-center">
-											<div class="app-box mx-auto bg-gradient-cosmic text-white"><i class='bx bx-group'></i>
-											</div>
-											<div class="app-title">Teams</div>
-										</div>
-										<div class="col text-center">
-											<div class="app-box mx-auto bg-gradient-burning text-white"><i class='bx bx-atom'></i>
-											</div>
-											<div class="app-title">Projects</div>
-										</div>
-										<div class="col text-center">
-											<div class="app-box mx-auto bg-gradient-lush text-white"><i class='bx bx-shield'></i>
-											</div>
-											<div class="app-title">Tasks</div>
-										</div>
-										<div class="col text-center">
-											<div class="app-box mx-auto bg-gradient-kyoto text-dark"><i class='bx bx-notification'></i>
-											</div>
-											<div class="app-title">Feeds</div>
-										</div>
-										<div class="col text-center">
-											<div class="app-box mx-auto bg-gradient-blues text-dark"><i class='bx bx-file'></i>
-											</div>
-											<div class="app-title">Files</div>
-										</div>
-										<div class="col text-center">
-											<div class="app-box mx-auto bg-gradient-moonlit text-white"><i class='bx bx-filter-alt'></i>
-											</div>
-											<div class="app-title">Alerts</div>
-										</div>
-									</div>
-								</div>
-							</li> --}}
-							<li class="nav-item dropdown dropdown-large d-none">
-								<a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <span class="alert-count">7</span>
-									<i class='bx bx-bell'></i>
-								</a>
-								<div class="dropdown-menu dropdown-menu-end">
-									<a href="javascript:;">
-										<div class="msg-header">
-											<p class="msg-header-title">Notifications</p>
-											<p class="msg-header-clear ms-auto">Marks all as read</p>
-										</div>
-									</a>
-									<div class="header-notifications-list">
-										<a class="dropdown-item" href="javascript:;">
-											<div class="d-flex align-items-center">
-												<div class="notify bg-light-primary text-primary"><i class="bx bx-group"></i>
-												</div>
-												<div class="flex-grow-1">
-													<h6 class="msg-name">New Customers<span class="msg-time float-end">14 Sec
-												ago</span></h6>
-													<p class="msg-info">5 new user registered</p>
-												</div>
-											</div>
-										</a>
-										<a class="dropdown-item" href="javascript:;">
-											<div class="d-flex align-items-center">
-												<div class="notify bg-light-danger text-danger"><i class="bx bx-cart-alt"></i>
-												</div>
-												<div class="flex-grow-1">
-													<h6 class="msg-name">New Orders <span class="msg-time float-end">2 min
-												ago</span></h6>
-													<p class="msg-info">You have recived new orders</p>
-												</div>
-											</div>
-										</a>
-										<a class="dropdown-item" href="javascript:;">
-											<div class="d-flex align-items-center">
-												<div class="notify bg-light-success text-success"><i class="bx bx-file"></i>
-												</div>
-												<div class="flex-grow-1">
-													<h6 class="msg-name">24 PDF File<span class="msg-time float-end">19 min
-												ago</span></h6>
-													<p class="msg-info">The pdf files generated</p>
-												</div>
-											</div>
-										</a>
-										<a class="dropdown-item" href="javascript:;">
-											<div class="d-flex align-items-center">
-												<div class="notify bg-light-warning text-warning"><i class="bx bx-send"></i>
-												</div>
-												<div class="flex-grow-1">
-													<h6 class="msg-name">Time Response <span class="msg-time float-end">28 min
-												ago</span></h6>
-													<p class="msg-info">5.1 min avarage time response</p>
-												</div>
-											</div>
-										</a>
-										<a class="dropdown-item" href="javascript:;">
-											<div class="d-flex align-items-center">
-												<div class="notify bg-light-info text-info"><i class="bx bx-home-circle"></i>
-												</div>
-												<div class="flex-grow-1">
-													<h6 class="msg-name">New Product Approved <span
-												class="msg-time float-end">2 hrs ago</span></h6>
-													<p class="msg-info">Your new product has approved</p>
-												</div>
-											</div>
-										</a>
-										<a class="dropdown-item" href="javascript:;">
-											<div class="d-flex align-items-center">
-												<div class="notify bg-light-danger text-danger"><i class="bx bx-message-detail"></i>
-												</div>
-												<div class="flex-grow-1">
-													<h6 class="msg-name">New Comments <span class="msg-time float-end">4 hrs
-												ago</span></h6>
-													<p class="msg-info">New customer comments recived</p>
-												</div>
-											</div>
-										</a>
-										<a class="dropdown-item" href="javascript:;">
-											<div class="d-flex align-items-center">
-												<div class="notify bg-light-success text-success"><i class='bx bx-check-square'></i>
-												</div>
-												<div class="flex-grow-1">
-													<h6 class="msg-name">Your item is shipped <span class="msg-time float-end">5 hrs
-												ago</span></h6>
-													<p class="msg-info">Successfully shipped your item</p>
-												</div>
-											</div>
-										</a>
-										<a class="dropdown-item" href="javascript:;">
-											<div class="d-flex align-items-center">
-												<div class="notify bg-light-primary text-primary"><i class='bx bx-user-pin'></i>
-												</div>
-												<div class="flex-grow-1">
-													<h6 class="msg-name">New 24 authors<span class="msg-time float-end">1 day
-												ago</span></h6>
-													<p class="msg-info">24 new authors joined last week</p>
-												</div>
-											</div>
-										</a>
-										<a class="dropdown-item" href="javascript:;">
-											<div class="d-flex align-items-center">
-												<div class="notify bg-light-warning text-warning"><i class='bx bx-door-open'></i>
-												</div>
-												<div class="flex-grow-1">
-													<h6 class="msg-name">Defense Alerts <span class="msg-time float-end">2 weeks
-												ago</span></h6>
-													<p class="msg-info">45% less alerts last 4 weeks</p>
-												</div>
-											</div>
-										</a>
-									</div>
-									<a href="javascript:;">
-										<div class="text-center msg-footer">View All Notifications</div>
-									</a>
-								</div>
-							</li>
-							<li class="nav-item dropdown dropdown-large d-none">
-								<a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <span class="alert-count">8</span>
-									<i class='bx bx-comment'></i>
-								</a>
-								<div class="dropdown-menu dropdown-menu-end">
-									<a href="javascript:;">
-										<div class="msg-header">
-											<p class="msg-header-title">Messages</p>
-											<p class="msg-header-clear ms-auto">Marks all as read</p>
-										</div>
-									</a>
-									<div class="header-message-list">
-										<a class="dropdown-item" href="javascript:;">
-											<div class="d-flex align-items-center">
-												<div class="user-online">
-														<img src="{{ asset('admin/assets/images/avatars/avatar-1.png') }}" class="msg-avatar" alt="user avatar">
-												</div>
-												<div class="flex-grow-1">
-													<h6 class="msg-name">Daisy Anderson <span class="msg-time float-end">5 sec
-												ago</span></h6>
-													<p class="msg-info">The standard chunk of lorem</p>
-												</div>
-											</div>
-										</a>
-										<a class="dropdown-item" href="javascript:;">
-											<div class="d-flex align-items-center">
-												<div class="user-online">
-														<img src="{{ asset('admin/assets/images/avatars/avatar-2.png') }}" class="msg-avatar" alt="user avatar">
-												</div>
-												<div class="flex-grow-1">
-													<h6 class="msg-name">Althea Cabardo <span class="msg-time float-end">14
-												sec ago</span></h6>
-													<p class="msg-info">Many desktop publishing packages</p>
-												</div>
-											</div>
-										</a>
-										<a class="dropdown-item" href="javascript:;">
-											<div class="d-flex align-items-center">
-												<div class="user-online">
-														<img src="{{ asset('admin/assets/images/avatars/avatar-3.png') }}" class="msg-avatar" alt="user avatar">
-												</div>
-												<div class="flex-grow-1">
-													<h6 class="msg-name">Oscar Garner <span class="msg-time float-end">8 min
-												ago</span></h6>
-													<p class="msg-info">Various versions have evolved over</p>
-												</div>
-											</div>
-										</a>
-										<a class="dropdown-item" href="javascript:;">
-											<div class="d-flex align-items-center">
-												<div class="user-online">
-														<img src="{{ asset('admin/assets/images/avatars/avatar-4.png') }}" class="msg-avatar" alt="user avatar">
-												</div>
-												<div class="flex-grow-1">
-													<h6 class="msg-name">Katherine Pechon <span class="msg-time float-end">15
-												min ago</span></h6>
-													<p class="msg-info">Making this the first true generator</p>
-												</div>
-											</div>
-										</a>
-										<a class="dropdown-item" href="javascript:;">
-											<div class="d-flex align-items-center">
-												<div class="user-online">
-														<img src="{{ asset('admin/assets/images/avatars/avatar-5.png') }}" class="msg-avatar" alt="user avatar">
-												</div>
-												<div class="flex-grow-1">
-													<h6 class="msg-name">Amelia Doe <span class="msg-time float-end">22 min
-												ago</span></h6>
-													<p class="msg-info">Duis aute irure dolor in reprehenderit</p>
-												</div>
-											</div>
-										</a>
-										<a class="dropdown-item" href="javascript:;">
-											<div class="d-flex align-items-center">
-												<div class="user-online">
-														<img src="{{ asset('admin/assets/images/avatars/avatar-6.png') }}" class="msg-avatar" alt="user avatar">
-												</div>
-												<div class="flex-grow-1">
-													<h6 class="msg-name">Cristina Jhons <span class="msg-time float-end">2 hrs
-												ago</span></h6>
-													<p class="msg-info">The passage is attributed to an unknown</p>
-												</div>
-											</div>
-										</a>
-										<a class="dropdown-item" href="javascript:;">
-											<div class="d-flex align-items-center">
-												<div class="user-online">
-														<img src="{{ asset('admin/assets/images/avatars/avatar-7.png') }}" class="msg-avatar" alt="user avatar">
-												</div>
-												<div class="flex-grow-1">
-													<h6 class="msg-name">James Caviness <span class="msg-time float-end">4 hrs
-												ago</span></h6>
-													<p class="msg-info">The point of using Lorem</p>
-												</div>
-											</div>
-										</a>
-										<a class="dropdown-item" href="javascript:;">
-											<div class="d-flex align-items-center">
-												<div class="user-online">
-														<img src="{{ asset('admin/assets/images/avatars/avatar-8.png') }}" class="msg-avatar" alt="user avatar">
-												</div>
-												<div class="flex-grow-1">
-													<h6 class="msg-name">Peter Costanzo <span class="msg-time float-end">6 hrs
-												ago</span></h6>
-													<p class="msg-info">It was popularised in the 1960s</p>
-												</div>
-											</div>
-										</a>
-										<a class="dropdown-item" href="javascript:;">
-											<div class="d-flex align-items-center">
-												<div class="user-online">
-														<img src="{{ asset('admin/assets/images/avatars/avatar-9.png') }}" class="msg-avatar" alt="user avatar">
-												</div>
-												<div class="flex-grow-1">
-													<h6 class="msg-name">David Buckley <span class="msg-time float-end">2 hrs
-												ago</span></h6>
-													<p class="msg-info">Various versions have evolved over</p>
-												</div>
-											</div>
-										</a>
-										<a class="dropdown-item" href="javascript:;">
-											<div class="d-flex align-items-center">
-												<div class="user-online">
-														<img src="{{ asset('admin/assets/images/avatars/avatar-10.png') }}" class="msg-avatar" alt="user avatar">
-												</div>
-												<div class="flex-grow-1">
-													<h6 class="msg-name">Thomas Wheeler <span class="msg-time float-end">2 days
-												ago</span></h6>
-													<p class="msg-info">If you are going to use a passage</p>
-												</div>
-											</div>
-										</a>
-										<a class="dropdown-item" href="javascript:;">
-											<div class="d-flex align-items-center">
-												<div class="user-online">
-														<img src="{{ asset('admin/assets/images/avatars/avatar-11.png') }}" class="msg-avatar" alt="user avatar">
-												</div>
-												<div class="flex-grow-1">
-													<h6 class="msg-name">Johnny Seitz <span class="msg-time float-end">5 days
-												ago</span></h6>
-													<p class="msg-info">All the Lorem Ipsum generators</p>
-												</div>
-											</div>
-										</a>
-									</div>
-									<a href="javascript:;">
-										<div class="text-center msg-footer">View All Messages</div>
-									</a>
-								</div>
-							</li>
-						</ul>
-					</div>
-
-					<div class="user-box dropdown">
-						<a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							<i class="bx bx-user"></i>
-							<div class="user-info ps-3">
-								<p class="user-name mb-0">{{ Auth::user()->name }}</p>
-							</div>
-						</a>
-						<ul class="dropdown-menu dropdown-menu-end">
-							{{-- <li><a class="dropdown-item" href="javascript:;"><i class="bx bx-user"></i><span>Profile</span></a>
-							</li> --}}
-							{{-- <li>
-								<div class="dropdown-divider mb-0"></div>
-							</li> --}}
-							<li>
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                    document.getElementById('logout-form').submit();">
-                                    <i class='bx bx-log-out-circle'></i>
-                                    <span>Logout</span>
-                                </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-							</li>
-						</ul>
-					</div>
-				</nav>
-			</div>
-		</header>
-		<!--end header -->
-		<!--start page wrapper -->
-		<div class="page-wrapper">
-			<div class="page-content">
-
-                @yield('content')
-
+    <div class="container-scroller">
+        <!-- Navbar -->
+        <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+            <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
+                <a class="navbar-brand brand-logo" href="{{ route('admin.home') }}" style="text-decoration: none;">
+                    <h3 class="mb-0" style="color: #6C7293; font-weight: 600;">BMS</h3>
+                </a>
+                <a class="navbar-brand brand-logo-mini" href="{{ route('admin.home') }}" style="text-decoration: none;">
+                    <h5 class="mb-0" style="color: #6C7293; font-weight: 600;">BMS</h5>
+                </a>
             </div>
-		</div>
-		<!--end page wrapper -->
-		<!--start overlay-->
-		<div class="overlay toggle-icon"></div>
-		<!--end overlay-->
-		<!--Start Back To Top Button--> <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
-		<!--End Back To Top Button-->
-		<footer class="page-footer">
-			<p class="mb-0">Copyright © {{ @date('Y') }}. All right reserved AFADBD</p>
-		</footer>
-	</div>
-	<!--end wrapper-->
-	<!--start switcher-->
-	<div class="switcher-wrapper">
-		<div class="switcher-btn"> <i class='bx bx-cog bx-spin'></i>
-		</div>
-		<div class="switcher-body">
-			<div class="d-flex align-items-center">
-				<h5 class="mb-0 text-uppercase">Theme Customizer</h5>
-				<button type="button" class="btn-close ms-auto close-switcher" aria-label="Close"></button>
-			</div>
-			<hr/>
-			<h6 class="mb-0">Theme Styles</h6>
-			<hr/>
-			<div class="d-flex align-items-center justify-content-between">
-				<div class="form-check">
-					<input class="form-check-input" type="radio" name="flexRadioDefault" id="lightmode" checked>
-					<label class="form-check-label" for="lightmode">Light</label>
-				</div>
-				<div class="form-check">
-					<input class="form-check-input" type="radio" name="flexRadioDefault" id="darkmode">
-					<label class="form-check-label" for="darkmode">Dark</label>
-				</div>
-				<div class="form-check">
-					<input class="form-check-input" type="radio" name="flexRadioDefault" id="semidark">
-					<label class="form-check-label" for="semidark">Semi Dark</label>
-				</div>
-			</div>
-			<hr/>
-			<div class="form-check">
-				<input class="form-check-input" type="radio" id="minimaltheme" name="flexRadioDefault">
-				<label class="form-check-label" for="minimaltheme">Minimal Theme</label>
-			</div>
-			<hr/>
-			<h6 class="mb-0">Header Colors</h6>
-			<hr/>
-			<div class="header-colors-indigators">
-				<div class="row row-cols-auto g-3">
-					<div class="col">
-						<div class="indigator headercolor1" id="headercolor1"></div>
-					</div>
-					<div class="col">
-						<div class="indigator headercolor2" id="headercolor2"></div>
-					</div>
-					<div class="col">
-						<div class="indigator headercolor3" id="headercolor3"></div>
-					</div>
-					<div class="col">
-						<div class="indigator headercolor4" id="headercolor4"></div>
-					</div>
-					<div class="col">
-						<div class="indigator headercolor5" id="headercolor5"></div>
-					</div>
-					<div class="col">
-						<div class="indigator headercolor6" id="headercolor6"></div>
-					</div>
-					<div class="col">
-						<div class="indigator headercolor7" id="headercolor7"></div>
-					</div>
-					<div class="col">
-						<div class="indigator headercolor8" id="headercolor8"></div>
-					</div>
-				</div>
-			</div>
+            <div class="navbar-menu-wrapper d-flex align-items-stretch">
+                <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+                    <span class="mdi mdi-menu"></span>
+                </button>
+                <div class="search-field d-none d-md-block">
+                    <form class="d-flex align-items-center h-100" action="#">
+                        <div class="input-group">
+                            <div class="input-group-prepend bg-transparent">
+                                <i class="input-group-text border-0 mdi mdi-magnify"></i>
+                            </div>
+                            <input type="text" class="form-control bg-transparent border-0" placeholder="Search...">
+                        </div>
+                    </form>
+                </div>
+                <ul class="navbar-nav navbar-nav-right">
+                    <li class="nav-item nav-logout d-none d-lg-block">
+                        <a class="nav-link" href="{{ route('logout') }}" 
+                           onclick="event.preventDefault(); document.getElementById('logout-form-2').submit();">
+                            <i class="mdi mdi-power"></i>
+                        </a>
+                        <form id="logout-form-2" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </li>
+                </ul>
+                <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+                    <span class="mdi mdi-menu"></span>
+                </button>
+            </div>
+        </nav>
 
-			<hr/>
-			<h6 class="mb-0">Sidebar Backgrounds</h6>
-			<hr/>
-			<div class="header-colors-indigators">
-				<div class="row row-cols-auto g-3">
-					<div class="col">
-						<div class="indigator sidebarcolor1" id="sidebarcolor1"></div>
-					</div>
-					<div class="col">
-						<div class="indigator sidebarcolor2" id="sidebarcolor2"></div>
-					</div>
-					<div class="col">
-						<div class="indigator sidebarcolor3" id="sidebarcolor3"></div>
-					</div>
-					<div class="col">
-						<div class="indigator sidebarcolor4" id="sidebarcolor4"></div>
-					</div>
-					<div class="col">
-						<div class="indigator sidebarcolor5" id="sidebarcolor5"></div>
-					</div>
-					<div class="col">
-						<div class="indigator sidebarcolor6" id="sidebarcolor6"></div>
-					</div>
-					<div class="col">
-						<div class="indigator sidebarcolor7" id="sidebarcolor7"></div>
-					</div>
-					<div class="col">
-						<div class="indigator sidebarcolor8" id="sidebarcolor8"></div>
-					</div>
-				</div>
-			</div>
+        <!-- Page Body Wrapper -->
+        <div class="container-fluid page-body-wrapper">
+            <!-- Sidebar -->
+            <nav class="sidebar sidebar-offcanvas" id="sidebar">
+                @php
+                    $currentPath = Request::path();
+                @endphp
+                <ul class="nav">
+                    @php
+                        $isDashboard = Request::is('admin/home') || Request::is('admin/home/*') || Request::is('admin/dashboard') || Request::is('admin/dashboard/*');
+                    @endphp
+                    <li class="nav-item @if($isDashboard) active @endif">
+                        <a class="nav-link" href="{{ route('admin.home') }}">
+                            <span class="menu-title">Dashboard</span>
+                            <i class="mdi mdi-home menu-icon"></i>
+                        </a>
+                    </li>
 
-		</div>
-	</div>
-	<!--end switcher-->
+                    <!-- Slider -->
+                    @php
+                        $isSlider = Request::is('admin/slider/add') || Request::is('admin/slider/all') || Request::is('admin/slider/edit/*');
+                    @endphp
+                    <li class="nav-item @if($isSlider) active @endif">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#slider" aria-expanded="@if($isSlider) true @else false @endif" aria-controls="slider">
+                            <span class="menu-title">Slider</span>
+                            <i class="menu-arrow"></i>
+                            <i class="mdi mdi-view-carousel menu-icon"></i>
+                        </a>
+                        <div class="collapse @if($isSlider) show @endif" id="slider">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link @if(Request::is('admin/slider/add')) active @endif" href="{{ route('slider.add') }}">Add Slider</a></li>
+                                <li class="nav-item"> <a class="nav-link @if(Request::is('admin/slider/all') || Request::is('admin/slider/edit/*')) active @endif" href="{{ route('slider.index') }}">All Slider</a></li>
+                            </ul>
+                        </div>
+                    </li>
 
-	<!-- Bootstrap JS -->
-	<script src="{{ asset('admin/assets/js/bootstrap.bundle.min.js') }}"></script>
-	<!--plugins-->
-	<script src="{{ asset('admin/assets/js/jquery.min.js') }}"></script>
-	<script src="{{ asset('admin/assets/plugins/simplebar/js/simplebar.min.js') }}"></script>
-	<script src="{{ asset('admin/assets/plugins/metismenu/js/metisMenu.min.js') }}"></script>
-	<script src="{{ asset('admin/assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>
-	<script src="{{ asset('admin/assets/plugins/chartjs/js/Chart.min.js') }}"></script>
-	<script src="{{ asset('admin/assets/plugins/vectormap/jquery-jvectormap-2.0.2.min.js') }}"></script>
-    <script src="{{ asset('admin/assets/plugins/vectormap/jquery-jvectormap-world-mill-en.js') }}"></script>
-	<script src="{{ asset('admin/assets/plugins/jquery.easy-pie-chart/jquery.easypiechart.min.js') }}"></script>
-	<script src="{{ asset('admin/assets/plugins/sparkline-charts/jquery.sparkline.min.js') }}"></script>
-	<script src="{{ asset('admin/assets/plugins/jquery-knob/excanvas.js') }}"></script>
-	<script src="{{ asset('admin/assets/plugins/jquery-knob/jquery.knob.js') }}"></script>
-	  <script>
-		  $(function() {
-			  $(".knob").knob();
-		  });
-	  </script>
-	  <script src="{{ asset('admin/assets/js/index.js') }}"></script>
-	<!--app JS-->
-	<script src="{{ asset('admin/assets/js/app.js') }}"></script>
+                    <!-- Ongoing Project -->
+                    @php
+                        $isProject = Request::is('admin/project/add') || Request::is('admin/project/index') || Request::is('admin/project/edit/*');
+                    @endphp
+                    <li class="nav-item @if($isProject) active @endif">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#projects" aria-expanded="@if($isProject) true @else false @endif" aria-controls="projects">
+                            <span class="menu-title">Ongoing Project</span>
+                            <i class="menu-arrow"></i>
+                            <i class="mdi mdi-briefcase menu-icon"></i>
+                        </a>
+                        <div class="collapse @if($isProject) show @endif" id="projects">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link @if(Request::is('admin/project/add')) active @endif" href="{{ route('project.add') }}">Add Project</a></li>
+                                <li class="nav-item"> <a class="nav-link @if(Request::is('admin/project/index') || Request::is('admin/project/edit/*')) active @endif" href="{{ route('project.index') }}">All Project</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <!-- Latest News -->
+                    @php
+                        $isNews = Request::is('admin/news/add') || Request::is('admin/news/index') || Request::is('admin/news/edit/*');
+                    @endphp
+                    <li class="nav-item @if($isNews) active @endif">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#news" aria-expanded="@if($isNews) true @else false @endif" aria-controls="news">
+                            <span class="menu-title">Latest News</span>
+                            <i class="menu-arrow"></i>
+                            <i class="mdi mdi-newspaper menu-icon"></i>
+                        </a>
+                        <div class="collapse @if($isNews) show @endif" id="news">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link @if(Request::is('admin/news/add')) active @endif" href="{{ route('news.add') }}">Add News</a></li>
+                                <li class="nav-item"> <a class="nav-link @if(Request::is('admin/news/index') || Request::is('admin/news/edit/*')) active @endif" href="{{ route('news.index') }}">All News</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <!-- Photo Gallery -->
+                    @php
+                        $isGallery = Request::is('admin/gallery/add') || Request::is('admin/gallery/index') || Request::is('admin/gallery/edit/*');
+                    @endphp
+                    <li class="nav-item @if($isGallery) active @endif">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#gallery" aria-expanded="@if($isGallery) true @else false @endif" aria-controls="gallery">
+                            <span class="menu-title">Photo Gallery</span>
+                            <i class="menu-arrow"></i>
+                            <i class="mdi mdi-image-multiple menu-icon"></i>
+                        </a>
+                        <div class="collapse @if($isGallery) show @endif" id="gallery">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link @if(Request::is('admin/gallery/add')) active @endif" href="{{ route('gallery.add') }}">Add Photo</a></li>
+                                <li class="nav-item"> <a class="nav-link @if(Request::is('admin/gallery/index') || Request::is('admin/gallery/edit/*')) active @endif" href="{{ route('gallery.index') }}">All Photo</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <!-- Subscribe -->
+                    @php
+                        $isSubscribe = Request::is('admin/admin/subscribe');
+                    @endphp
+                    <li class="nav-item @if($isSubscribe) active @endif">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#subscribe" aria-expanded="@if($isSubscribe) true @else false @endif" aria-controls="subscribe">
+                            <span class="menu-title">Subscribe</span>
+                            <i class="menu-arrow"></i>
+                            <i class="mdi mdi-bell menu-icon"></i>
+                        </a>
+                        <div class="collapse @if($isSubscribe) show @endif" id="subscribe">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link @if($isSubscribe) active @endif" href="{{ route('subscribe.all') }}">All Subscribe</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <!-- Donate Now -->
+                    @php
+                        $isDonate = Request::is('admin/payment-methods/*') || Request::is('admin/donations/*');
+                    @endphp
+                    <li class="nav-item @if($isDonate) active @endif">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#donate" aria-expanded="@if($isDonate) true @else false @endif" aria-controls="donate">
+                            <span class="menu-title">Donate Now</span>
+                            <i class="menu-arrow"></i>
+                            <i class="mdi mdi-heart menu-icon"></i>
+                        </a>
+                        <div class="collapse @if($isDonate) show @endif" id="donate">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link @if(Request::is('admin/payment-methods/add')) active @endif" href="{{ route('admin.payment_methods.add') }}">Add Payment Method</a></li>
+                                <li class="nav-item"> <a class="nav-link @if(Request::is('admin/payment-methods/index') || Request::is('admin/payment-methods/edit/*')) active @endif" href="{{ route('admin.payment_methods.index') }}">All Payment Methods</a></li>
+                                <li class="nav-item"> <a class="nav-link @if(Request::is('admin/donations/*')) active @endif" href="{{ route('admin.donations.index') }}">All Donations</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <!-- Key Focus Area -->
+                    @php
+                        $isFocus = Request::is('admin/focus-areas/add') || Request::is('admin/focus-areas/index') || Request::is('admin/focus-areas/edit/*');
+                    @endphp
+                    <li class="nav-item @if($isFocus) active @endif">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#focus" aria-expanded="@if($isFocus) true @else false @endif" aria-controls="focus">
+                            <span class="menu-title">Key Focus Area</span>
+                            <i class="menu-arrow"></i>
+                            <i class="mdi mdi-target menu-icon"></i>
+                        </a>
+                        <div class="collapse @if($isFocus) show @endif" id="focus">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link @if(Request::is('admin/focus-areas/add')) active @endif" href="{{ route('admin.focus_areas.add') }}">Add Focus Area</a></li>
+                                <li class="nav-item"> <a class="nav-link @if(Request::is('admin/focus-areas/index') || Request::is('admin/focus-areas/edit/*')) active @endif" href="{{ route('admin.focus_areas.index') }}">All Focus Areas</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <!-- Application -->
+                    @php
+                        $isLogo = Request::is('admin/logo/create') || Request::is('admin/logo/index') || Request::is('admin/logo/edit/*');
+                    @endphp
+                    <li class="nav-item @if($isLogo) active @endif">
+                        <a class="nav-link" href="{{ route('logo.create') }}">
+                            <span class="menu-title">Application</span>
+                            <i class="mdi mdi-application menu-icon"></i>
+                        </a>
+                    </li>
+
+                    <!-- About us -->
+                    @php
+                        $isAbout = Request::is('admin/about/us/add') || Request::is('admin/about/us/create');
+                    @endphp
+                    <li class="nav-item @if($isAbout) active @endif">
+                        <a class="nav-link" href="{{ route('about.us.create') }}">
+                            <span class="menu-title">About us</span>
+                            <i class="mdi mdi-information menu-icon"></i>
+                        </a>
+                    </li>
+
+                    <!-- Mission Vision -->
+                    @php
+                        $isMission = Request::is('admin/mission/vision/create');
+                    @endphp
+                    <li class="nav-item @if($isMission) active @endif">
+                        <a class="nav-link" href="{{ route('mission.vision.create') }}">
+                            <span class="menu-title">Mission Vision</span>
+                            <i class="mdi mdi-flag menu-icon"></i>
+                        </a>
+                    </li>
+
+                    <!-- Origin & Legal Affilation -->
+                                        @php
+                        $isLegal = Request::is('admin/origin/legal_affilation/create') || Request::is('admin/origin/legal_affilation/index') || Request::is('admin/origin/legal_affilation/edit/*');
+                    @endphp
+                    <li class="nav-item @if($isLegal) active @endif">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#legal" aria-expanded="@if($isLegal) true @else false @endif" aria-controls="legal">
+                            <span class="menu-title">Origin & Legal Affilation</span>
+                            <i class="menu-arrow"></i>
+                            <i class="mdi mdi-file-document menu-icon"></i>
+                        </a>
+                        <div class="collapse @if($isLegal) show @endif" id="legal">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link @if(Request::is('admin/origin/legal_affilation/create')) active @endif" href="{{ route('origin.legal_affilation.create') }}">Add Affilation</a></li>
+                                <li class="nav-item"> <a class="nav-link @if(Request::is('admin/origin/legal_affilation/index') || Request::is('admin/origin/legal_affilation/edit/*')) active @endif" href="{{ route('origin.legal_affilation.index') }}">All Affilation</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <!-- Executive Committee -->
+                                        @php
+                        $isExecutive = Request::is('admin/executive/add') || Request::is('admin/executive/index') || Request::is('admin/executive/edit/*');
+                    @endphp
+                    <li class="nav-item @if($isExecutive) active @endif">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#executive" aria-expanded="@if($isExecutive) true @else false @endif" aria-controls="executive">
+                            <span class="menu-title">Executive Committee</span>
+                            <i class="menu-arrow"></i>
+                            <i class="mdi mdi-account-circle menu-icon"></i>
+                        </a>
+                        <div class="collapse @if($isExecutive) show @endif" id="executive">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link @if(Request::is('admin/executive/add')) active @endif" href="{{ route('executive.add') }}">Add Member</a></li>
+                                <li class="nav-item"> <a class="nav-link @if(Request::is('admin/executive/index') || Request::is('admin/executive/edit/*')) active @endif" href="{{ route('executive.index') }}">All Members</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <!-- Team Members -->
+                                        @php
+                        $isTeam = Request::is('admin/team/add') || Request::is('admin/team/index') || Request::is('admin/team/edit/*');
+                    @endphp
+                    <li class="nav-item @if($isTeam) active @endif">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#team" aria-expanded="@if($isTeam) true @else false @endif" aria-controls="team">
+                            <span class="menu-title">Team Members</span>
+                            <i class="menu-arrow"></i>
+                            <i class="mdi mdi-account-multiple menu-icon"></i>
+                        </a>
+                        <div class="collapse @if($isTeam) show @endif" id="team">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link @if(Request::is('admin/team/add')) active @endif" href="{{ route('team.add') }}">Add Member</a></li>
+                                <li class="nav-item"> <a class="nav-link @if(Request::is('admin/team/index') || Request::is('admin/team/edit/*')) active @endif" href="{{ route('team.index') }}">All Members</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <!-- Programs -->
+                                        @php
+                        $isPrograms = Request::is('admin/programs/add') || Request::is('admin/programs/index') || Request::is('admin/programs/edit/*');
+                    @endphp
+                    <li class="nav-item @if($isPrograms) active @endif">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#programs" aria-expanded="@if($isPrograms) true @else false @endif" aria-controls="programs">
+                            <span class="menu-title">Programs</span>
+                            <i class="menu-arrow"></i>
+                            <i class="mdi mdi-bulletin-board menu-icon"></i>
+                        </a>
+                        <div class="collapse @if($isPrograms) show @endif" id="programs">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link @if(Request::is('admin/programs/add')) active @endif" href="{{ route('programs.add') }}">Add Program</a></li>
+                                <li class="nav-item"> <a class="nav-link @if(Request::is('admin/programs/index') || Request::is('admin/programs/edit/*')) active @endif" href="{{ route('programs.index') }}">All Programs</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <!-- Impact Metrics -->
+                                        @php
+                        $isImpact = Request::is('admin/impact/add') || Request::is('admin/impact/index') || Request::is('admin/impact/edit/*');
+                    @endphp
+                    <li class="nav-item @if($isImpact) active @endif">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#impact" aria-expanded="@if($isImpact) true @else false @endif" aria-controls="impact">
+                            <span class="menu-title">Impact Metrics</span>
+                            <i class="menu-arrow"></i>
+                            <i class="mdi mdi-chart-line menu-icon"></i>
+                        </a>
+                        <div class="collapse @if($isImpact) show @endif" id="impact">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link @if(Request::is('admin/impact/add')) active @endif" href="{{ route('impact.add') }}">Add Impact</a></li>
+                                <li class="nav-item"> <a class="nav-link @if(Request::is('admin/impact/index') || Request::is('admin/impact/edit/*')) active @endif" href="{{ route('impact.index') }}">All Impact</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <!-- Success Stories -->
+                                        @php
+                        $isStories = Request::is('admin/stories/add') || Request::is('admin/stories/index') || Request::is('admin/stories/edit/*');
+                    @endphp
+                    <li class="nav-item @if($isStories) active @endif">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#stories" aria-expanded="@if($isStories) true @else false @endif" aria-controls="stories">
+                            <span class="menu-title">Success Stories</span>
+                            <i class="menu-arrow"></i>
+                            <i class="mdi mdi-book-open-variant menu-icon"></i>
+                        </a>
+                        <div class="collapse @if($isStories) show @endif" id="stories">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link @if(Request::is('admin/stories/add')) active @endif" href="{{ route('stories.add') }}">Add Story</a></li>
+                                <li class="nav-item"> <a class="nav-link @if(Request::is('admin/stories/index') || Request::is('admin/stories/edit/*')) active @endif" href="{{ route('stories.index') }}">All Stories</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <!-- Chief Executive Message -->
+                                        @php
+                        $isChief = Request::is('admin/chief/message/add') || Request::is('admin/chief/message/index') || Request::is('admin/chief/message/edit/*');
+                    @endphp
+                    <li class="nav-item @if($isChief) active @endif">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#chief" aria-expanded="@if($isChief) true @else false @endif" aria-controls="chief">
+                            <span class="menu-title">Chief Executive Message</span>
+                            <i class="menu-arrow"></i>
+                            <i class="mdi mdi-message-text menu-icon"></i>
+                        </a>
+                        <div class="collapse @if($isChief) show @endif" id="chief">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link @if(Request::is('admin/chief/message/add')) active @endif" href="{{ route('chief.message.add') }}">Add Message</a></li>
+                                <li class="nav-item"> <a class="nav-link @if(Request::is('admin/chief/message/index') || Request::is('admin/chief/message/edit/*')) active @endif" href="{{ route('chief.message.index') }}">All Message</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <!-- FAQ -->
+                                        @php
+                        $isFAQ = Request::is('admin/faq/add') || Request::is('admin/faq/index') || Request::is('admin/faq/edit/*');
+                    @endphp
+                    <li class="nav-item @if($isFAQ) active @endif">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#faq" aria-expanded="@if($isFAQ) true @else false @endif" aria-controls="faq">
+                            <span class="menu-title">FAQ</span>
+                            <i class="menu-arrow"></i>
+                            <i class="mdi mdi-help-circle menu-icon"></i>
+                        </a>
+                        <div class="collapse @if($isFAQ) show @endif" id="faq">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link @if(Request::is('admin/faq/add')) active @endif" href="{{ route('faq.add') }}">Add FAQ</a></li>
+                                <li class="nav-item"> <a class="nav-link @if(Request::is('admin/faq/index') || Request::is('admin/faq/edit/*')) active @endif" href="{{ route('faq.index') }}">All FAQ</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <!-- Strategic Plan -->
+                                        @php
+                        $isStrategicPlan = Request::is('admin/strategic-plans/create') || Request::is('admin/strategic-plans') || Request::is('admin/strategic-plans/edit/*');
+                    @endphp
+                    <li class="nav-item @if($isStrategicPlan) active @endif">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#strategicplan" aria-expanded="@if($isStrategicPlan) true @else false @endif" aria-controls="strategicplan">
+                            <span class="menu-title">Strategic Plan</span>
+                            <i class="menu-arrow"></i>
+                            <i class="mdi mdi-file-chart menu-icon"></i>
+                        </a>
+                        <div class="collapse @if($isStrategicPlan) show @endif" id="strategicplan">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link @if(Request::is('admin/strategic-plans/create')) active @endif" href="{{ route('strategic_plans.create') }}">Add Strategic Plan</a></li>
+                                <li class="nav-item"> <a class="nav-link @if(Request::is('admin/strategic-plans') || Request::is('admin/strategic-plans/edit/*')) active @endif" href="{{ route('strategic_plans.index') }}">All Strategic Plans</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <!-- Volunteers -->
+                                        @php
+                        $isVolunteers = Request::is('admin/volunteers/add') || Request::is('admin/volunteers/index') || Request::is('admin/volunteers/edit/*');
+                    @endphp
+                    <li class="nav-item @if($isVolunteers) active @endif">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#volunteers" aria-expanded="@if($isVolunteers) true @else false @endif" aria-controls="volunteers">
+                            <span class="menu-title">Volunteers</span>
+                            <i class="menu-arrow"></i>
+                            <i class="mdi mdi-account-heart menu-icon"></i>
+                        </a>
+                        <div class="collapse @if($isVolunteers) show @endif" id="volunteers">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link @if(Request::is('admin/volunteers/add')) active @endif" href="{{ route('volunteers.add') }}">Add Opportunity</a></li>
+                                <li class="nav-item"> <a class="nav-link @if(Request::is('admin/volunteers/index') || Request::is('admin/volunteers/edit/*')) active @endif" href="{{ route('volunteers.index') }}">All Opportunities</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <!-- User Message -->
+                                        @php
+                        $isMessage = Request::is('admin/message/index') || Request::is('admin/message/view/*');
+                    @endphp
+                    <li class="nav-item @if($isMessage) active @endif">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#usermessage" aria-expanded="@if($isMessage) true @else false @endif" aria-controls="usermessage">
+                            <span class="menu-title">User Message</span>
+                            <i class="menu-arrow"></i>
+                            <i class="mdi mdi-email menu-icon"></i>
+                        </a>
+                        <div class="collapse @if($isMessage) show @endif" id="usermessage">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link @if(Request::is('admin/message/index') || Request::is('admin/message/view/*')) active @endif" href="{{ route('message.index') }}">All Message</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <!-- Partners & Donor -->
+                                        @php
+                        $isPartner = Request::is('admin/partner/create') || Request::is('admin/partner/index') || Request::is('admin/partner/edit/*');
+                    @endphp
+                    <li class="nav-item @if($isPartner) active @endif">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#partners" aria-expanded="@if($isPartner) true @else false @endif" aria-controls="partners">
+                            <span class="menu-title">Partners & Donor</span>
+                            <i class="menu-arrow"></i>
+                            <i class="mdi mdi-handshake menu-icon"></i>
+                        </a>
+                        <div class="collapse @if($isPartner) show @endif" id="partners">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link @if(Request::is('admin/partner/create')) active @endif" href="{{ route('partner.create') }}">Add Partners & Donor</a></li>
+                                <li class="nav-item"> <a class="nav-link @if(Request::is('admin/partner/index') || Request::is('admin/partner/edit/*')) active @endif" href="{{ route('partner.index') }}">All Partners & Donor</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <!-- Project Archive -->
+                                        @php
+                        $isArchive = Request::is('admin/project/archive/create') || Request::is('admin/project/archive/index') || Request::is('admin/project/archive/edit/*');
+                    @endphp
+                    <li class="nav-item @if($isArchive) active @endif">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#archive" aria-expanded="@if($isArchive) true @else false @endif" aria-controls="archive">
+                            <span class="menu-title">Project Archive</span>
+                            <i class="menu-arrow"></i>
+                            <i class="mdi mdi-archive menu-icon"></i>
+                        </a>
+                        <div class="collapse @if($isArchive) show @endif" id="archive">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link @if(Request::is('admin/project/archive/create')) active @endif" href="{{ route('project.archive.create') }}">Add Project</a></li>
+                                <li class="nav-item"> <a class="nav-link @if(Request::is('admin/project/archive/index') || Request::is('admin/project/archive/edit/*')) active @endif" href="{{ route('project.archive.index') }}">All Project</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <!-- Policy and Guideline -->
+                                        @php
+                        $isPolicy = Request::is('admin/policy/create') || Request::is('admin/policy/index') || Request::is('admin/policy/edit/*');
+                    @endphp
+                    <li class="nav-item @if($isPolicy) active @endif">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#policy" aria-expanded="@if($isPolicy) true @else false @endif" aria-controls="policy">
+                            <span class="menu-title">Policy and Guideline</span>
+                            <i class="menu-arrow"></i>
+                            <i class="mdi mdi-file-document-box menu-icon"></i>
+                        </a>
+                        <div class="collapse @if($isPolicy) show @endif" id="policy">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link @if(Request::is('admin/policy/create')) active @endif" href="{{ route('policy.create') }}">Add Policy and Guideline</a></li>
+                                <li class="nav-item"> <a class="nav-link @if(Request::is('admin/policy/index') || Request::is('admin/policy/edit/*')) active @endif" href="{{ route('policy.index') }}">All Policy and Guideline</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <!-- Publication -->
+                                        @php
+                        $isPublications = Request::is('admin/publications/add') || Request::is('admin/publications/index') || Request::is('admin/publications/edit/*');
+                    @endphp
+                    <li class="nav-item @if($isPublications) active @endif">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#publications" aria-expanded="@if($isPublications) true @else false @endif" aria-controls="publications">
+                            <span class="menu-title">Publication</span>
+                            <i class="menu-arrow"></i>
+                            <i class="mdi mdi-book-open-page-variant menu-icon"></i>
+                        </a>
+                        <div class="collapse @if($isPublications) show @endif" id="publications">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link @if(Request::is('admin/publications/add')) active @endif" href="{{ route('publications.add') }}">Add Publication</a></li>
+                                <li class="nav-item"> <a class="nav-link @if(Request::is('admin/publications/index') || Request::is('admin/publications/edit/*')) active @endif" href="{{ route('publications.index') }}">All Publications</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <!-- Career -->
+                                        @php
+                        $isCareer = Request::is('admin/invoked/create') || Request::is('admin/invoked/index') || Request::is('admin/invoked/edit/*');
+                    @endphp
+                    <li class="nav-item @if($isCareer) active @endif">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#career" aria-expanded="@if($isCareer) true @else false @endif" aria-controls="career">
+                            <span class="menu-title">Career</span>
+                            <i class="menu-arrow"></i>
+                            <i class="mdi mdi-briefcase-outline menu-icon"></i>
+                        </a>
+                        <div class="collapse @if($isCareer) show @endif" id="career">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link @if(Request::is('admin/invoked/create')) active @endif" href="{{ route('invoked.create') }}">Add Career</a></li>
+                                <li class="nav-item"> <a class="nav-link @if(Request::is('admin/invoked/index') || Request::is('admin/invoked/edit/*')) active @endif" href="{{ route('invoked.index') }}">All Career</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <!-- Contact -->
+                                        @php
+                        $isContact = Request::is('admin/contact/add') || Request::is('admin/contact/index') || Request::is('admin/contact/edit/*');
+                    @endphp
+                    <li class="nav-item @if($isContact) active @endif">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#contact" aria-expanded="@if($isContact) true @else false @endif" aria-controls="contact">
+                            <span class="menu-title">Contact</span>
+                            <i class="menu-arrow"></i>
+                            <i class="mdi mdi-phone menu-icon"></i>
+                        </a>
+                        <div class="collapse @if($isContact) show @endif" id="contact">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link @if(Request::is('admin/contact/add')) active @endif" href="{{ route('contact.add') }}">Add Contact</a></li>
+                                <li class="nav-item"> <a class="nav-link @if(Request::is('admin/contact/index') || Request::is('admin/contact/edit/*')) active @endif" href="{{ route('contact.index') }}">All Contact</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Main Panel -->
+            <div class="main-panel">
+                <div class="content-wrapper">
+                    @yield('content')
+                </div>
+                
+                <!-- Footer -->
+                <footer class="footer">
+                    <div class="d-flex justify-content-center">
+                        <span class="text-muted text-center">
+                            Copyright © {{ date('Y') }} BMS. All rights reserved.
+                        </span>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal fade" id="deleteConfirmModal" data-bs-keyboard="true" tabindex="-1" aria-labelledby="deleteConfirmModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content shadow-lg" style="border-radius: 15px; border: none;">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="modal-title w-100 text-center mt-3" id="deleteConfirmModalLabel">
+                        <div class="d-flex flex-column align-items-center">
+                            <div class="rounded-circle bg-danger bg-opacity-10 p-3 mb-3">
+                                <i class="mdi mdi-delete-forever text-danger" style="font-size: 3rem;"></i>
+                            </div>
+                            <h4 class="mb-0">Are you sure?</h4>
+                        </div>
+                    </h5>
+                </div>
+                <div class="modal-body text-center px-4 pb-2">
+                    <p class="text-muted mb-0">Do you really want to delete this item?</p>
+                    <p class="text-muted mb-0">This action cannot be undone.</p>
+                </div>
+                <div class="modal-footer border-0 justify-content-center pb-4">
+                    <button type="button" class="btn btn-light px-4" data-bs-dismiss="modal" style="border-radius: 25px;">
+                        Cancel
+                    </button>
+                    <button type="button" class="btn btn-danger px-4" id="confirmDeleteBtn" style="border-radius: 25px;">
+                        Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Toast Notification -->
+    <div class="position-fixed top-0 end-0 p-3" style="z-index: 11000;">
+        <div id="successToast" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true" style="border-radius: 10px;">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <i class="mdi mdi-check-circle me-2"></i>
+                    <span id="toastMessage">@if(session('success')){{ session('success') }}@else Item deleted successfully! @endif</span>
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Plugins JS -->
+    <script src="{{ asset('admin-assets/vendors/js/vendor.bundle.base.js') }}"></script>
+    
+    <!-- Plugin JS for this page -->
+    <script src="{{ asset('admin-assets/vendors/chart.js/chart.umd.js') }}"></script>
+    <script src="{{ asset('admin-assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
+    
+    <!-- Inject JS -->
+    <script src="{{ asset('admin-assets/js/off-canvas.js') }}"></script>
+    <script src="{{ asset('admin-assets/js/misc.js') }}"></script>
+    <script src="{{ asset('admin-assets/js/settings.js') }}"></script>
+    <script src="{{ asset('admin-assets/js/todolist.js') }}"></script>
+    <script src="{{ asset('admin-assets/js/jquery.cookie.js') }}"></script>
+    
+    <!-- Global delete confirmation modal -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let deleteUrl = '';
+            const deleteModalElement = document.getElementById('deleteConfirmModal');
+            const deleteModal = new bootstrap.Modal(deleteModalElement);
+            const successToastElement = document.getElementById('successToast');
+            const successToast = new bootstrap.Toast(successToastElement);
+            
+            // Handle all delete links with delete-confirm class
+            document.addEventListener('click', function(e) {
+                const deleteLink = e.target.closest('.delete-confirm');
+                if (deleteLink) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    deleteUrl = deleteLink.href;
+                    deleteModal.show();
+                    return false;
+                }
+            });
+            
+            // Handle confirm delete button
+            document.getElementById('confirmDeleteBtn').addEventListener('click', function() {
+                if (deleteUrl) {
+                    // Hide the modal first
+                    deleteModal.hide();
+                    
+                    // Redirect to delete URL
+                    window.location.href = deleteUrl;
+                }
+            });
+            
+            // Reset deleteUrl when modal is closed
+            deleteModalElement.addEventListener('hidden.bs.modal', function() {
+                deleteUrl = '';
+            });
+            
+            // Show success toast if delete was successful (check for success message in session)
+            @if(session('success'))
+                successToast.show();
+            @endif
+        });
+    </script>
+    
+    @stack('scripts')
 </body>
-
 </html>
