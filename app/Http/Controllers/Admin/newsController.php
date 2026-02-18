@@ -96,6 +96,6 @@ class newsController extends Controller
         );
 
         DB::table('latest_news')->where('id', $id)->update($news);
-        return redirect()->back()->with('update', 'Successfully Updated News');
+        return redirect()->route('news.index')->with('update', 'Successfully Updated News');
     }
 }

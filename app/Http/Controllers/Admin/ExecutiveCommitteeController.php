@@ -110,6 +110,6 @@ class ExecutiveCommitteeController extends Controller
         );
 
         DB::table('executive_committee')->where('id', $id)->update($data);
-        return redirect()->back()->with('update', 'Successfully Updated');
+        return redirect()->route('executive.index')->with('update', 'Successfully Updated');
     }
 }

@@ -26,18 +26,691 @@
         <link rel="shortcut icon" href="{{ asset('admin-assets/images/favicon.png') }}" />
     @endif
     
+    <!-- Dark Mode Styles -->
+    <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f4f5f7;
+            --bg-card: #ffffff;
+            --text-primary: #343a40;
+            --text-secondary: #6c757d;
+            --border-color: #dee2e6;
+            --card-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #1a1d2e;
+            --bg-secondary: #151824;
+            --bg-card: #242939;
+            --text-primary: #e0e6ed;
+            --text-secondary: #98a6ad;
+            --border-color: #2c3142;
+            --card-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+
+        [data-theme="dark"] body {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+
+        [data-theme="dark"] .container-scroller {
+            background: var(--bg-secondary);
+        }
+
+        [data-theme="dark"] .navbar {
+            background: var(--bg-card) !important;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        [data-theme="dark"] .navbar-menu-wrapper {
+            background: var(--bg-card) !important;
+        }
+
+        [data-theme="dark"] .sidebar {
+            background: var(--bg-card) !important;
+        }
+
+        [data-theme="dark"] .card {
+            background: var(--bg-card) !important;
+            border-color: var(--border-color) !important;
+            color: var(--text-primary);
+        }
+
+        [data-theme="dark"] .card-body {
+            color: var(--text-primary);
+        }
+
+        [data-theme="dark"] .card-body > * {
+            background-color: transparent;
+        }
+
+        [data-theme="dark"] .card-header {
+            background: var(--bg-card) !important;
+            border-color: var(--border-color) !important;
+            color: var(--text-primary);
+        }
+
+        [data-theme="dark"] .card-footer {
+            background: var(--bg-card) !important;
+            border-color: var(--border-color) !important;
+        }
+
+        [data-theme="dark"] .table {
+            color: var(--text-primary);
+            background: var(--bg-card);
+            --bs-table-hover-bg: rgba(255, 255, 255, 0.05);
+            --bs-table-hover-color: var(--text-primary);
+            --bs-table-bg-state: transparent;
+            --bs-table-color-state: var(--text-primary);
+        }
+
+        [data-theme="dark"] .table thead {
+            background-color: var(--bg-secondary) !important;
+            color: var(--text-primary);
+        }
+
+        [data-theme="dark"] .table thead th {
+            background-color: var(--bg-secondary) !important;
+            color: var(--text-primary) !important;
+            border-color: var(--border-color) !important;
+        }
+
+        [data-theme="dark"] .table tbody {
+            background-color: var(--bg-card) !important;
+        }
+
+        [data-theme="dark"] .table tbody td {
+            background-color: var(--bg-card) !important;
+            color: var(--text-primary) !important;
+            border-color: var(--border-color) !important;
+        }
+
+        [data-theme="dark"] .table tbody tr {
+            background-color: var(--bg-card) !important;
+        }
+
+        [data-theme="dark"] .table-hover tbody tr:hover {
+            background-color: rgba(255, 255, 255, 0.05) !important;
+        }
+
+        [data-theme="dark"] .table-hover tbody tr:hover td {
+            background-color: rgba(255, 255, 255, 0.05) !important;
+        }
+
+        /* Override ALL table row hover effects */
+        [data-theme="dark"] table tbody tr:hover {
+            background-color: rgba(255, 255, 255, 0.05) !important;
+        }
+
+        [data-theme="dark"] table tbody tr:hover td {
+            background-color: rgba(255, 255, 255, 0.05) !important;
+        }
+
+        [data-theme="dark"] .table tbody tr:hover {
+            background-color: rgba(255, 255, 255, 0.05) !important;
+        }
+
+        [data-theme="dark"] .table tbody tr:hover td {
+            background-color: rgba(255, 255, 255, 0.05) !important;
+        }
+
+        [data-theme="dark"] .table-striped tbody tr:nth-of-type(odd) {
+            background-color: rgba(255, 255, 255, 0.02) !important;
+        }
+
+        [data-theme="dark"] .table-striped tbody tr:nth-of-type(odd) td {
+            background-color: rgba(255, 255, 255, 0.02) !important;
+        }
+
+        [data-theme="dark"] .table-light {
+            background-color: rgba(255, 255, 255, 0.05) !important;
+            color: var(--text-primary);
+        }
+
+        [data-theme="dark"] .table-light th,
+        [data-theme="dark"] .table-light td {
+            background-color: rgba(255, 255, 255, 0.05) !important;
+            color: var(--text-primary) !important;
+        }
+
+        [data-theme="dark"] .text-muted {
+            color: var(--text-secondary) !important;
+        }
+
+        [data-theme="dark"] .border,
+        [data-theme="dark"] .table-bordered,
+        [data-theme="dark"] .table-bordered td,
+        [data-theme="dark"] .table-bordered th {
+            border-color: var(--border-color) !important;
+        }
+
+        [data-theme="dark"] .bg-light {
+            background-color: rgba(255, 255, 255, 0.05) !important;
+        }
+
+        [data-theme="dark"] .form-control,
+        [data-theme="dark"] .form-select {
+            background-color: var(--bg-secondary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        [data-theme="dark"] .form-control:focus,
+        [data-theme="dark"] .form-select:focus {
+            background-color: var(--bg-secondary);
+            border-color: #4a90e2;
+            color: var(--text-primary);
+        }
+
+        [data-theme="dark"] .modal-content {
+            background-color: var(--bg-card);
+            color: var(--text-primary);
+        }
+
+        [data-theme="dark"] .modal-header,
+        [data-theme="dark"] .modal-footer {
+            border-color: var(--border-color);
+        }
+
+        [data-theme="dark"] .page-header {
+            background: transparent;
+        }
+
+        [data-theme="dark"] .breadcrumb {
+            background: transparent;
+        }
+
+        [data-theme="dark"] .nav-link {
+            color: var(--text-secondary);
+        }
+
+        [data-theme="dark"] .nav-link:hover {
+            color: var(--text-primary);
+        }
+
+        [data-theme="dark"] .sidebar .nav .nav-item.active > .nav-link {
+            background: transparent !important;
+        }
+
+        .theme-toggle {
+            cursor: pointer;
+            font-size: 1.25rem;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        /* Sun icon in light mode - yellow */
+        .theme-toggle .mdi-weather-sunny {
+            color: #ffc107;
+            filter: drop-shadow(0 0 3px rgba(255, 193, 7, 0.5));
+        }
+
+        /* Moon icon in dark mode - white */
+        [data-theme="dark"] .theme-toggle .mdi-weather-night {
+            color: #f8f9fa;
+            filter: drop-shadow(0 0 3px rgba(248, 249, 250, 0.5));
+        }
+
+        [data-theme="dark"] .pending-donations-list::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+
+        [data-theme="dark"] .pending-donations-list::-webkit-scrollbar-thumb {
+            background: #555;
+        }
+
+        [data-theme="dark"] .page-title-icon {
+            background: linear-gradient(to right, #4a90e2, #357abd) !important;
+        }
+
+        [data-theme="dark"] .bg-gradient-danger,
+        [data-theme="dark"] .bg-gradient-info,
+        [data-theme="dark"] .bg-gradient-success,
+        [data-theme="dark"] .bg-gradient-warning,
+        [data-theme="dark"] .bg-gradient-primary,
+        [data-theme="dark"] .bg-gradient-secondary {
+            opacity: 0.95;
+        }
+
+        [data-theme="dark"] .sidebar .nav .nav-item .nav-link .menu-title {
+            color: var(--text-primary);
+        }
+
+        [data-theme="dark"] .sidebar .nav .nav-item .nav-link .menu-icon {
+            color: var(--text-secondary);
+        }
+
+        [data-theme="dark"] .sidebar .nav .nav-item.active .nav-link .menu-icon {
+            color: #fff;
+        }
+
+        [data-theme="dark"] h1, [data-theme="dark"] h2, [data-theme="dark"] h3, 
+        [data-theme="dark"] h4, [data-theme="dark"] h5, [data-theme="dark"] h6 {
+            color: var(--text-primary);
+        }
+
+        [data-theme="dark"] .card-title {
+            color: var(--text-primary);
+        }
+
+        [data-theme="dark"] .badge.bg-light {
+            background-color: rgba(255, 255, 255, 0.1) !important;
+            color: var(--text-primary);
+        }
+
+        [data-theme="dark"] .page-body-wrapper {
+            background: var(--bg-secondary);
+        }
+
+        [data-theme="dark"] .btn-outline-primary,
+        [data-theme="dark"] .btn-outline-danger,
+        [data-theme="dark"] .btn-outline-info {
+            color: inherit;
+        }
+
+        [data-theme="dark"] .btn-outline-primary:hover,
+        [data-theme="dark"] .btn-outline-danger:hover,
+        [data-theme="dark"] .btn-outline-info:hover {
+            color: #fff;
+        }
+
+        /* Brand Logo Area - Dark Mode */
+        [data-theme="dark"] .navbar-brand-wrapper {
+            background: var(--bg-card) !important;
+            border-right: 1px solid var(--border-color);
+        }
+
+        [data-theme="dark"] .navbar-brand h3,
+        [data-theme="dark"] .navbar-brand h5 {
+            color: #e0e6ed !important;
+        }
+
+        /* Logo Styling */
+        .navbar-brand-wrapper {
+            padding: 0.5rem 0.5rem 0.5rem 0;
+            justify-content: flex-start !important;
+            text-align: left !important;
+        }
+
+        .brand-logo img,
+        .brand-logo-mini img {
+            max-height: 45px;
+            width: auto;
+            object-fit: contain;
+            margin-left: 0;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            padding-left: 0;
+        }
+
+        .brand-logo-mini {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            padding-left: 0;
+        }
+
+        .brand-logo-mini img {
+            max-height: 32px;
+        }
+
+        /* Dark mode logo filter (optional - uncomment if logo needs inversion in dark mode) */
+        /* [data-theme="dark"] .navbar-brand img {
+            filter: brightness(0) invert(1);
+        } */
+
+        /* Sidebar Menu Highlighting - Dark Mode */
+        [data-theme="dark"] .sidebar .nav .nav-item .nav-link {
+            color: var(--text-secondary);
+            background: transparent !important;
+        }
+
+        [data-theme="dark"] .sidebar .nav .nav-item {
+            background: transparent !important;
+        }
+
+        [data-theme="dark"] .sidebar .nav .nav-item.active {
+            background: transparent !important;
+        }
+
+        [data-theme="dark"] .sidebar .nav .nav-item.active > .nav-link {
+            background: transparent !important;
+            color: #4a90e2 !important;
+        }
+
+        [data-theme="dark"] .sidebar .nav .nav-item.active > .nav-link::before,
+        [data-theme="dark"] .sidebar .nav .nav-item.active > .nav-link::after {
+            background: transparent !important;
+        }
+
+        [data-theme="dark"] .sidebar .nav .nav-item.active > .nav-link .menu-title {
+            color: #4a90e2 !important;
+        }
+
+        [data-theme="dark"] .sidebar .nav .nav-item.active > .nav-link .menu-icon {
+            color: #4a90e2 !important;
+        }
+
+        [data-theme="dark"] .sidebar .nav .nav-item:hover {
+            background: transparent !important;
+        }
+
+        [data-theme="dark"] .sidebar .nav .nav-item .nav-link:hover {
+            background: transparent !important;
+            color: #4a90e2 !important;
+        }
+
+        [data-theme="dark"] .sidebar .nav .nav-item .nav-link:hover::before,
+        [data-theme="dark"] .sidebar .nav .nav-item .nav-link:hover::after {
+            background: transparent !important;
+        }
+
+        [data-theme="dark"] .sidebar .nav .nav-item .nav-link:hover .menu-title {
+            color: #4a90e2 !important;
+        }
+
+        [data-theme="dark"] .sidebar .nav .nav-item .nav-link:hover .menu-icon {
+            color: #4a90e2 !important;
+        }
+
+        /* Submenu styling */
+        [data-theme="dark"] .sidebar .nav .nav-item .collapse .nav-link.active {
+            background: transparent !important;
+            color: #4a90e2 !important;
+        }
+
+        [data-theme="dark"] .sidebar .nav .nav-item .collapse .nav-link {
+            color: var(--text-secondary);
+        }
+
+        [data-theme="dark"] .sidebar .nav .nav-item .collapse .nav-link:hover {
+            color: #4a90e2 !important;
+            background: transparent !important;
+        }
+
+        [data-theme="dark"] .sidebar .nav .nav-item .collapse {
+            background: transparent !important;
+        }
+
+        [data-theme="dark"] .sidebar .nav .nav-item .sub-menu {
+            background: transparent !important;
+        }
+
+        /* Search functionality - no results message */
+        [data-theme="dark"] .sidebar .nav .text-muted {
+            color: var(--text-secondary) !important;
+        }
+
+        [data-theme="dark"] .sidebar .nav .text-muted i {
+            font-size: 24px;
+            opacity: 0.5;
+        }
+
+        /* Main Content Wrapper - Dark Mode */
+        [data-theme="dark"] .main-panel {
+            background: var(--bg-secondary) !important;
+        }
+
+        [data-theme="dark"] .content-wrapper {
+            background: var(--bg-secondary) !important;
+        }
+
+        /* Remove white backgrounds from all containers */
+        [data-theme="dark"] .container-fluid {
+            background: transparent !important;
+        }
+
+        [data-theme="dark"] .row {
+            background: transparent !important;
+        }
+
+        /* Ensure search field is dark */
+        [data-theme="dark"] .search-field input {
+            background-color: rgba(255, 255, 255, 0.1) !important;
+            color: var(--text-primary) !important;
+            border-color: var(--border-color) !important;
+        }
+
+        [data-theme="dark"] .search-field input::placeholder {
+            color: var(--text-secondary) !important;
+        }
+
+        [data-theme="dark"] .input-group-text {
+            background-color: transparent !important;
+            color: var(--text-secondary) !important;
+            border-color: var(--border-color) !important;
+        }
+
+        /* Pagination */
+        [data-theme="dark"] .pagination .page-item .page-link {
+            background-color: var(--bg-card);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        [data-theme="dark"] .pagination .page-item.active .page-link {
+            background-color: #4a90e2;
+            border-color: #4a90e2;
+        }
+
+        [data-theme="dark"] .pagination .page-item .page-link:hover {
+            background-color: rgba(74, 144, 226, 0.2);
+            color: var(--text-primary);
+        }
+
+        /* Alerts */
+        [data-theme="dark"] .alert {
+            background-color: var(--bg-card);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        /* Dropdown menus */
+        [data-theme="dark"] .dropdown-menu {
+            background-color: var(--bg-card);
+            border-color: var(--border-color);
+        }
+
+        [data-theme="dark"] .dropdown-item {
+            color: var(--text-primary);
+        }
+
+        [data-theme="dark"] .dropdown-item:hover {
+            background-color: rgba(74, 144, 226, 0.2);
+            color: var(--text-primary);
+        }
+
+        /* Footer if exists */
+        [data-theme="dark"] footer {
+            background-color: var(--bg-card) !important;
+            color: var(--text-primary);
+        }
+
+        /* Remove any remaining white backgrounds */
+        [data-theme="dark"] .bg-white {
+            background-color: var(--bg-card) !important;
+        }
+
+        [data-theme="dark"] .stretch-card,
+        [data-theme="dark"] .grid-margin {
+            background: transparent !important;
+        }
+
+        [data-theme="dark"] .card-img-holder {
+            background: transparent;
+        }
+
+        /* Col elements should be transparent */
+        [data-theme="dark"] [class*="col-"] {
+            background: transparent !important;
+        }
+
+        /* List groups */
+        [data-theme="dark"] .list-group-item {
+            background-color: var(--bg-card);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        /* Navbar toggler buttons */
+        [data-theme="dark"] .navbar-toggler {
+            color: var(--text-primary);
+            border-color: var(--border-color);
+        }
+
+        [data-theme="dark"] .navbar-toggler .mdi {
+            color: var(--text-primary);
+        }
+
+        /* Breadcrumbs */
+        [data-theme="dark"] .breadcrumb-item,
+        [data-theme="dark"] .breadcrumb-item a {
+            color: var(--text-secondary);
+        }
+
+        [data-theme="dark"] .breadcrumb-item.active {
+            color: var(--text-primary);
+        }
+
+        /* Page title */
+        [data-theme="dark"] .page-title {
+            color: var(--text-primary);
+        }
+
+        /* Ensure all text inputs maintain dark styling */
+        [data-theme="dark"] input[type="text"],
+        [data-theme="dark"] input[type="email"],
+        [data-theme="dark"] input[type="password"],
+        [data-theme="dark"] input[type="number"],
+        [data-theme="dark"] input[type="date"],
+        [data-theme="dark"] textarea,
+        [data-theme="dark"] select {
+            background-color: var(--bg-secondary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        /* Table responsive wrapper */
+        [data-theme="dark"] .table-responsive {
+            background-color: transparent !important;
+        }
+
+        [data-theme="dark"] .table-responsive.border {
+            background-color: transparent !important;
+        }
+
+        [data-theme="dark"] .table-responsive.rounded {
+            background-color: transparent !important;
+        }
+
+        [data-theme="dark"] .table-responsive.p-4 {
+            background-color: transparent !important;
+        }
+
+        /* Remove any white borders or backgrounds from table containers */
+        [data-theme="dark"] .p-4.border,
+        [data-theme="dark"] .border.rounded {
+            background-color: transparent !important;
+        }
+
+        [data-theme="dark"] .p-4.border.rounded {
+            background-color: transparent !important;
+        }
+
+        [data-theme="dark"] .p-4.border.rounded.table-responsive {
+            background-color: transparent !important;
+        }
+
+        /* Ensure table wrapper divs are dark */
+        [data-theme="dark"] div.table-responsive,
+        [data-theme="dark"] div.p-4 {
+            background-color: transparent !important;
+        }
+
+        /* Card header backgrounds */
+        [data-theme="dark"] .card-header.bg-white {
+            background: var(--bg-card) !important;
+        }
+
+        /* Table bordered cells */
+        [data-theme="dark"] .table-bordered thead th,
+        [data-theme="dark"] .table-bordered thead td,
+        [data-theme="dark"] .table-bordered tbody th,
+        [data-theme="dark"] .table-bordered tbody td {
+            background-color: var(--bg-card) !important;
+        }
+
+        /* Override any remaining white/light classes */
+        [data-theme="dark"] .bg-white,
+        [data-theme="dark"] .bg-light,
+        [data-theme="dark"] .bg-transparent {
+            background-color: transparent !important;
+        }
+
+        /* Specifically target table cells to remove white backgrounds */
+        [data-theme="dark"] td,
+        [data-theme="dark"] th {
+            background-color: inherit !important;
+        }
+
+        /* Wrapper divs that might have white backgrounds */
+        [data-theme="dark"] .p-4,
+        [data-theme="dark"] .p-3,
+        [data-theme="dark"] .p-2,
+        [data-theme="dark"] .p-1 {
+            background-color: transparent;
+        }
+
+        /* Border class overrides */
+        [data-theme="dark"] .border {
+            border-color: var(--border-color) !important;
+        }
+
+        [data-theme="dark"] .rounded,
+        [data-theme="dark"] .rounded-1,
+        [data-theme="dark"] .rounded-2,
+        [data-theme="dark"] .rounded-3 {
+            background-color: transparent;
+        }
+
+        /* Catch all for any remaining white backgrounds */
+        [data-theme="dark"] div:not(.card):not(.modal-content):not(.btn) {
+            background-color: transparent;
+        }
+
+        /* Specific for table wrappers with both border and rounded classes */
+        [data-theme="dark"] .border.rounded {
+            background-color: transparent !important;
+        }
+
+        [data-theme="dark"] .p-4.border.rounded {
+            background-color: transparent !important;
+        }
+    </style>
+    
     @stack('styles')
 </head>
 <body>
     <div class="container-scroller">
         <!-- Navbar -->
         <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
-            <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
-                <a class="navbar-brand brand-logo" href="{{ route('admin.home') }}" style="text-decoration: none;">
-                    <h3 class="mb-0" style="color: #6C7293; font-weight: 600;">BMS</h3>
+            @php
+                $app = application();
+                $logoPath = !empty($app->main_logo) ? 'images/application/' . $app->main_logo : 'img/logo.png';
+            @endphp
+            <div class="navbar-brand-wrapper d-flex align-items-center justify-content-start">
+                <a class="navbar-brand brand-logo" href="{{ route('admin.home') }}">
+                    <img src="{{ asset($logoPath) }}" alt="Logo" />
                 </a>
-                <a class="navbar-brand brand-logo-mini" href="{{ route('admin.home') }}" style="text-decoration: none;">
-                    <h5 class="mb-0" style="color: #6C7293; font-weight: 600;">BMS</h5>
+                <a class="navbar-brand brand-logo-mini" href="{{ route('admin.home') }}">
+                    <img src="{{ asset($logoPath) }}" alt="Logo" />
                 </a>
             </div>
             <div class="navbar-menu-wrapper d-flex align-items-stretch">
@@ -45,17 +718,22 @@
                     <span class="mdi mdi-menu"></span>
                 </button>
                 <div class="search-field d-none d-md-block">
-                    <form class="d-flex align-items-center h-100" action="#">
+                    <form class="d-flex align-items-center h-100" action="#" onsubmit="return false;">
                         <div class="input-group">
                             <div class="input-group-prepend bg-transparent">
                                 <i class="input-group-text border-0 mdi mdi-magnify"></i>
                             </div>
-                            <input type="text" class="form-control bg-transparent border-0" placeholder="Search...">
+                            <input type="text" id="menuSearch" class="form-control bg-transparent border-0" placeholder="Search menu..." autocomplete="off">
                         </div>
                     </form>
                 </div>
-                <ul class="navbar-nav navbar-nav-right">
-                    <li class="nav-item nav-logout d-none d-lg-block">
+                <ul class="navbar-nav navbar-nav-right">                    <!-- Dark Mode Toggle -->
+                    <li class="nav-item d-none d-lg-block me-2">
+                        <a class="nav-link theme-toggle" href="javascript:void(0)" id="themeToggle" title="Toggle Dark Mode">
+                            <i class="mdi mdi-weather-sunny" id="themeIcon"></i>
+                        </a>
+                    </li>
+                    <!-- Logout -->                    <li class="nav-item nav-logout d-none d-lg-block">
                         <a class="nav-link" href="{{ route('logout') }}" 
                            onclick="event.preventDefault(); document.getElementById('logout-form-2').submit();">
                             <i class="mdi mdi-power"></i>
@@ -163,7 +841,7 @@
 
                     <!-- Subscribe -->
                     @php
-                        $isSubscribe = Request::is('admin/admin/subscribe');
+                        $isSubscribe = Request::is('admin/subscribe');
                     @endphp
                     <li class="nav-item @if($isSubscribe) active @endif">
                         <a class="nav-link" data-bs-toggle="collapse" href="#subscribe" aria-expanded="@if($isSubscribe) true @else false @endif" aria-controls="subscribe">
@@ -394,7 +1072,7 @@
 
                     <!-- Strategic Plan -->
                                         @php
-                        $isStrategicPlan = Request::is('admin/strategic-plans/create') || Request::is('admin/strategic-plans') || Request::is('admin/strategic-plans/edit/*');
+                        $isStrategicPlan = Request::is('admin/strategic-plans/create') || Request::is('admin/strategic-plans/index') || Request::is('admin/strategic-plans/edit/*');
                     @endphp
                     <li class="nav-item @if($isStrategicPlan) active @endif">
                         <a class="nav-link" data-bs-toggle="collapse" href="#strategicplan" aria-expanded="@if($isStrategicPlan) true @else false @endif" aria-controls="strategicplan">
@@ -405,7 +1083,7 @@
                         <div class="collapse @if($isStrategicPlan) show @endif" id="strategicplan">
                             <ul class="nav flex-column sub-menu">
                                 <li class="nav-item"> <a class="nav-link @if(Request::is('admin/strategic-plans/create')) active @endif" href="{{ route('strategic_plans.create') }}">Add Strategic Plan</a></li>
-                                <li class="nav-item"> <a class="nav-link @if(Request::is('admin/strategic-plans') || Request::is('admin/strategic-plans/edit/*')) active @endif" href="{{ route('strategic_plans.index') }}">All Strategic Plans</a></li>
+                                <li class="nav-item"> <a class="nav-link @if(Request::is('admin/strategic-plans/index') || Request::is('admin/strategic-plans/edit/*')) active @endif" href="{{ route('strategic_plans.index') }}">All Strategic Plans</a></li>
                             </ul>
                         </div>
                     </li>
@@ -603,17 +1281,33 @@
         </div>
     </div>
 
-    <!-- Success Toast Notification -->
+    <!-- Toast Notifications -->
     <div class="position-fixed top-0 end-0 p-3" style="z-index: 11000;">
+        <!-- Success Toast -->
+        @if(session('success') || session('update'))
         <div id="successToast" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true" style="border-radius: 10px;">
             <div class="d-flex">
                 <div class="toast-body">
                     <i class="mdi mdi-check-circle me-2"></i>
-                    <span id="toastMessage">@if(session('success')){{ session('success') }}@else Item deleted successfully! @endif</span>
+                    <span>{{ session('success') ?? session('update') }}</span>
                 </div>
                 <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
         </div>
+        @endif
+
+        <!-- Error Toast -->
+        @if(session('error'))
+        <div id="errorToast" class="toast align-items-center text-white bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true" style="border-radius: 10px;">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <i class="mdi mdi-alert-circle me-2"></i>
+                    <span>{{ session('error') }}</span>
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+        @endif
     </div>
 
     <!-- Plugins JS -->
@@ -636,8 +1330,25 @@
             let deleteUrl = '';
             const deleteModalElement = document.getElementById('deleteConfirmModal');
             const deleteModal = new bootstrap.Modal(deleteModalElement);
-            const successToastElement = document.getElementById('successToast');
-            const successToast = new bootstrap.Toast(successToastElement);
+            
+            // Initialize toasts
+            @if(session('success') || session('update'))
+                const successToastElement = document.getElementById('successToast');
+                const successToast = new bootstrap.Toast(successToastElement, {
+                    autohide: true,
+                    delay: 3000
+                });
+                successToast.show();
+            @endif
+
+            @if(session('error'))
+                const errorToastElement = document.getElementById('errorToast');
+                const errorToast = new bootstrap.Toast(errorToastElement, {
+                    autohide: true,
+                    delay: 4000
+                });
+                errorToast.show();
+            @endif
             
             // Handle all delete links with delete-confirm class
             document.addEventListener('click', function(e) {
@@ -666,12 +1377,166 @@
             deleteModalElement.addEventListener('hidden.bs.modal', function() {
                 deleteUrl = '';
             });
-            
-            // Show success toast if delete was successful (check for success message in session)
-            @if(session('success'))
-                successToast.show();
-            @endif
         });
+    </script>
+
+    <!-- Dark Mode Toggle Script -->
+    <script>
+        (function() {
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = document.getElementById('themeIcon');
+            const htmlElement = document.documentElement;
+            
+            // Check for saved theme preference or default to 'light' mode
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            htmlElement.setAttribute('data-theme', currentTheme);
+            updateIcon(currentTheme);
+            
+            // Theme toggle handler
+            themeToggle.addEventListener('click', function() {
+                let theme = htmlElement.getAttribute('data-theme');
+                
+                if (theme === 'light') {
+                    htmlElement.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('theme', 'dark');
+                    updateIcon('dark');
+                } else {
+                    htmlElement.setAttribute('data-theme', 'light');
+                    localStorage.setItem('theme', 'light');
+                    updateIcon('light');
+                }
+            });
+            
+            function updateIcon(theme) {
+                if (theme === 'dark') {
+                    themeIcon.classList.remove('mdi-weather-sunny');
+                    themeIcon.classList.add('mdi-weather-night');
+                    themeToggle.setAttribute('title', 'Switch to Light Mode');
+                } else {
+                    themeIcon.classList.remove('mdi-weather-night');
+                    themeIcon.classList.add('mdi-weather-sunny');
+                    themeToggle.setAttribute('title', 'Switch to Dark Mode');
+                }
+            }
+        })();
+    </script>
+
+    <!-- Menu Search Functionality -->
+    <script>
+        (function() {
+            const searchInput = document.getElementById('menuSearch');
+            const sidebar = document.getElementById('sidebar');
+            
+            if (searchInput && sidebar) {
+                const menuItems = sidebar.querySelectorAll('.nav-item');
+                let noResultsMsg = null;
+                
+                // Store original expanded state of each menu
+                const originalExpandedState = new Map();
+                menuItems.forEach(function(item) {
+                    const collapseElement = item.querySelector('.collapse');
+                    if (collapseElement) {
+                        originalExpandedState.set(item, collapseElement.classList.contains('show'));
+                    }
+                });
+                
+                searchInput.addEventListener('input', function(e) {
+                    const searchTerm = e.target.value.toLowerCase().trim();
+                    let hasResults = false;
+                    
+                    menuItems.forEach(function(item) {
+                        const menuTitle = item.querySelector('.menu-title');
+                        const subMenuLinks = item.querySelectorAll('.sub-menu .nav-link');
+                        
+                        if (menuTitle) {
+                            const titleText = menuTitle.textContent.toLowerCase();
+                            let showItem = false;
+                            let mainMenuMatches = false;
+                            
+                            // Check if main menu title matches
+                            if (titleText.includes(searchTerm)) {
+                                showItem = true;
+                                mainMenuMatches = true;
+                            }
+                            
+                            // Check if any submenu item matches
+                            let hasMatchingSubmenu = false;
+                            subMenuLinks.forEach(function(link) {
+                                const linkText = link.textContent.toLowerCase();
+                                
+                                if (searchTerm === '') {
+                                    // No search term: show all submenus
+                                    link.parentElement.style.display = '';
+                                } else if (mainMenuMatches) {
+                                    // Main menu matches: show ALL submenus regardless of their text
+                                    link.parentElement.style.display = '';
+                                    hasMatchingSubmenu = true;
+                                } else if (linkText.includes(searchTerm)) {
+                                    // Main menu doesn't match, but this submenu does
+                                    showItem = true;
+                                    hasMatchingSubmenu = true;
+                                    link.parentElement.style.display = '';
+                                } else {
+                                    // Main menu doesn't match and this submenu doesn't match
+                                    link.parentElement.style.display = 'none';
+                                }
+                            });
+                            
+                            // Show/hide the menu item
+                            if (showItem || searchTerm === '') {
+                                item.style.display = '';
+                                hasResults = true;
+                                
+                                const collapseElement = item.querySelector('.collapse');
+                                if (collapseElement) {
+                                    if (searchTerm !== '') {
+                                        // During search: expand if main menu or submenu matches
+                                        if (mainMenuMatches || hasMatchingSubmenu) {
+                                            collapseElement.classList.add('show');
+                                        }
+                                    } else {
+                                        // Search cleared: restore original state
+                                        const wasOriginallyExpanded = originalExpandedState.get(item);
+                                        if (wasOriginallyExpanded) {
+                                            collapseElement.classList.add('show');
+                                        } else {
+                                            collapseElement.classList.remove('show');
+                                        }
+                                    }
+                                }
+                            } else {
+                                item.style.display = 'none';
+                            }
+                        }
+                    });
+                    
+                    // Show/hide "no results" message
+                    if (!hasResults && searchTerm !== '') {
+                        if (!noResultsMsg) {
+                            noResultsMsg = document.createElement('div');
+                            noResultsMsg.className = 'text-center text-muted py-4 px-3';
+                            noResultsMsg.style.fontSize = '14px';
+                            noResultsMsg.innerHTML = '<i class="mdi mdi-magnify-close"></i><br>No menu items found';
+                            sidebar.querySelector('.nav').appendChild(noResultsMsg);
+                        }
+                        noResultsMsg.style.display = 'block';
+                    } else {
+                        if (noResultsMsg) {
+                            noResultsMsg.style.display = 'none';
+                        }
+                    }
+                });
+                
+                // Clear search on escape key
+                searchInput.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape') {
+                        e.target.value = '';
+                        e.target.dispatchEvent(new Event('input'));
+                        e.target.blur();
+                    }
+                });
+            }
+        })();
     </script>
     
     @stack('scripts')

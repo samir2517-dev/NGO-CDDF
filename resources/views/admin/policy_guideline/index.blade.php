@@ -29,11 +29,11 @@
                                         {{ $value->file }}
                                     </td>
                                     <td>
-                                        <a href="{{ route('policy.edit',$value->id) }}" class="btn btn-sm btn-primary text-white text-center">
-                                            <i class="fadeIn animated bx bx-edit"></i>
+                                        <a href="{{ route('policy.edit',$value->id) }}" class="btn btn-outline-primary btn-sm me-1" title="Edit">
+                                            <i class="mdi mdi-pencil"></i>
                                         </a>
-                                        <a href="{{ route('policy.delete',$value->id) }}" class="btn btn-sm btn-danger text-white text-center">
-                                            <i class="fadeIn animated bx bx-trash-alt"></i>
+                                        <a href="{{ route('policy.delete',$value->id) }}" class="btn btn-outline-danger btn-sm delete-confirm" title="Delete">
+                                            <i class="mdi mdi-delete"></i>
                                         </a>
                                     </td>
                                 </tr>

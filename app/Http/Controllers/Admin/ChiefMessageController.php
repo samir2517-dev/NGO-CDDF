@@ -128,6 +128,6 @@ class ChiefMessageController extends Controller
         );
 
         DB::table('chief_executive_message')->where('id', $id)->update($data);
-        return redirect()->back()->with('update', 'Successfully Updated');
+        return redirect()->route('chief.message.index')->with('update', 'Successfully Updated');
     }
 }

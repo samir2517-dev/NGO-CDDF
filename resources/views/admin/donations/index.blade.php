@@ -71,31 +71,26 @@
                                         <a href="{{ route('admin.donations.show', $item->id) }}" 
                                            class="btn btn-sm btn-info" 
                                            title="View Details">
-                                            <i class="bx bx-show"></i>
+                                            <i class="bx bx-show"></i> View
                                         </a>
                                         @if($item->status == 'pending')
-                                        <form action="{{ route('admin.donations.verify', $item->id) }}" method="POST" class="d-inline">
-                                            @csrf
-                                            <button type="submit" class="btn btn-sm btn-success" 
-                                                    onclick="return confirm('Verify this donation?')"
-                                                    title="Verify">
-                                                <i class="bx bx-check"></i>
-                                            </button>
-                                        </form>
-                                        <form action="{{ route('admin.donations.reject', $item->id) }}" method="POST" class="d-inline">
-                                            @csrf
-                                            <button type="submit" class="btn btn-sm btn-warning" 
-                                                    onclick="return confirm('Reject this donation?')"
-                                                    title="Reject">
-                                                <i class="bx bx-x"></i>
-                                            </button>
-                                        </form>
+                                        <button type="button" 
+                                                class="btn btn-sm btn-success verify-confirm" 
+                                                data-url="{{ route('admin.donations.verify', $item->id) }}"
+                                                title="Verify">
+                                            <i class="bx bx-check"></i> Verify
+                                        </button>
+                                        <button type="button" 
+                                                class="btn btn-sm btn-warning reject-confirm" 
+                                                data-url="{{ route('admin.donations.reject', $item->id) }}"
+                                                title="Reject">
+                                            <i class="bx bx-x"></i> Reject
+                                        </button>
                                         @endif
                                         <a href="{{ route('admin.donations.delete', $item->id) }}" 
-                                           class="btn btn-sm btn-danger" 
-                                           onclick="return confirm('Are you sure you want to delete this donation?')"
+                                           class="btn btn-sm btn-danger delete-confirm" 
                                            title="Delete">
-                                            <i class="bx bx-trash"></i>
+                                            <i class="bx bx-trash"></i> Delete
                                         </a>
                                     </div>
                                 </td>
@@ -129,4 +124,153 @@
         </div>
     </div>
 </div>
+
+<!-- Verify Confirmation Modal -->
+<div class="modal fade" id="verifyConfirmModal" data-bs-keyboard="true" tabindex="-1" aria-labelledby="verifyConfirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow-lg" style="border-radius: 15px; border: none;">
+            <div class="modal-header border-0 pb-0">
+                <h5 class="modal-title w-100 text-center mt-3" id="verifyConfirmModalLabel">
+                    <div class="d-flex flex-column align-items-center">
+                        <div class="rounded-circle bg-success bg-opacity-10 p-4 mb-3" style="width: 80px; height: 80px; display: flex; align-items: center; justify-content: center;">
+                            <i class="mdi mdi-check text-success" style="font-size: 3.5rem; font-weight: bold;"></i>
+                        </div>
+                        <h4 class="mb-0">Verify Donation?</h4>
+                    </div>
+                </h5>
+            </div>
+            <div class="modal-body text-center px-4 pb-2">
+                <p class="text-muted mb-0">Are you sure you want to verify this donation?</p>
+                <p class="text-muted mb-0">This will mark the donation as verified.</p>
+            </div>
+            <div class="modal-footer border-0 justify-content-center pb-4">
+                <button type="button" class="btn btn-light px-4" data-bs-dismiss="modal" style="border-radius: 25px;">
+                    Cancel
+                </button>
+                <button type="button" class="btn btn-success px-4" id="confirmVerifyBtn" style="border-radius: 25px;">
+                    Verify
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Reject Confirmation Modal -->
+<div class="modal fade" id="rejectConfirmModal" data-bs-keyboard="true" tabindex="-1" aria-labelledby="rejectConfirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content shadow-lg" style="border-radius: 15px; border: none;">
+            <div class="modal-header border-0 pb-0">
+                <h5 class="modal-title w-100 text-center mt-3" id="rejectConfirmModalLabel">
+                    <div class="d-flex flex-column align-items-center">
+                        <div class="rounded-circle bg-warning bg-opacity-10 p-4 mb-3" style="width: 80px; height: 80px; display: flex; align-items: center; justify-content: center;">
+                            <i class="mdi mdi-close text-warning" style="font-size: 3.5rem; font-weight: bold;"></i>
+                        </div>
+                        <h4 class="mb-0">Reject Donation?</h4>
+                    </div>
+                </h5>
+            </div>
+            <div class="modal-body text-center px-4 pb-2">
+                <p class="text-muted mb-0">Are you sure you want to reject this donation?</p>
+                <p class="text-muted mb-0">This will mark the donation as rejected.</p>
+            </div>
+            <div class="modal-footer border-0 justify-content-center pb-4">
+                <button type="button" class="btn btn-light px-4" data-bs-dismiss="modal" style="border-radius: 25px;">
+                    Cancel
+                </button>
+                <button type="button" class="btn btn-warning px-4" id="confirmRejectBtn" style="border-radius: 25px;">
+                    Reject
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @endsection
+
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        let actionUrl = '';
+        
+        // Initialize modals
+        const verifyModalElement = document.getElementById('verifyConfirmModal');
+        const verifyModal = new bootstrap.Modal(verifyModalElement);
+        
+        const rejectModalElement = document.getElementById('rejectConfirmModal');
+        const rejectModal = new bootstrap.Modal(rejectModalElement);
+        
+        // Handle verify button clicks
+        document.addEventListener('click', function(e) {
+            const verifyBtn = e.target.closest('.verify-confirm');
+            if (verifyBtn) {
+                e.preventDefault();
+                e.stopPropagation();
+                actionUrl = verifyBtn.getAttribute('data-url');
+                verifyModal.show();
+                return false;
+            }
+        });
+        
+        // Handle reject button clicks
+        document.addEventListener('click', function(e) {
+            const rejectBtn = e.target.closest('.reject-confirm');
+            if (rejectBtn) {
+                e.preventDefault();
+                e.stopPropagation();
+                actionUrl = rejectBtn.getAttribute('data-url');
+                rejectModal.show();
+                return false;
+            }
+        });
+        
+        // Handle confirm verify button
+        document.getElementById('confirmVerifyBtn').addEventListener('click', function() {
+            if (actionUrl) {
+                verifyModal.hide();
+                // Create and submit form
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = actionUrl;
+                
+                const csrfToken = document.createElement('input');
+                csrfToken.type = 'hidden';
+                csrfToken.name = '_token';
+                csrfToken.value = '{{ csrf_token() }}';
+                form.appendChild(csrfToken);
+                
+                document.body.appendChild(form);
+                form.submit();
+            }
+        });
+        
+        // Handle confirm reject button
+        document.getElementById('confirmRejectBtn').addEventListener('click', function() {
+            if (actionUrl) {
+                rejectModal.hide();
+                // Create and submit form
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = actionUrl;
+                
+                const csrfToken = document.createElement('input');
+                csrfToken.type = 'hidden';
+                csrfToken.name = '_token';
+                csrfToken.value = '{{ csrf_token() }}';
+                form.appendChild(csrfToken);
+                
+                document.body.appendChild(form);
+                form.submit();
+            }
+        });
+        
+        // Reset actionUrl when modals are closed
+        verifyModalElement.addEventListener('hidden.bs.modal', function() {
+            actionUrl = '';
+        });
+        
+        rejectModalElement.addEventListener('hidden.bs.modal', function() {
+            actionUrl = '';
+        });
+    });
+</script>
+@endpush

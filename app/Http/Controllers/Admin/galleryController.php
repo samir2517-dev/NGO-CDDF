@@ -95,7 +95,7 @@ class galleryController extends Controller
         );
 
         DB::table('gallery')->where('id', $id)->update($gallery);
-        return redirect()->back()->with('update', 'Successfully Updated News');
+        return redirect()->route('gallery.index')->with('update', 'Successfully Updated News');
     }
 }
 

@@ -106,6 +106,6 @@ class StoryController extends Controller
         );
 
         DB::table('stories')->where('id', $id)->update($data);
-        return redirect()->back()->with('update', 'Successfully Updated');
+        return redirect()->route('stories.index')->with('update', 'Successfully Updated');
     }
 }

@@ -74,6 +74,6 @@ class VolunteerController extends Controller
         );
 
         DB::table('volunteers')->where('id', $id)->update($data);
-        return redirect()->back()->with('update', 'Successfully Updated');
+        return redirect()->route('volunteers.index')->with('update', 'Successfully Updated');
     }
 }

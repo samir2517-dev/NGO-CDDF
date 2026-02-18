@@ -95,6 +95,6 @@ class policyController extends Controller
         ];
 
         DB::table('policy_guideline')->where('id', $id)->update($policy_guideline);
-        return redirect()->back()->with('success', 'Successfully Updated');
+        return redirect()->route('policy.index')->with('success', 'Successfully Updated');
     }
 }

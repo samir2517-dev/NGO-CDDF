@@ -95,6 +95,6 @@ class invokedController extends Controller
         ];
 
         DB::table('invoked')->where('id', $id)->update($invoked);
-        return redirect()->back()->with('success', 'Successfully Updated');
+        return redirect()->route('invoked.index')->with('success', 'Successfully Updated');
     }
 }

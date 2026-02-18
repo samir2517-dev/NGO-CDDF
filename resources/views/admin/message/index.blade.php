@@ -26,11 +26,11 @@
                                 <td class="align-middle">{{ $message->email }}</td>
                                 <td class="align-middle">{{ $message->subject }}</td>
                                 <td class="text-center align-middle">
-                                    <a href="{{ route('message.delete',$message->id) }}" class="btn btn-sm btn-danger text-white text-center">
-                                        <i class="fadeIn animated bx bx-trash-alt"></i>
+                                    <a href="{{ route('message.view',$message->id) }}" class="btn btn-outline-info btn-sm me-1" title="View">
+                                        <i class="mdi mdi-eye"></i>
                                     </a>
-                                    <a href="{{ route('message.view',$message->id) }}" class="btn btn-sm btn-info text-white text-center">
-                                        <i class="lni lni-eye"></i>
+                                    <a href="{{ route('message.delete',$message->id) }}" class="btn btn-outline-danger btn-sm delete-confirm" title="Delete">
+                                        <i class="mdi mdi-delete"></i>
                                     </a>
                                 </td>
                             </tr>

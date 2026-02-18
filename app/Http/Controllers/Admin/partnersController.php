@@ -91,7 +91,7 @@ class partnersController extends Controller
         ];
 
         DB::table('partners')->where('id',$id)->update($updatedPartner);
-        return redirect()->back()->with('success','success');
+        return redirect()->route('partner.index')->with('success','success');
 
 
     }

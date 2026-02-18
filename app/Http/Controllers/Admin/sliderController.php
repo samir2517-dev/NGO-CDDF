@@ -92,6 +92,6 @@ class sliderController extends Controller
         );
 
         DB::table('slider')->where('id',$id)->update($slider);
-        return redirect()->back()->with('success', 'Successfully Updated data');
+        return redirect()->route('slider.index')->with('success', 'Successfully Updated data');
     }
 }

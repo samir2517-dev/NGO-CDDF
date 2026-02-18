@@ -66,15 +66,14 @@
                                 </td>
                                 <td class="text-center">
                                     <a href="{{ route('impact.edit',$item->id) }}" 
-                                       class="btn btn-sm btn-primary text-white" 
+                                       class="btn btn-outline-primary btn-sm me-1" 
                                        title="Edit">
-                                        <i class="bx bx-edit"></i>
+                                        <i class="mdi mdi-pencil"></i>
                                     </a>
                                     <a href="{{ route('impact.delete',$item->id) }}" 
-                                       class="btn btn-sm btn-danger text-white" 
-                                       onclick="return confirm('Are you sure you want to delete this impact metric?')"
+                                       class="btn btn-outline-danger btn-sm delete-confirm" 
                                        title="Delete">
-                                        <i class="bx bx-trash-alt"></i>
+                                        <i class="mdi mdi-delete"></i>
                                     </a>
                                 </td>
                             </tr>

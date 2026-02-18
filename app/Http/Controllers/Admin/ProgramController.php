@@ -102,6 +102,6 @@ class ProgramController extends Controller
         );
 
         DB::table('programs')->where('id', $id)->update($data);
-        return redirect()->back()->with('update', 'Successfully Updated');
+        return redirect()->route('programs.index')->with('update', 'Successfully Updated');
     }
 }

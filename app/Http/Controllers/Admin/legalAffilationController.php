@@ -92,6 +92,6 @@ class legalAffilationController extends Controller
         ];
 
         DB::table('legal_affilation')->where('id',$id)->update($legal_affilation);
-        return redirect()->back()->with('success', 'Successfully Updated Origin and Legal Affilation PDF');
+        return redirect()->route('origin.legal_affilation.index')->with('success', 'Successfully Updated Origin and Legal Affilation PDF');
     }
 }

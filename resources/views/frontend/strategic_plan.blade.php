@@ -28,7 +28,11 @@
                     @if (!empty($plan->image))
                       <img src="{{ asset('images/strategic_plans/images/'.$plan->image) }}" alt="{{ $plan->title }}" style="max-width: 70%; height: auto;">
                     @else
-                      <img src="{{ asset('img/logo.png') }}" alt="" width="50%">
+                      @php
+                        $app = application();
+                        $logoPath = !empty($app->main_logo) ? 'images/application/' . $app->main_logo : 'img/logo.png';
+                      @endphp
+                      <img src="{{ asset($logoPath) }}" alt="Logo" width="50%">
                     @endif
                   </div>
                   <div class="card-footer">

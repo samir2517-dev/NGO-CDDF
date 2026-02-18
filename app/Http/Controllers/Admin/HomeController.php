@@ -31,7 +31,7 @@ class HomeController extends Controller
             $stats = [
                 'total_projects' => DB::table('projects')->count(),
                 'total_donations' => DB::table('donations')->count(),
-                'total_donation_amount' => DB::table('donations')->where('status', 'approved')->sum('amount') ?? 0,
+                'total_donation_amount' => DB::table('donations')->where('status', 'verified')->sum('amount') ?? 0,
                 'pending_donations' => DB::table('donations')->where('status', 'pending')->count(),
                 'total_team_members' => DB::table('team_members')->count(),
                 'total_executive_members' => DB::table('executive_committee')->count(),
@@ -40,6 +40,12 @@ class HomeController extends Controller
                 'total_publications' => DB::table('publications')->count(),
                 'total_programs' => DB::table('programs')->count(),
                 'total_contact_messages' => DB::table('messages')->count(),
+                'total_stories' => DB::table('stories')->count(),
+                'total_gallery' => DB::table('gallery')->count(),
+                'total_faq' => DB::table('faq')->count(),
+                'total_impact' => DB::table('impact')->count(),
+                'total_sliders' => DB::table('slider')->count(),
+                'total_partners' => DB::table('partners')->count(),
             ];
         } catch (\Exception $e) {
             // If any query fails, set defaults
@@ -55,16 +61,21 @@ class HomeController extends Controller
                 'total_publications' => 0,
                 'total_programs' => 0,
                 'total_contact_messages' => 0,
+                'total_stories' => 0,
+                'total_gallery' => 0,
+                'total_faq' => 0,
+                'total_impact' => 0,
+                'total_sliders' => 0,
+                'total_partners' => 0,
             ];
         }
 
-        // Recent donations (last 7 for chart)
+        // Recent donations (last 7 for display)
         try {
             $recentDonations = DB::table('donations')
-                ->where('status', 'approved')
                 ->orderBy('created_at', 'desc')
                 ->limit(7)
-                ->get(['amount', 'created_at', 'donor_name']);
+                ->get(['id', 'amount', 'created_at', 'donor_name', 'donor_phone', 'status', 'transaction_id']);
         } catch (\Exception $e) {
             $recentDonations = collect();
         }

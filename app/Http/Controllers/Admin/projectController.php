@@ -92,6 +92,6 @@ class projectController extends Controller
         );
 
         DB::table('ongoing_project')->where('id',$id)->update($project);
-        return redirect()->back()->with('update', 'Successfully Updated data');
+        return redirect()->route('project.index')->with('update', 'Successfully Updated data');
     }
 }

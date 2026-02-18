@@ -112,6 +112,6 @@ class TeamMemberController extends Controller
         );
 
         DB::table('team_members')->where('id', $id)->update($data);
-        return redirect()->back()->with('update', 'Successfully Updated');
+        return redirect()->route('team.index')->with('update', 'Successfully Updated');
     }
 }

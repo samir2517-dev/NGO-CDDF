@@ -89,7 +89,7 @@ class ImpactController extends Controller
             'order' => $request->order ?? 0
         ]);
 
-        return redirect()->back()->with('update', 'Impact metric successfully updated!');
+        return redirect()->route('impact.index')->with('update', 'Impact metric successfully updated!');
     }
 }
 

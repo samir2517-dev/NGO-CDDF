@@ -72,6 +72,6 @@ class FaqController extends Controller
         );
 
         DB::table('faq')->where('id', $id)->update($data);
-        return redirect()->back()->with('update', 'Successfully Updated');
+        return redirect()->route('faq.index')->with('update', 'Successfully Updated');
     }
 }

@@ -65,6 +65,6 @@ class projectArchiveController extends Controller
             ];
 
         DB::table('projects')->where('id',$id)->update($project);
-        return redirect()->back()->with('success', 'Successfully Updated');
+        return redirect()->route('project.archive.index')->with('success', 'Successfully Updated');
     }
 }
