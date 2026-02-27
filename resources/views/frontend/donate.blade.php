@@ -1,86 +1,106 @@
 @extends('main')
 
 @section('content')
-  <!-- ======= Breadcrumbs ======= -->
-  <section class="breadcrumbs">
-    <div class="container">
-      <ol>
-        <li><a href="{{ url('/') }}">Home</a></li>
-        <li>Get Involved</li>
-      </ol>
-      <h2>Donate</h2>
-    </div>
-  </section>
-  <!-- End Breadcrumbs -->
 
-    <!-- ======= Project Archieve Section ======= -->
-  <section id="contact" class="contact bg-light p-0">
-    <div class="container bg-white py-5" data-aos="fade-up">
-      <div class="section-title">
-        <h2>Donate</h2>
-        <div style="background-image: url('{{ asset('img/donation.jpg') }}')" class="py-5">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8 col-12 mx-auto text-center">
-                        <h6 class="text-warning text-center">We need your cooperation</h6>
-                        <h1 class="text-white text-center">Be a part of our mission to raise funds for impactful humanitarian causes.</h1>
-                    </div>
+<!-- Donate Section -->
+<section class="py-5" style="background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%); padding-top: 60px !important;">
+    <div class="container">
+        <!-- Page Header -->
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h1 style="font-size: 48px; font-weight: 800; color: #2c3e50; margin-bottom: 15px;">
+                Make a <span style="color: #0D47A1;">Donation</span>
+            </h1>
+        </div>
+
+        <!-- Payment Methods Section -->
+        @if($paymentMethods->count() > 0)
+            <div class="mb-5" data-aos="fade-up">
+                <h3 class="text-center mb-4" style="color: #2c3e50; font-weight: 700;">Payment Methods</h3>
+                <div class="row g-4 justify-content-center">
+                    @foreach($paymentMethods as $index => $method)
+                        @php
+                            $gradients = [
+                                'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                                'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+                                'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+                                'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
+                                'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
+                                'linear-gradient(135deg, #30cfd0 0%, #330867 100%)',
+                            ];
+                            $gradient = $gradients[$index % count($gradients)];
+                        @endphp
+                        
+                        <div class="col-lg-4 col-md-6 col-12" data-aos="zoom-in" data-aos-delay="{{ $index * 50 }}">
+                            <div class="card border-0 shadow-sm h-100" style="border-radius: 15px; overflow: hidden; transition: all 0.3s ease;">
+                                <!-- Card Header -->
+                                <div class="card-header border-0 text-white text-center" style="background: {{ $gradient }}; padding: 20px;">
+                                    @if($method->icon_image)
+                                        <div style="width: 100px; height: 100px; margin: 0 auto; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; padding: 15px;">
+                                            <img src="{{ asset('storage/'.$method->icon_image) }}" alt="{{ $method->type }}" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                                        </div>
+                                    @elseif($method->type == 'bank')
+                                        <i class="bx bxs-bank" style="font-size: 60px;"></i>
+                                    @elseif(file_exists(public_path('img/'.$method->type.'.png')))
+                                        <img src="{{ asset('img/'.$method->type.'.png') }}" alt="{{ $method->type }}" style="max-width: 80px; max-height: 80px;">
+                                    @else
+                                        <i class="bx bx-money" style="font-size: 60px;"></i>
+                                    @endif
+                                </div>
+
+                                <!-- Card Body -->
+                                <div class="card-body text-center p-4">
+                                    <h5 class="fw-bold mb-2" style="color: #2c3e50;">{{ $method->account_name }}</h5>
+                                    <h4 class="mb-3" style="color: #0D47A1; font-weight: 700;">{{ $method->account_number }}</h4>
+                                    
+                                    @if($method->type == 'bank' && $method->bank_details)
+                                        <div class="text-start mt-3" style="background: #f8f9fa; border-radius: 10px; padding: 15px;">
+                                            @if(isset($method->bank_details['bank_name']))
+                                                <div class="mb-2" style="font-size: 14px;">
+                                                    <strong style="color: #6c757d;">Bank:</strong> 
+                                                    <span style="color: #2c3e50;">{{ $method->bank_details['bank_name'] }}</span>
+                                                </div>
+                                            @endif
+                                            @if(isset($method->bank_details['branch_name']))
+                                                <div class="mb-2" style="font-size: 14px;">
+                                                    <strong style="color: #6c757d;">Branch:</strong> 
+                                                    <span style="color: #2c3e50;">{{ $method->bank_details['branch_name'] }}</span>
+                                                </div>
+                                            @endif
+                                            @if(isset($method->bank_details['routing_number']))
+                                                <div style="font-size: 14px;">
+                                                    <strong style="color: #6c757d;">Routing:</strong> 
+                                                    <span style="color: #2c3e50;">{{ $method->bank_details['routing_number'] }}</span>
+                                                </div>
+                                            @endif
+                                        </div>
+                                    @endif
+                                </div>
+
+                                <!-- Card Footer Accent -->
+                                <div style="height: 5px; background: {{ $gradient }};"></div>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
-        </div>
-        <div class="row py-5 p-3 justify-content-center">
-            <h5 class="fs-2 text-danger">Please donate to us using the following payment methods.</h5>
-            
-            @if($paymentMethods->count() > 0)
-                @foreach($paymentMethods as $method)
-                    <div class="col-md-3 border rounded p-3 m-1 d-flex justify-content-center align-items-center">
-                        <div class="text-center">
-                            @if($method->icon_image)
-                                <img src="{{ asset('storage/'.$method->icon_image) }}" alt="{{ $method->type }}" width="50%">
-                            @elseif($method->type == 'bank')
-                                <h1><i class="fa-solid fa-building-columns"></i></h1>
-                            @elseif(file_exists(public_path('img/'.$method->type.'.png')))
-                                <img src="{{ asset('img/'.$method->type.'.png') }}" alt="{{ $method->type }}" width="50%">
-                            @else
-                                <h1><i class="fa-solid fa-money-bill-wave"></i></h1>
-                            @endif
-                            <h5 class="fs-5 mt-2">{{ $method->account_name }}</h5>
-                            <h5 class="fs-4">{{ $method->account_number }}</h5>
-                            
-                            @if($method->type == 'bank' && $method->bank_details)
-                                <ul class="list-unstyled text-start mt-2">
-                                    @if(isset($method->bank_details['bank_name']))
-                                        <li><small><strong>Bank:</strong> {{ $method->bank_details['bank_name'] }}</small></li>
-                                    @endif
-                                    @if(isset($method->bank_details['branch_name']))
-                                        <li><small><strong>Branch:</strong> {{ $method->bank_details['branch_name'] }}</small></li>
-                                    @endif
-                                    @if(isset($method->bank_details['routing_number']))
-                                        <li><small><strong>Routing:</strong> {{ $method->bank_details['routing_number'] }}</small></li>
-                                    @endif
-                                </ul>
-                            @endif
-                        </div>
-                    </div>
-                @endforeach
-            @else
-                <div class="col-md-12 text-center py-4">
-                    <p class="text-muted">Payment methods will be available soon.</p>
-                </div>
-            @endif
-        </div>
+        @endif
 
         <!-- Donation Form -->
-        <div class="row py-5 p-3">
-            <div class="col-md-8 mx-auto">
-                <div class="card border">
-                    <div class="card-header bg-danger text-white">
-                        <h4 class="mb-0">Submit Your Donation Information</h4>
+        <div class="row justify-content-center" data-aos="fade-up">
+            <div class="col-lg-8 col-md-10 col-12">
+                <div class="card border-0 shadow-sm" style="border-radius: 15px; overflow: hidden;">
+                    <!-- Form Header -->
+                    <div class="card-header border-0 text-white text-center" style="background: linear-gradient(135deg, #0D47A1 0%, #1565C0 100%); padding: 30px;">
+                        <h3 class="mb-0 fw-bold" style="font-size: 24px;">
+                            <i class="bx bx-donate-heart me-2"></i>Submit Donation Information
+                        </h3>
                     </div>
-                    <div class="card-body">
+
+                    <!-- Form Body -->
+                    <div class="card-body p-4 p-md-5">
                         @if (session()->has('success'))
-                            <div class="alert alert-success alert-dismissible fade show">
-                                <i class="fa-solid fa-check-circle"></i> {{ session()->get('success') }}
+                            <div class="alert alert-success alert-dismissible fade show" style="border-radius: 10px; border-left: 4px solid #10b981;">
+                                <i class="bx bx-check-circle me-2"></i>{{ session()->get('success') }}
                                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                             </div>
                         @endif
@@ -89,23 +109,31 @@
                             @csrf
                             
                             <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="donor_name" class="form-label">Your Name <span class="text-danger">*</span></label>
+                                <div class="col-md-6 mb-4">
+                                    <label for="donor_name" class="form-label fw-bold" style="color: #2c3e50;">
+                                        Your Name <span style="color: #0D47A1;">*</span>
+                                    </label>
                                     <input type="text" name="donor_name" id="donor_name" 
                                            class="form-control @error('donor_name') is-invalid @enderror" 
                                            placeholder="Enter your full name" 
-                                           value="{{ old('donor_name') }}" required>
+                                           value="{{ old('donor_name') }}" 
+                                           style="border-radius: 10px; padding: 12px; border: 2px solid #e9ecef;"
+                                           required>
                                     @error('donor_name')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
 
-                                <div class="col-md-6 mb-3">
-                                    <label for="donor_phone" class="form-label">Phone Number <span class="text-danger">*</span></label>
+                                <div class="col-md-6 mb-4">
+                                    <label for="donor_phone" class="form-label fw-bold" style="color: #2c3e50;">
+                                        Phone Number <span style="color: #0D47A1;">*</span>
+                                    </label>
                                     <input type="text" name="donor_phone" id="donor_phone" 
                                            class="form-control @error('donor_phone') is-invalid @enderror" 
                                            placeholder="e.g., +8801XXXXXXXXX" 
-                                           value="{{ old('donor_phone') }}" required>
+                                           value="{{ old('donor_phone') }}" 
+                                           style="border-radius: 10px; padding: 12px; border: 2px solid #e9ecef;"
+                                           required>
                                     @error('donor_phone')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -113,10 +141,14 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="payment_method_id" class="form-label">Payment Method Used <span class="text-danger">*</span></label>
+                                <div class="col-md-6 mb-4">
+                                    <label for="payment_method_id" class="form-label fw-bold" style="color: #2c3e50;">
+                                        Payment Method Used <span style="color: #0D47A1;">*</span>
+                                    </label>
                                     <select name="payment_method_id" id="payment_method_id" 
-                                            class="form-select @error('payment_method_id') is-invalid @enderror" required>
+                                            class="form-select @error('payment_method_id') is-invalid @enderror" 
+                                            style="border-radius: 10px; padding: 12px; border: 2px solid #e9ecef;"
+                                            required>
                                         <option value="">-- Select Payment Method --</option>
                                         @foreach($paymentMethods as $method)
                                             <option value="{{ $method->id }}" {{ old('payment_method_id') == $method->id ? 'selected' : '' }}>
@@ -129,47 +161,71 @@
                                     @enderror
                                 </div>
 
-                                <div class="col-md-6 mb-3">
-                                    <label for="transaction_id" class="form-label">Transaction ID <span class="text-danger">*</span></label>
+                                <div class="col-md-6 mb-4">
+                                    <label for="transaction_id" class="form-label fw-bold" style="color: #2c3e50;">
+                                        Transaction ID <span style="color: #0D47A1;">*</span>
+                                    </label>
                                     <input type="text" name="transaction_id" id="transaction_id" 
                                            class="form-control @error('transaction_id') is-invalid @enderror" 
                                            placeholder="Enter transaction/reference ID" 
-                                           value="{{ old('transaction_id') }}" required>
+                                           value="{{ old('transaction_id') }}" 
+                                           style="border-radius: 10px; padding: 12px; border: 2px solid #e9ecef;"
+                                           required>
                                     @error('transaction_id')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
 
-                            <div class="mb-3">
-                                <label for="amount" class="form-label">Donation Amount (৳) <span class="text-danger">*</span></label>
+                            <div class="mb-4">
+                                <label for="amount" class="form-label fw-bold" style="color: #2c3e50;">
+                                    Donation Amount (৳) <span style="color: #0D47A1;">*</span>
+                                </label>
                                 <input type="number" name="amount" id="amount" 
                                        class="form-control @error('amount') is-invalid @enderror" 
                                        placeholder="Enter amount in BDT" 
                                        min="1" step="0.01"
-                                       value="{{ old('amount') }}" required>
+                                       value="{{ old('amount') }}" 
+                                       style="border-radius: 10px; padding: 12px; border: 2px solid #e9ecef;"
+                                       required>
                                 @error('amount')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 
-                            <div class="alert alert-info">
-                                <i class="fa-solid fa-info-circle"></i> 
-                                <strong>Note:</strong> Please make your donation first, then submit this form with the transaction details. 
-                                We will verify your donation and contact you soon.
+                            <div class="alert" style="background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%); border-left: 4px solid #3b82f6; border-radius: 10px; padding: 15px; margin-bottom: 20px;">
+                                <i class="bx bx-info-circle" style="color: #3b82f6; font-size: 20px; margin-right: 8px;"></i>
+                                <strong style="color: #1e40af;">Note:</strong>
+                                <span style="color: #1e3a8a;">Please make your donation first, then submit this form with the transaction details. We will verify your donation and contact you soon.</span>
                             </div>
 
-                            <button type="submit" class="btn btn-danger btn-lg w-100">
-                                <i class="fa-solid fa-paper-plane"></i> Submit Donation Information
+                            <button type="submit" class="btn btn-lg w-100 text-white fw-bold" style="background: linear-gradient(135deg, #0D47A1 0%, #1565C0 100%); border: none; border-radius: 10px; padding: 15px; font-size: 18px; transition: all 0.3s ease;">
+                                <i class="bx bx-paper-plane me-2"></i>Submit Donation Information
                             </button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-      </div>
     </div>
-  </section>
-  <!-- End Project ArchievePartner and Donor Section -->
+</section>
+
+<style>
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15) !important;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #0D47A1 !important;
+    box-shadow: 0 0 0 0.2rem rgba(13, 71, 161, 0.15) !important;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(13, 71, 161, 0.4);
+}
+</style>
 
 @endsection

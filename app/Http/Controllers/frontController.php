@@ -89,7 +89,7 @@ class frontController extends Controller
             $focus_areas = collect([
                 (object)[
                     'title' => 'Women Empowerment',
-                    'description' => 'AFAD mainly focuses on women empowerment, eradicating the gender Based Violence in community level, sub-distrit, district and national level.  AFAD undertakes initiatives that empower the destitute and neglected portion of women who are deprived from rights and to ensure equal rights and opportunities for them. AFAD  works on acclerating the women dignity and eqaul opportunity. AFAD sensitizes the government and non-government institutions for strengthening the socio-economic status of women, and ensuring the full enforcement of such arrangement though training and advocacy. It also sensitizes and influences the different level of stakeholders (policy makers, local government representatives, media, communities and religious leaders) on GVB. AFAD provides the income generation training to the women for the socio-economic empowerment.',
+                    'description' => 'BMS mainly focuses on women empowerment, eradicating the gender Based Violence in community level, sub-distrit, district and national level.  BMS undertakes initiatives that empower the destitute and neglected portion of women who are deprived from rights and to ensure equal rights and opportunities for them. BMS  works on acclerating the women dignity and eqaul opportunity. BMS sensitizes the government and non-government institutions for strengthening the socio-economic status of women, and ensuring the full enforcement of such arrangement though training and advocacy. It also sensitizes and influences the different level of stakeholders (policy makers, local government representatives, media, communities and religious leaders) on GVB. BMS provides the income generation training to the women for the socio-economic empowerment.',
                     'icon_class' => null,
                     'icon_path' => null,
                     'image_path' => null,
@@ -105,7 +105,7 @@ class frontController extends Controller
                 ],
                 (object)[
                     'title' => 'Livelihood',
-                    'description' => 'AFAD is playing influential role in the development sectors for bringing a sustainable livelihoods and social changes of the women.  AFAD try to  Improve the livelihoods, income and food security of extremely poor women, children and men living on the norther Baangladesh particularly the  island char. AFAD  provide technical skills training, grants or interest-free loans to procure a viable market asset or start a business. Promoting agricultural farming, disaster preparedness, livelihood security, access to finance and micro-enterprise as means of income. AFAD works  for the market linkage.',
+                    'description' => 'BMS is playing influential role in the development sectors for bringing a sustainable livelihoods and social changes of the women.  BMS try to  Improve the livelihoods, income and food security of extremely poor women, children and men living on the norther Baangladesh particularly the  island char. BMS  provide technical skills training, grants or interest-free loans to procure a viable market asset or start a business. Promoting agricultural farming, disaster preparedness, livelihood security, access to finance and micro-enterprise as means of income. BMS works  for the market linkage.',
                     'icon_class' => null,
                     'icon_path' => null,
                     'image_path' => null,
@@ -127,13 +127,13 @@ class frontController extends Controller
 
     // Project Archieve
     public function proj_archieve(){
-        $project = DB::table('projects')->get();
+        $project = DB::table('projects')->orderBy('id', 'desc')->paginate(12);
         return view('frontend.project_archieve',compact('project'));
     }
 
     // Ongoing Project
     public function ongoing_project(){
-        $project = DB::table('ongoing_project')->paginate(15);
+        $project = DB::table('ongoing_project')->orderBy('id', 'desc')->paginate(12);
         return view('frontend.ongoing_project',compact('project'));
     }
 
@@ -145,7 +145,7 @@ class frontController extends Controller
 
     //__Latest News All__//
     public function news_all(){
-        $news = DB::table('latest_news')->paginate(15);
+        $news = DB::table('latest_news')->orderBy('id', 'desc')->paginate(12);
         return view('frontend.news_all',compact('news'));
     }
 
@@ -156,7 +156,7 @@ class frontController extends Controller
 
     // Programs
     public function programs(){
-        $programs = DB::table('programs')->orderBy('id', 'desc')->get();
+        $programs = DB::table('programs')->orderBy('id', 'desc')->paginate(12);
         return view('frontend.programs', compact('programs'));
     }
 
@@ -168,7 +168,7 @@ class frontController extends Controller
 
     // Stories
     public function stories(){
-        $stories = DB::table('stories')->orderBy('id', 'desc')->get();
+        $stories = DB::table('stories')->orderBy('id', 'desc')->paginate(12);
         return view('frontend.stories', compact('stories'));
     }
 
@@ -181,7 +181,8 @@ class frontController extends Controller
     //__Latest News view__//
     public function news_view($id){
         $news = DB::table('latest_news')->where('id',$id)->first();
-        return view('frontend.news_view',compact('news'));
+        $recent_news = DB::table('latest_news')->where('id', '!=', $id)->orderBy('id', 'desc')->take(3)->get();
+        return view('frontend.news_view',compact('news', 'recent_news'));
     }
 
     // Events Calender
@@ -287,7 +288,7 @@ class frontController extends Controller
 
     //__All Photos
     public function all_photos(){
-        $photos = DB::table('gallery')->paginate('30');
+        $photos = DB::table('gallery')->orderBy('id', 'desc')->paginate(12);
         return view('frontend.photos_all',compact('photos'));
     }
 

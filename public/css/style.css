@@ -364,3 +364,322 @@ section {
   font-size: 14px;
 }
 
+/* Active menu highlighting - dark blue color */
+.navbar-nav .nav-item.active .nav-link {
+  color: #0D47A1 !important;
+}
+
+/* Dropdown active state */
+.navbar-nav .nav-item.dropdown.active .nav-link {
+  color: #0D47A1 !important;
+}
+
+/* Template Homepage Enhancements */
+.hero-wrap .overlay {
+  opacity: 0.5;
+}
+
+.ftco-counter .block-18 .text {
+  color: #fff;
+}
+
+.carousel-cause .cause-entry .img {
+  height: 300px;
+  display: block;
+  background-size: cover;
+  background-position: center;
+}
+
+.ftco-gallery .gallery {
+  height: 300px;
+  position: relative;
+  overflow: hidden;
+}
+
+.ftco-gallery .gallery .icon {
+  width: 60px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.ftco-gallery .gallery:hover .icon {
+  opacity: 1;
+}
+
+.blog-entry .block-20 {
+  height: 270px;
+  display: block;
+  background-size: cover;
+  background-position: center;
+}
+
+.carousel-testimony .user-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  flex-shrink: 0;
+}
+
+.staff .img-wrap .img {
+  height: 350px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 8px !important;
+  -webkit-border-radius: 8px !important;
+  -moz-border-radius: 8px !important;
+  -ms-border-radius: 8px !important;
+}
+
+.staff .img {
+  border-radius: 8px !important;
+  -webkit-border-radius: 8px !important;
+  -moz-border-radius: 8px !important;
+  -ms-border-radius: 8px !important;
+  width: 100% !important;
+  height: auto !important;
+}
+
+/* Owl Carousel Custom Dots */
+.owl-theme .owl-dots .owl-dot span {
+  background: #ccc;
+}
+
+.owl-theme .owl-dots .owl-dot.active span,
+.owl-theme .owl-dots .owl-dot:hover span {
+  background: #0D47A1;
+}
+
+/* Owl Carousel Navigation Arrows */
+.owl-theme .owl-nav {
+  margin-top: 20px;
+}
+
+.owl-theme .owl-nav button.owl-prev,
+.owl-theme .owl-nav button.owl-next {
+  background: transparent !important;
+  color: #0D47A1 !important;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 30px;
+  line-height: 50px;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: all 0.3s ease;
+  opacity: 0.8;
+  outline: none;
+  border: 2px solid #0D47A1 !important;
+}
+
+.owl-theme .owl-nav button.owl-prev:hover,
+.owl-theme .owl-nav button.owl-next:hover {
+  opacity: 1;
+  background: rgba(255, 106, 0, 0.1) !important;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.owl-theme .owl-nav button.owl-prev {
+  left: -25px;
+}
+
+.owl-theme .owl-nav button.owl-next {
+  right: -25px;
+}
+
+.owl-theme .owl-nav button.owl-prev span,
+.owl-theme .owl-nav button.owl-next span {
+  font-size: 24px;
+  line-height: 50px;
+  color: #0D47A1 !important;
+  font-weight: bold;
+}
+
+/* Gallery carousel specific */
+.carousel-gallery .owl-nav button.owl-prev,
+.carousel-gallery .owl-nav button.owl-next {
+  background: transparent !important;
+  border: 2px solid #0D47A1 !important;
+}
+
+.carousel-gallery .owl-nav button.owl-prev:hover,
+.carousel-gallery .owl-nav button.owl-next:hover {
+  background: rgba(255, 106, 0, 0.1) !important;
+}
+
+/* AOS Animations */
+[data-aos] {
+  pointer-events: auto;
+}
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.gallery-item:hover {
+  transform: scale(1.05);
+}
+
+.gallery-item .icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 60px;
+  background: rgba(255, 106, 0, 0.9);
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover .icon {
+  opacity: 1;
+}
+
+.gallery-item .icon span {
+  font-size: 24px;
+  color: #fff;
+}
+
+/* Smooth carousel transitions */
+.owl-carousel {
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+}
+
+.owl-carousel .owl-stage {
+  position: relative;
+}
+
+.owl-carousel .owl-item {
+  -webkit-backface-visibility: hidden;
+  -webkit-transform: translate3d(0,0,0);
+  backface-visibility: hidden;
+  transform: translate3d(0,0,0);
+}
+
+.owl-carousel:hover {
+  cursor: grab;
+}
+
+.owl-carousel.owl-drag {
+  cursor: grabbing;
+}
+
+/* Carousel container hint for horizontal scroll */
+.carousel-cause:hover .owl-stage-outer::after,
+.carousel-testimony:hover .owl-stage-outer::after,
+.carousel-gallery:hover .owl-stage-outer::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -15px;
+  width: 0;
+  height: 0;
+  border-left: 8px solid rgba(255, 106, 0, 0.3);
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  transform: translateY(-50%);
+  animation: arrowPulse 2s infinite;
+  pointer-events: none;
+}
+
+@keyframes arrowPulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.7; }
+}
+
+/* Prevent scroll issues on carousels */
+.owl-carousel .owl-stage-outer {
+  overflow: hidden;
+  position: relative;
+  -webkit-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+}
+
+/* Hide cloned items when loop is disabled */
+.owl-carousel .cloned {
+  display: none !important;
+}
+
+/* Photo Gallery Page Specific */
+.ftco-section .gallery-item {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ftco-section .gallery-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 20px rgba(0,0,0,0.2) !important;
+}
+
+/* Fixed Navbar with Solid Background - Sticky on Scroll */
+.ftco-navbar-light {
+  background: #ffffff !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 1000 !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Add padding to body to prevent content hidden behind fixed navbar */
+body {
+  padding-top: 80px;
+}
+
+/* Override for homepage with slider */
+.home {
+  padding-top: 0 !important;
+}
+
+/* Make homepage sections start from top (hero slider should go behind fixed navbar) */
+.home section:first-of-type,
+.home .hero-slider-container {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Navbar Text Color - Black on All Pages */
+.navbar .nav-link {
+  color: #000 !important;
+}
+
+.navbar .nav-link:hover {
+  color: #0D47A1 !important;
+}
+
+/* Navbar Brand (Logo) */
+.ftco-navbar-light .navbar-brand {
+  color: #000 !important;
+}
+
+/* Navigation Links */
+.ftco-navbar-light .navbar-nav > .nav-item > .nav-link {
+  color: #000 !important;
+}
+
+.ftco-navbar-light .navbar-nav > .nav-item > .nav-link:hover {
+  color: #0D47A1 !important;
+}
+
+/* Active Navigation Item */
+.ftco-navbar-light .navbar-nav > .nav-item.active > a {
+  color: #0D47A1 !important;
+}
+
+/* Remove extra spacing for sections since body has padding-top */
+section:first-of-type {
+  margin-top: 0;
+}
+

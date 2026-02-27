@@ -1,173 +1,158 @@
 @extends('main')
 
 @section('content')
-<style>
-    .focus-area-kicker{
-        letter-spacing: 0.12em;
-        font-size: 12px;
-        font-weight: 700;
-        color: var(--bs-secondary-color);
-    }
-    .focus-area-card{
-        background: #fff;
-        border: 1px solid var(--bs-border-color);
-        border-radius: 16px;
-        padding: 24px;
-        height: 100%;
-        transition: transform 180ms ease, box-shadow 180ms ease;
-        will-change: transform;
-        position: relative;
-        overflow: hidden;
-    }
-    .focus-area-card--image{
-        background-size: cover;
-        background-position: center;
-        border-color: transparent;
-        padding: 28px;
-    }
-    .focus-area-card--image::before{
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(180deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.28) 55%, rgba(0,0,0,0.65) 100%);
-        pointer-events: none;
-    }
-    .focus-area-card-content{
-        position: relative;
-        z-index: 1;
-    }
-    .focus-area-card:hover{
-        transform: translateY(-4px);
-        box-shadow: 0 .75rem 2rem rgba(var(--bs-body-color-rgb), .10);
-    }
-    .focus-area-icon{
-        width: 56px;
-        height: 56px;
-        border-radius: 14px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 14px;
-        overflow: hidden;
-    }
-    .focus-area-icon img{
-        width: 28px;
-        height: 28px;
-        object-fit: contain;
-        display: block;
-    }
-    .focus-area-icon i{
-        font-size: 22px;
-    }
-    .focus-area-card-title{
-        font-size: 18px;
-        font-weight: 800;
-        margin-bottom: 8px;
-    }
-    .focus-area-card-text{
-        color: var(--bs-secondary-color);
-        margin-bottom: 0;
-    }
-    .focus-area-card--image .focus-area-card-title,
-    .focus-area-card--image .focus-area-card-text{
-        color: rgba(255,255,255,.92);
-        text-shadow: 0 2px 10px rgba(0,0,0,.45);
-    }
-    .focus-area-card--image .focus-area-card-text{
-        color: rgba(255,255,255,.80);
-    }
-    .focus-area-card--image .focus-area-card-content{
-        background: rgba(0,0,0,.22);
-        border-radius: 14px;
-        padding: 14px;
-    }
-    .focus-area-card--image .focus-area-icon{
-        background: rgba(255,255,255,.14) !important;
-        color: rgba(255,255,255,.95) !important;
-    }
-    @media (prefers-reduced-motion: reduce){
-        .focus-area-card{
-            transition: none;
-        }
-        .focus-area-card:hover{
-            transform: none;
-            box-shadow: none;
-        }
-    }
-</style>
 
-<!-- ======= Breadcrumbs ======= -->
-<section class="breadcrumbs">
+<!-- Focus Areas Section -->
+<section class="py-5" style="background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);">
     <div class="container">
-        <ol>
-            <li><a href="{{ url('/') }}">Home</a></li>
-            <li>What we do</li>
-        </ol>
-        <h2>Key Focus Area</h2>
-    </div>
-</section>
-<!-- End Breadcrumbs -->
-
-<section class="bg-light p-0">
-    <div class="container bg-white py-5" data-aos="fade-up">
-        <div class="text-center mb-4">
-            <div class="focus-area-kicker">WHAT WE DO</div>
-            <h2 class="fw-bold mb-2">Our Focus Areas</h2>
-            <p class="text-secondary mx-auto mb-0" style="max-width: 720px;">
-                The Focus Area section provides a brief overview of the key areas our projects will prioritize—such as infrastructure support for women, community empowerment, livelihood development, and social protection.
-            </p>
+        <!-- Page Header -->
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h1 style="font-size: 48px; font-weight: 800; color: #2c3e50; margin-bottom: 15px;">
+                Our <span style="color: #0D47A1;">Key Focus Areas</span>
+            </h1>
         </div>
 
-        @php
-            $iconBadgeClasses = [
-                'bg-primary bg-opacity-10 text-primary',
-                'bg-danger bg-opacity-10 text-danger',
-                'bg-warning bg-opacity-10 text-warning',
-                'bg-info bg-opacity-10 text-info',
-                'bg-success bg-opacity-10 text-success',
-                'bg-secondary bg-opacity-10 text-secondary',
-            ];
-        @endphp
-
+        <!-- Focus Areas Grid -->
         <div class="row g-4">
-            @foreach(($focus_areas ?? collect()) as $item)
+            @foreach(($focus_areas ?? collect()) as $index => $item)
                 @php
-                    $badgeClass = $iconBadgeClasses[$loop->index % count($iconBadgeClasses)];
-                    $iconClass = !empty($item->icon_class) ? $item->icon_class : 'fa-solid fa-bullseye';
-
+                    // Gradient colors for cards without images
+                    $gradients = [
+                        'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                        'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+                        'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+                        'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
+                        'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
+                        'linear-gradient(135deg, #30cfd0 0%, #330867 100%)',
+                    ];
+                    
+                    $gradient = $gradients[$index % count($gradients)];
+                    
+                    // Check for icon
                     $iconUrl = null;
+                    $iconClass = 'fa-solid fa-bullseye';
                     if (!empty($item->icon_path)) {
                         $iconUrl = asset('storage/' . $item->icon_path);
+                    } elseif (!empty($item->icon_class)) {
+                        $iconClass = $item->icon_class;
                     }
-
-                    $imageUrl = null;
-                    if (!empty($item->image_path)) {
-                        $imageUrl = asset('storage/' . $item->image_path);
-                    } elseif (!empty($item->default_image)) {
-                        $imageUrl = asset($item->default_image);
-                    }
-
-                    $cardClass = !empty($imageUrl) ? 'focus-area-card--image' : '';
-                    $cardStyle = !empty($imageUrl) ? "background-image: url('{$imageUrl}');" : '';
                 @endphp
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="focus-area-card {{ $cardClass }}" style="{{ $cardStyle }}">
-                        <div class="focus-area-card-content">
-                            <div class="focus-area-icon {{ $badgeClass }}">
-                                @if (!empty($iconUrl))
-                                    <img src="{{ $iconUrl }}" alt="{{ $item->title }} icon">
+
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
+                    <div class="focus-card" style="height: 100%;">
+                        <!-- Card Header with Image or Gradient -->
+                        <div class="focus-card-header" style="
+                            @if(!empty($item->image_path))
+                                background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)), url('{{ asset('storage/' . $item->image_path) }}');
+                                background-size: cover;
+                                background-position: center;
+                            @else
+                                background: {{ $gradient }};
+                            @endif
+                            height: 280px;
+                            border-radius: 20px 20px 0 0;
+                            padding: 35px;
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: flex-end;
+                            position: relative;
+                            overflow: hidden;
+                        ">
+                            <!-- Icon Badge -->
+                            <div style="
+                                position: absolute;
+                                top: 25px;
+                                right: 25px;
+                                width: 70px;
+                                height: 70px;
+                                background: rgba(255,255,255,0.2);
+                                backdrop-filter: blur(10px);
+                                border-radius: 50%;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                border: 3px solid rgba(255,255,255,0.3);
+                            ">
+                                @if($iconUrl)
+                                    <img src="{{ $iconUrl }}" alt="{{ $item->title }}" style="width: 40px; height: 40px; object-fit: contain;">
                                 @else
-                                    <i class="{{ $iconClass }}"></i>
+                                    <i class="{{ $iconClass }}" style="font-size: 35px; color: white;"></i>
                                 @endif
                             </div>
-                            <div class="focus-area-card-title">{{ $item->title }}</div>
-                            <p class="focus-area-card-text" style="text-align: justify;">{{ $item->description }}</p>
+                            
+                            <!-- Title on Image/Gradient -->
+                            <h3 style="
+                                color: white;
+                                font-size: 28px;
+                                font-weight: 700;
+                                margin: 0;
+                                text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+                                line-height: 1.3;
+                            ">{{ $item->title }}</h3>
+                        </div>
+                        
+                        <!-- Card Body -->
+                        <div style="
+                            background: white;
+                            padding: 35px 30px;
+                            border-radius: 0 0 20px 20px;
+                            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+                            position: relative;
+                        ">
+                            <p style="
+                                font-size: 16px;
+                                line-height: 1.8;
+                                color: #555;
+                                text-align: justify;
+                                margin: 0;
+                            ">{{ $item->description }}</p>
+                            
+                            <!-- Decorative Bottom Border -->
+                            <div style="
+                                position: absolute;
+                                bottom: 0;
+                                left: 30px;
+                                right: 30px;
+                                height: 4px;
+                                background: {{ !empty($item->image_path) ? 'linear-gradient(90deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.1) 100%)' : $gradient }};
+                                border-radius: 4px 4px 0 0;
+                            "></div>
                         </div>
                     </div>
                 </div>
             @endforeach
         </div>
+
+        @if(($focus_areas ?? collect())->isEmpty())
+            <div class="text-center py-5" data-aos="fade-up">
+                <i class="fa-solid fa-inbox" style="font-size: 80px; color: #dee2e6; margin-bottom: 20px;"></i>
+                <h4 style="color: #6c757d; font-weight: 600;">No Focus Areas Available</h4>
+                <p style="color: #adb5bd;">Focus areas will be displayed here once they are added.</p>
+            </div>
+        @endif
     </div>
 </section>
+
+<style>
+    .focus-card {
+        transition: all 0.4s ease;
+        border-radius: 20px;
+        overflow: hidden;
+        background: white;
+    }
+    
+    .focus-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 60px rgba(0,0,0,0.15) !important;
+    }
+    
+    .focus-card-header {
+        transition: all 0.4s ease;
+    }
+    
+    .focus-card:hover .focus-card-header {
+        transform: scale(1.05);
+    }
+</style>
 
 @endsection

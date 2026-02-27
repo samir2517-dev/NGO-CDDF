@@ -6,7 +6,7 @@
     <style>
     .cd__main{
     position: relative;
-    background: linear-gradient(to right, #667db6, #0082c8, #0082c8, #667db6) !important;
+    background: linear-gradient(to right, #0D47A1, #1565C0, #1565C0, #0D47A1) !important;
     }
     #calendar {
         max-width: 100%;
@@ -92,24 +92,20 @@
 @endpush
 
 @section('content')
-  <!-- ======= Breadcrumbs ======= -->
-  <section class="breadcrumbs">
-    <div class="container">
-      <ol>
-        <li><a href="{{ url('/') }}">Home</a></li>
-        <li>News & Events</li>
-      </ol>
-      <h2>Events Calender</h2>
-    </div>
-  </section>
-  <!-- End Breadcrumbs -->
 
 <!-- Calender Section -->
-  <section id="contact" class="contact bg-light p-0">
-    <div class="container bg-white py-5" data-aos="fade-up">
-      <div class="section-title">
-        <h2>Events Calender</h2>
-        <p class="fs-5 text-secondary">From this calendar, you can view the names, dates, and durations of our upcoming events and programs</p> <br>
+  <section style="background: linear-gradient(135deg, #E3F2FD 0%, #E8EAF6 100%); padding: 80px 0; min-height: 100vh;">
+    <div class="container" data-aos="fade-up">
+      
+      <!-- Page Header -->
+      <div class="text-center mb-5" data-aos="fade-up">
+        <h1 style="font-size: 48px; font-weight: 800; color: #2c3e50; margin-bottom: 15px;">
+            <span style="color: #0D47A1;">Events Calendar</span>
+        </h1>
+        <p style="color: #6c757d; font-size: 18px; max-width: 700px; margin: 0 auto;">
+            View upcoming events and programs with their dates and durations
+        </p>
+      </div>
             <main class="cd__main p-4 mt-3">
                 <div id='calendar'></div>
                 <!-- Add modal -->

@@ -31,7 +31,10 @@ class galleryController extends Controller
         $gallery = array(
             'title' => $request->title,
             'description' => $request->description,
-            'image' => $imageName
+            'image' => $imageName,
+            'source_type' => 'manual', // Manually added gallery items
+            'source_id' => null,
+            'image_type' => null
         );
 
         DB::table('gallery')->insert($gallery);
@@ -48,14 +51,22 @@ class galleryController extends Controller
     // Destroy
     public function destroy($id)
     {
-        $news = DB::table('gallery')->where('id', $id)->first();
-        $oldIamgeName = public_path('images/gallery/' . $news->image);
-
-        if (file_exists($oldIamgeName)) {
-            @unlink($oldIamgeName);
+        $gallery = DB::table('gallery')->where('id', $id)->first();
+        
+        // Prevent deletion of auto-synced items
+        if ($gallery->source_type && $gallery->source_type !== 'manual') {
+            return redirect()->back()->with('error', 'Cannot delete auto-synced gallery items. Delete the source ' . $gallery->source_type . ' instead.');
         }
+        
+        // Only delete manual gallery images from the gallery folder
+        $oldImageName = public_path('images/gallery/' . $gallery->image);
+
+        if (file_exists($oldImageName)) {
+            @unlink($oldImageName);
+        }
+        
         DB::table('gallery')->where('id', $id)->delete();
-        return redirect()->back()->with('success', 'Successfully Deleted News');
+        return redirect()->back()->with('success', 'Successfully Deleted Gallery Item');
     }
 
     // Edit

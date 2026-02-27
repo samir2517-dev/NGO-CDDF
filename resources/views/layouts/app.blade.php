@@ -9,7 +9,14 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    {{-- Favicon --}}
+    <link rel="shortcut icon" href="{{ asset('images/application/'.application()->fav_icon) }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('images/application/'.application()->fav_icon) }}" type="image/x-icon">
+
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
+    {{-- Boxicons --}}
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     {{-- bootstrap css --}}
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">

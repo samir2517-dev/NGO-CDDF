@@ -2,30 +2,44 @@
 
 @section('content')
 
-  <!-- ======= Breadcrumbs ======= -->
-  <section class="breadcrumbs">
+<section class="py-5" style="background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);">
     <div class="container">
-      <ol>
-        <li><a href="{{ url('/') }}">Home</a></li>
-        <li>About AFAD</li>
-      </ol>
-      <h2>About AFAD</h2>
+        <!-- Page Header -->
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h1 style="
+                font-size: 48px;
+                font-weight: 800;
+                color: #2c3e50;
+                margin-bottom: 20px;
+                position: relative;
+                display: inline-block;
+            ">
+                About <span style="color: #0D47A1;">BMS</span>
+            </h1>
+
+        </div>
+
+        <!-- About Content -->
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div style="
+                    background: white;
+                    border-radius: 20px;
+                    padding: 45px;
+                    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+                    border-left: 5px solid #0D47A1;
+                " data-aos="fade-up">
+                    <p style="
+                        font-size: 17px;
+                        line-height: 1.9;
+                        color: #555;
+                        text-align: justify;
+                        margin: 0;
+                    ">{{ $about_us->description }}</p>
+                </div>
+            </div>
+        </div>
     </div>
-  </section>
-  <!-- End Breadcrumbs -->
-
-    <!-- ======= Contact Section ======= -->
-  <section id="contact" class="contact bg-light p-0">
-    <div class="container" data-aos="fade-up">
-
-      <div class="section-title bg-white py-5 px-3">
-        <h2>About AFAD</h2>
-        <p style="text-align:justify;">
-            {{ $about_us->description }}
-        </p>
-      </div>
-
-    </div>
-  </section><!-- End Contact Section -->
+</section>
 
 @endsection

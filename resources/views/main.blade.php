@@ -9,34 +9,59 @@
     </title>
     {{-- favicon --}}
     <link rel="shortcut icon" href="{{ asset('images/application/'.application()->fav_icon) }}" type="image/x-icon">
-    {{-- bootstrap css --}}
-    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"> --}}
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-    {{-- css --}}
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    
+    {{-- Google Fonts --}}
+    <link href="https://fonts.googleapis.com/css?family=Dosis:200,300,400,500,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Overpass:300,400,400i,600,700" rel="stylesheet">
+
+    {{-- Template CSS --}}
+    <link rel="stylesheet" href="{{ asset('frontend-assets/css/open-iconic-bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend-assets/css/animate.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend-assets/css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend-assets/css/owl.theme.default.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend-assets/css/magnific-popup.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend-assets/css/aos.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend-assets/css/ionicons.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend-assets/css/bootstrap-datepicker.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend-assets/css/jquery.timepicker.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend-assets/css/flaticon.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend-assets/css/icomoon.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend-assets/css/style.css') }}?v={{ time() }}">
+    
+    {{-- Boxicons for Impact and other admin-selected icons --}}
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+    
+    {{-- Custom CSS overrides --}}
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}?v={{ time() }}">
+    
     @stack('css')
 </head>
-<body>
+<body class="{{ request()->is('/') ? 'home' : '' }}">
     @include('header')
 
         @yield('content')
 
     @include('footer')
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    {{-- loader --}}
+    <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
-    {{-- <script>
-        document.addEventListener('contextmenu', function(e) {
-            e.preventDefault();
-        });
-    </script> --}}
+    {{-- Template JS --}}
+    <script src="{{ asset('frontend-assets/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('frontend-assets/js/jquery-migrate-3.0.1.min.js') }}"></script>
+    <script src="{{ asset('frontend-assets/js/popper.min.js') }}"></script>
+    <script src="{{ asset('frontend-assets/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('frontend-assets/js/jquery.easing.1.3.js') }}"></script>
+    <script src="{{ asset('frontend-assets/js/jquery.waypoints.min.js') }}"></script>
+    <script src="{{ asset('frontend-assets/js/jquery.stellar.min.js') }}"></script>
+    <script src="{{ asset('frontend-assets/js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('frontend-assets/js/jquery.magnific-popup.min.js') }}"></script>
+    <script src="{{ asset('frontend-assets/js/aos.js') }}"></script>
+    <script src="{{ asset('frontend-assets/js/jquery.animateNumber.min.js') }}"></script>
+    <script src="{{ asset('frontend-assets/js/bootstrap-datepicker.js') }}"></script>
+    <script src="{{ asset('frontend-assets/js/jquery.timepicker.min.js') }}"></script>
+    <script src="{{ asset('frontend-assets/js/scrollax.min.js') }}"></script>
+    <script src="{{ asset('frontend-assets/js/main.js') }}"></script>
 
     @stack('js')
 

@@ -19,6 +19,7 @@ class projectController extends Controller
             'title' => 'required',
             'description' => 'required',
             'image' => 'required|mimes:jpeg,png,jpg',
+            'gallery_images.*' => 'nullable|mimes:jpg,png,jpeg,gif|max:5120',
         ]);
 
         $imageName = '';
@@ -27,13 +28,29 @@ class projectController extends Controller
             $image->move(public_path('images/project'), $imageName);
         }
 
+        // Handle gallery images
+        $galleryImages = [];
+        if ($request->hasFile('gallery_images')) {
+            foreach ($request->file('gallery_images') as $galleryImage) {
+                $galleryImageName = rand(10000, 99999) . "_gallery_" . time() . "." . $galleryImage->getClientOriginalExtension();
+                $galleryImage->move(public_path('images/ongoing_project/gallery/'), $galleryImageName);
+                $galleryImages[] = $galleryImageName;
+            }
+        }
+
         $project = array(
                 'title' => $request->title,
                 'description' => $request->description,
                 'image' => $imageName,
+                'gallery_images' => !empty($galleryImages) ? json_encode($galleryImages) : null,
             );
 
         DB::table('ongoing_project')->insert($project);
+        
+        // Sync with gallery table
+        $projectId = DB::getPdo()->lastInsertId();
+        $this->syncGalleryEntries($projectId, $imageName, $galleryImages, $request->title, $request->description);
+        
         return redirect()->back()->with('success', 'Successfully inserted data');
     }
 
@@ -52,6 +69,20 @@ class projectController extends Controller
             @unlink($oldImageName);
         }
 
+        // Delete gallery images
+        if ($project->gallery_images) {
+            $galleryImages = json_decode($project->gallery_images, true);
+            foreach ($galleryImages as $galleryImage) {
+                $galleryImagePath = public_path('images/ongoing_project/gallery/' . $galleryImage);
+                if (file_exists($galleryImagePath)) {
+                    @unlink($galleryImagePath);
+                }
+            }
+        }
+
+        // Remove from gallery table
+        DB::table('gallery')->where('source_type', 'project')->where('source_id', $id)->delete();
+
         DB::table('ongoing_project')->where('id',$id)->delete();
         return redirect()->back()->with('success','Successfully Deleted Project');
     }
@@ -67,6 +98,7 @@ class projectController extends Controller
         $validated = $request->validate([
             'title' => 'required',
             'description' => 'required',
+            'gallery_images.*' => 'nullable|mimes:jpg,png,jpeg,gif|max:5120',
         ]);
 
         $project = DB::table('ongoing_project')->where('id',$id)->first();
@@ -85,13 +117,84 @@ class projectController extends Controller
             $imageName = $project->image;
         }
 
+        // Handle gallery images
+        $existingGalleryImages = $project->gallery_images ? json_decode($project->gallery_images, true) : [];
+        
+        // Handle deleted images
+        if ($request->has('deleted_gallery_images')) {
+            $deletedImages = json_decode($request->deleted_gallery_images, true);
+            foreach ($deletedImages as $deletedImage) {
+                $imagePath = public_path('images/ongoing_project/gallery/' . $deletedImage);
+                if (file_exists($imagePath)) {
+                    @unlink($imagePath);
+                }
+                $existingGalleryImages = array_diff($existingGalleryImages, [$deletedImage]);
+            }
+        }
+
+        // Handle gallery reordering
+        if ($request->has('gallery_order') && $request->gallery_order) {
+            $orderedImages = json_decode($request->gallery_order, true);
+            // Filter to only include images that still exist (not deleted)
+            $existingGalleryImages = array_intersect($orderedImages, $existingGalleryImages);
+        }
+
+        // Add new gallery images
+        if ($request->hasFile('gallery_images')) {
+            foreach ($request->file('gallery_images') as $galleryImage) {
+                $galleryImageName = rand(10000, 99999) . "_gallery_" . time() . "." . $galleryImage->getClientOriginalExtension();
+                $galleryImage->move(public_path('images/ongoing_project/gallery/'), $galleryImageName);
+                $existingGalleryImages[] = $galleryImageName;
+            }
+        }
+
         $project = array(
             'title' => $request->title,
             'description' => $request->description,
-            'image' => $imageName
+            'image' => $imageName,
+            'gallery_images' => !empty($existingGalleryImages) ? json_encode(array_values($existingGalleryImages)) : null,
         );
 
         DB::table('ongoing_project')->where('id',$id)->update($project);
+        
+        // Sync with gallery table
+        $this->syncGalleryEntries($id, $imageName, $existingGalleryImages, $request->title, $request->description);
+        
         return redirect()->route('project.index')->with('update', 'Successfully Updated data');
+    }
+
+    /**
+     * Sync project images with the main gallery table
+     */
+    private function syncGalleryEntries($projectId, $coverImage, $galleryImages, $title, $description)
+    {
+        // Delete existing gallery entries for this project
+        DB::table('gallery')->where('source_type', 'project')->where('source_id', $projectId)->delete();
+
+        // Add cover image to gallery
+        if ($coverImage) {
+            DB::table('gallery')->insert([
+                'title' => $title,
+                'description' => $description,
+                'image' => $coverImage,
+                'source_type' => 'project',
+                'source_id' => $projectId,
+                'image_type' => 'cover'
+            ]);
+        }
+
+        // Add all gallery images
+        if (!empty($galleryImages)) {
+            foreach ($galleryImages as $index => $galleryImage) {
+                DB::table('gallery')->insert([
+                    'title' => $title,
+                    'description' => $description,
+                    'image' => $galleryImage,
+                    'source_type' => 'project',
+                    'source_id' => $projectId,
+                    'image_type' => 'gallery'
+                ]);
+            }
+        }
     }
 }

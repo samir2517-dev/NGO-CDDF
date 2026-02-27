@@ -7,9 +7,6 @@
         <hr/>
         <div class="card">
             <div class="card-body">
-                @if (session()->has('update'))
-                    <div class="alert alert-success">{{ session()->get('update') }}</div>
-                @endif
                 <div class="p-4 border rounded">
                     <form class="row g-3" action="{{ route('faq.update',$data->id) }}" method="post">
                         @csrf

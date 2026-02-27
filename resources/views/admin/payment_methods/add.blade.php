@@ -7,20 +7,7 @@
         <hr/>
         <div class="card">
             <div class="card-body">
-                @if (session()->has('success'))
-                    <div class="alert alert-success alert-dismissible fade show">
-                        {{ session()->get('success') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    </div>
-                @endif
-                
-                @if (session()->has('error'))
-                    <div class="alert alert-danger alert-dismissible fade show">
-                        {{ session()->get('error') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    </div>
-                @endif
-                
+
                 @if ($errors->any())
                     <div class="alert alert-danger alert-dismissible fade show">
                         <strong>Error!</strong> Please fix the following issues:

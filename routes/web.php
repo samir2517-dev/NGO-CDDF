@@ -13,14 +13,15 @@ require __DIR__.'/admin.php';
 
 Route::get('/', function () {
     $slider = DB::table('slider')->get();
-    $project = DB::table('ongoing_project')->take(3)->get();
-    $news = DB::table('latest_news')->take(6)->get();
-    $gallery = DB::table('gallery')->take(6)->get();
+    $project = DB::table('ongoing_project')->orderBy('id', 'desc')->take(3)->get();
+    $news = DB::table('latest_news')->orderBy('id', 'desc')->take(6)->get();
+    $gallery = DB::table('gallery')->orderBy('id', 'desc')->take(12)->get();
     $application = DB::table('applications')->get()->first();
-    $programs = DB::table('programs')->orderBy('created_at', 'desc')->take(6)->get();
+    $programs = DB::table('programs')->orderBy('id', 'desc')->take(6)->get();
     $stories = DB::table('stories')->orderBy('id', 'desc')->get();
+    $mission_vision = DB::table('mission_vision')->first();
 
-    return view('home', compact('slider', 'project', 'news', 'gallery', 'application', 'programs', 'stories'));
+    return view('home', compact('slider', 'project', 'news', 'gallery', 'application', 'programs', 'stories', 'mission_vision'));
 });
 
 Route::post('user/subscribe', [frontController::class, 'subscribe'])->name('user.subscribe');

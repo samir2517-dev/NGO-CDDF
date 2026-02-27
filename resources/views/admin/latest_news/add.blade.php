@@ -7,9 +7,6 @@
         <hr/>
         <div class="card">
             <div class="card-body">
-                @if (session()->has('success'))
-                    <div class="alert alert-success">{{ session()->get('success') }}</div>
-                @endif
                 <div class="p-4 border rounded">
                     <form class="row g-3" action="{{ route('news.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
@@ -21,12 +18,17 @@
                             @enderror
                         </div>
                         <div class="col-md-12">
-                            <label for="img" class="form-label">Image</label>
+                            <label for="img" class="form-label">Cover Image (Required)</label>
                             <input type="file" name="image" class="form-control @error('image') is-invalid @enderror" id="img">
-                            <span class="text-info">Image Dimension Must be (725 X 375) and maximum size 300 kb.</span>
+                            <span class="text-info">This is the main cover image for the news. Image Dimension Must be (725 X 375) and maximum size 300 kb.</span>
                             @error('image')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
+                        </div>
+                        <div class="col-md-12">
+                            <label for="gallery_images" class="form-label">Additional Gallery Images (Optional)</label>
+                            <input type="file" name="gallery_images[]" class="form-control" id="gallery_images" multiple accept="image/*">
+                            <span class="text-info">You can select multiple images. These will be displayed as a gallery below the cover image.</span>
                         </div>
                         <div class="col-md-12">
                             <label for="description" class="form-label">Description</label>

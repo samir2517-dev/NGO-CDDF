@@ -1,90 +1,77 @@
-{{-- Footer started --}}
-<div class="bg-dark" style="border-top:5px solid #dc3545;">
-    <div class="container py-5">
-        <div class="row" id="footer_link_wrapper">
-            {{-- logo and short description --}}
-            <div class="col-md-4 d-flex align-items-center">
-                <div>
-                    <img src="{{ asset('images/application/'.application()->main_logo) }}" alt="Logo" width="75%">
-                    <p class="py-3 text-justified text-white" style="font-size: 14px;">
-                        AFAD is a women led organization working in norther Bangladesh since 1999. AFAD is registered (No. 2443) with NGO Affair’s Bureau (NGOAB) of Prime Minister’s Office of of People's Republic of Government of Bangladesh.
-                    </p>
+<footer class="ftco-footer ftco-section img">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row mb-5">
+            {{-- Logo and Description Column --}}
+            <div class="col-md-3">
+                <div class="ftco-footer-widget mb-4">
+                    <div class="mb-3">
+                        <img src="{{ asset('images/application/'.application()->main_logo) }}" alt="BMS Logo" style="width: 80px; height: 80px;">
+                    </div>
+                    <p>Bakultali Mahila Sangshad (BMS) is a women-led grassroots organization working in northern Bangladesh since 1998. We are dedicated to empowering women and children in the disaster-prone regions of Kurigram through education, economic self-reliance, and community resilience programs.</p>
+                    <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+                        <li class="ftco-animate"><a href="{{ application()->twitter }}" target="_blank"><span class="icon-twitter"></span></a></li>
+                        <li class="ftco-animate"><a href="{{ application()->facebook }}" target="_blank"><span class="icon-facebook"></span></a></li>
+                        <li class="ftco-animate"><a href="{{ application()->instagram }}" target="_blank"><span class="icon-instagram"></span></a></li>
+                    </ul>
                 </div>
             </div>
 
-            {{-- link and address --}}
-            <div class="col-md-8 mt-5 text-white">
-                <div class="row">
-                    <div class="col-md-3 py-4">
-                        <h5 class="pb-3">Who we are</h5>
-                        <ul class="p-0 m-0" style="font-size: 14px;">
-                            <li class="py-1"><a class="dropdown-item" href="{{ route('about.us') }}">About AFAD</a></li>
-                            <li class="py-1"><a class="dropdown-item" href="{{ route('vision.mission') }}">Mission & Vision</a></li>
-                            <li class="py-1"><a class="dropdown-item" href="{{ route('origin_affilation') }}">Origin and legal Affiliation</a></li>
-                            <li class="py-1"><a class="dropdown-item" href="{{ route('partner.donor') }}">Our Partners and Donor</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-3 py-4">
-                        <h5 class="pb-3">What we do</h5>
-                        <ul class="p-0 m-0" style="font-size: 14px;">
-                            <li class="py-1"><a class="dropdown-item" href="{{ route('key.focus.area') }}">Key Focus Area</a></li>
-                            <li class="py-1"><a class="dropdown-item" href="{{ route('ongoing.project') }}">Ongoing Project</a></li>
-                            <li class="py-1"><a class="dropdown-item" href="{{ route('project.archieve') }}">Project Archieve</a></li>
-                            <li class="py-1"><a class="dropdown-item" href="{{ route('programs.all') }}">Programs</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-3 py-4">
-                        <h5 class="pb-3">HELP</h5>
-                        <ul class="p-0 m-0" style="font-size: 14px;">
-                            <li class="py-1"><a href="{{ route('faq') }}" class="text-white">FAQ</a></li>
-                            <li class="py-1"><a href="{{ route('donate') }}" class="text-white">Donate</a></li>
-                            <li class="py-1"><a href="{{ route('policy.guideline') }}" class="text-white">Policy & Guideline</a></li>
-                            {{-- <li class="py-1"><a href="#" class="text-white">Terms & Condtions</a></li> --}}
-                            <li class="py-1"><a href="{{ route('volunterr.opportunities') }}" class="text-white">Volunteer Opportunities</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-3 py-4">
-                        <h5 class="pb-3">CONTACT</h5>
-                        <div class="d-flex py-2" style="font-size: 14px;">
-                            <div><i class="fa-solid fa-location-dot mx-2"></i></div>
-                            <div>R.K Road Khalilganj Bazar, Kurigram</div>
-                        </div>
-                        <div class="d-flex py-2" style="font-size: 14px;">
-                            <div><i class="fa-solid fa-phone mx-2"></i></div>
-                            <div>01719-691409 <br>  01324-194889 </div>
-                        </div>
-                        <div>
-                            <ul class="d-flex">
-                                <li class="me-2">
-                                <a href="{{ application()->facebook }}" target="blank"><i class="fa-brands fa-facebook-f px-1 text-white"></i></a>
-                                </li class="mx-2">
-                                <li>
-                                <a href="{{ application()->twitter }}" target="blank"><i class="fa-brands fa-twitter px-1 text-white"></i></a>
-                                </li>
-                                <li class="mx-2">
-                                <a href="{{ application()->instagram }}" target="blank"><i class="fa-brands fa-instagram px-1 text-white"></i></a>
-                                </li>
-                                <li class="">
-                                <a href="{{ application()->youtube }}" target="blank"><i class="fa-brands fa-youtube px-1 text-white"></i></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+            {{-- What We Are Column --}}
+            <div class="col-md-3">
+                <div class="ftco-footer-widget mb-4" style="margin-top: 80px;">
+                    <h2 class="ftco-heading-2 mb-3">WHAT WE ARE</h2>
+                    <ul class="list-unstyled">
+                        <li><a href="{{ route('about.us') }}" class="py-2 d-block">About BMS</a></li>
+                        <li><a href="{{ route('vision.mission') }}" class="py-2 d-block">Mission & Vision</a></li>
+                        <li><a href="{{ route('key.focus.area') }}" class="py-2 d-block">Key Focus Area</a></li>
+                        <li><a href="{{ route('origin_affilation') }}" class="py-2 d-block">Origin and Legal Affiliation</a></li>
+                        <li><a href="{{ route('partner.donor') }}" class="py-2 d-block">Our Partners and Donor</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            {{-- What We Do Column --}}
+            <div class="col-md-3">
+                <div class="ftco-footer-widget mb-4" style="margin-top: 80px;">
+                    <h2 class="ftco-heading-2 mb-3">WHAT WE DO</h2>
+                    <ul class="list-unstyled">
+                        <li><a href="{{ route('ongoing.project') }}" class="py-2 d-block">Ongoing Project</a></li>
+                        <li><a href="{{ route('project.archieve') }}" class="py-2 d-block">Project Archieve</a></li>
+                        <li><a href="{{ route('programs.all') }}" class="py-2 d-block">Programs</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            {{-- Quick Links Column --}}
+            <div class="col-md-3">
+                <div class="ftco-footer-widget mb-4" style="margin-top: 80px;">
+                    <h2 class="ftco-heading-2 mb-3">QUICK LINKS</h2>
+                    <ul class="list-unstyled">
+                        <li><a href="{{ route('volunterr.opportunities') }}" class="py-2 d-block">Volunteer Opportunities</a></li>
+                        <li><a href="{{ route('donate') }}" class="py-2 d-block">Donate</a></li>
+                        <li><a href="{{ route('contact') }}" class="py-2 d-block">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            {{-- Removed duplicate About BMS links column --}}
+            <div class="col-md-2 d-none">
+                <div class="ftco-footer-widget mb-4 ml-md-4">
+                    <h2 class="ftco-heading-2">About BMS</h2>
+                    <ul class="list-unstyled">
+                        <li><a href="{{ route('about.us') }}" class="py-2 d-block">About BMS</a></li>
+                        <li><a href="{{ route('vision.mission') }}" class="py-2 d-block">Mission & Vision</a></li>
+                        <li><a href="{{ route('origin_affilation') }}" class="py-2 d-block">Origin and Legal Affiliation</a></li>
+                        <li><a href="{{ route('partner.donor') }}" class="py-2 d-block">Our Partners and Donor</a></li>
+                    </ul>
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <p>Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved by <a href="{{ url('/') }}" target="_blank">BMS</a> | Developed By: <a href="#" title="Noakhali Science and Technology University">NSTU Software Development Team</a></p>
+            </div>
+        </div>
     </div>
-</div>
-<div class="text-end">
-    <a href="#" class="btn btn-danger shadow back-to-top">
-        <i class="fa fa-arrow-up" aria-hidden="true"></i>
-    </a>
-</div>
-
-{{-- copyright --}}
-<div class="p-3" style="background: #000;">
-    <div class="container text-white d-flex justify-content-between">
-       <small> Copyright © {{ date('Y') }} || All right reserved by <abbr title="Association for Alternative Development">AFAD</abbr></small>
-       <small> Developed By: <span title="Noakhali Science and Technology University">NSTU</span> Software Development Team</small>
-    </div>
-</div>
+</footer>

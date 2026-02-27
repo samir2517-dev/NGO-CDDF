@@ -1,17 +1,6 @@
 @extends('main')
 
 @section('content')
-  <!-- ======= Breadcrumbs ======= -->
-  <section class="breadcrumbs">
-    <div class="container">
-      <ol>
-        <li><a href="{{ url('/') }}">Home</a></li>
-        <li>News & Events</li>
-      </ol>
-      <h2>Youtube <i class="fa-brands fa-youtube" style="color: red;"></i></h2>
-    </div>
-  </section>
-  <!-- End Breadcrumbs -->
 
     <!-- ======= Project Archieve Section ======= -->
   <section id="contact" class="contact bg-light p-0">

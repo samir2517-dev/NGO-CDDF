@@ -7,12 +7,6 @@
         <hr/>
         <div class="card">
             <div class="card-body">
-                @if (session()->has('update'))
-                    <div class="alert alert-success alert-dismissible fade show">
-                        {{ session()->get('update') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    </div>
-                @endif
                 <div class="p-4 border rounded">
                     <form class="row g-3" action="{{ route('impact.update',$data->id) }}" method="post">
                         @csrf

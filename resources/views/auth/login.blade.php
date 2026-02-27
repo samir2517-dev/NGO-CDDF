@@ -1,13 +1,47 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+    body {
+        background: #f8f9fa;
+    }
+    
+    .form-control:focus {
+        border-color: #0D47A1;
+        box-shadow: 0 0 0 0.2rem rgba(13, 71, 161, 0.15);
+    }
+    
+    .form-check-input:checked {
+        background-color: #0D47A1;
+        border-color: #0D47A1;
+    }
+    
+    .btn-primary {
+        background-color: #0D47A1;
+        border-color: #0D47A1;
+    }
+    
+    .btn-primary:hover {
+        background-color: #1565C0;
+        border-color: #1565C0;
+    }
+    
+    a {
+        color: #0D47A1;
+    }
+    
+    a:hover {
+        color: #1565C0;
+    }
+</style>
+
 <div class="container">
     <div class="row pt-5">
         <div class="col-md-6 mx-auto">
-            <div class="card border-top border-0 border-4 border-dark">
-                <div class="card-body py-5 px-3">
+            <div class="card border-top border-0 border-4" style="border-color: #0D47A1 !important;">
+                <div class="card-body py-5 px-4">
                     <div class="card-title text-center">
-                        <h5 class="mb-5 mt-2 text-dark">User Login</h5>
+                        <h5 class="mb-5 mt-2 text-dark">Admin Login</h5>
                     </div>
                     <hr>
                     <form class="row g-3" action="{{ route('login') }}" method="POST">
@@ -26,7 +60,7 @@
                         <div class="col-12">
                             <label for="password" class="form-label">Enter Password</label>
                             <div class="input-group input-group-lg">
-                                <input type="text" class="form-control border-start-0 @error('password') is-invalid @enderror" name="password" id="password" placeholder="Enter Password" value="{{ old('password') }}"/>
+                                <input type="password" class="form-control border-start-0 @error('password') is-invalid @enderror" name="password" id="password" placeholder="Enter Password"/>
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -41,12 +75,14 @@
                             </div>
                         </div>
                         <div class="col-md-6 text-end">
-                            <a href="{{ route('password.request') }}">Forgot Password ?</a>
+                            @if (Route::has('password.request'))
+                                <a href="{{ route('password.request') }}">Forgot Password ?</a>
+                            @endif
                         </div>
                         <div class="col-12">
                             <div class="d-grid">
                                 <button type="submit" class="btn btn-primary btn-lg px-5">
-                                    <i class='bx bxs-lock-open'></i>Login
+                                    <i class='bx bxs-lock-open'></i> Login
                                 </button>
                             </div>
                         </div>

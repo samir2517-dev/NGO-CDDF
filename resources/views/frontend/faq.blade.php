@@ -1,17 +1,6 @@
 @extends('main')
 
 @section('content')
-  <!-- ======= Breadcrumbs ======= -->
-  <section class="breadcrumbs">
-    <div class="container">
-      <ol>
-        <li><a href="{{ url('/') }}">Home</a></li>
-        <li>FAQ</li>
-      </ol>
-      <h2>Frequently Asked Questions</h2>
-    </div>
-  </section>
-  <!-- End Breadcrumbs -->
 
   <section id="contact" class="contact bg-light p-0">
     <div class="container bg-white py-5" data-aos="fade-up">

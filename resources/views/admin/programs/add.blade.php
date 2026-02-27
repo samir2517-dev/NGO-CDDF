@@ -7,9 +7,6 @@
         <hr/>
         <div class="card">
             <div class="card-body">
-                @if (session()->has('success'))
-                    <div class="alert alert-success">{{ session()->get('success') }}</div>
-                @endif
                 <div class="p-4 border rounded">
                     <form class="row g-3" action="{{ route('programs.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
@@ -21,11 +18,17 @@
                             @enderror
                         </div>
                         <div class="col-md-12">
-                            <label for="img" class="form-label">Image</label>
+                            <label for="img" class="form-label">Cover Image (Required)</label>
                             <input type="file" name="image" class="form-control @error('image') is-invalid @enderror" id="img">
+                            <small class="text-muted">This will be the main cover image for the program</small>
                             @error('image')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
+                        </div>
+                        <div class="col-md-12">
+                            <label for="gallery_images" class="form-label">Additional Gallery Images (Optional)</label>
+                            <input type="file" name="gallery_images[]" class="form-control" id="gallery_images" multiple accept="image/*">
+                            <small class="text-muted">You can select multiple images. These will be displayed as a gallery below the cover image.</small>
                         </div>
                         <div class="col-md-12">
                             <label for="description" class="form-label">Description</label>
