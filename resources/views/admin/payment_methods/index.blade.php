@@ -38,8 +38,8 @@
                                         <img src="{{ asset('storage/'.$item->icon_image) }}" alt="{{ $item->type }}" style="height: 40px;">
                                     @elseif($item->type == 'bank')
                                         <i class="fa-solid fa-building-columns" style="font-size: 28px;"></i>
-                                    @elseif(file_exists(public_path('img/'.$item->type.'.png')))
-                                        <img src="{{ asset('img/'.$item->type.'.png') }}" alt="{{ $item->type }}" style="height: 40px;">
+                                    @elseif(in_array(strtolower((string) $item->type), ['bkash', 'nagad', 'rocket', 'upay', 'visa']))
+                                        <i class="bx bxs-wallet" style="font-size: 28px;"></i>
                                     @else
                                         <span class="badge bg-secondary">No Icon</span>
                                     @endif
@@ -70,8 +70,7 @@
                                             <i class="bx bx-edit"></i>
                                         </a>
                                         <a href="{{ route('admin.payment_methods.delete', $item->id) }}" 
-                                           class="btn btn-sm btn-danger" 
-                                           onclick="return confirm('Are you sure you want to delete this payment method?')"
+                                           class="btn btn-sm btn-danger delete-confirm" 
                                            title="Delete">
                                             <i class="bx bx-trash"></i>
                                         </a>

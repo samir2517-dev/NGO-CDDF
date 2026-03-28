@@ -29,13 +29,14 @@
                     box-shadow: 0 10px 40px rgba(0,0,0,0.08);
                     border-left: 5px solid #0D47A1;
                 " data-aos="fade-up">
-                    <p style="
+                    <div style="
                         font-size: 17px;
                         line-height: 1.9;
                         color: #555;
                         text-align: justify;
-                        margin: 0;
-                    ">{{ $about_us->description }}</p>
+                    ">
+                        {!! $about_us->description !!}
+                    </div>
                 </div>
             </div>
         </div>

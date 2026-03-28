@@ -17,7 +17,7 @@ class partnersController extends Controller
     public function store(Request $request){
         $validatedData = $request->validate([
             'name' => 'required',
-            'image' => 'required|mimes:jpg,png,gif,jpeg',
+            'image' => 'required|mimes:jpg,png,gif,jpeg|max:10240',
         ]);
 
         $partnerImg = '';
@@ -78,7 +78,7 @@ class partnersController extends Controller
             if(file_exists($oldImage)){
                 @unlink($oldImage);
             }
-            $imageName = rand(10000,99999) . 'partner_donor' . $image->getClientOriginalExtension();
+            $imageName = rand(10000,99999) . 'partner_donor.' . $image->getClientOriginalExtension();
             $image->move(public_path('images/partner/'), $imageName);
         }
         else{

@@ -44,6 +44,15 @@
                         <h5 class="mb-5 mt-2 text-dark">Admin Login</h5>
                     </div>
                     <hr>
+                    @if($errors->any())
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <i class="bx bx-error-circle me-1"></i>
+                            @foreach($errors->all() as $error)
+                                {{ $error }}<br>
+                            @endforeach
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
                     <form class="row g-3" action="{{ route('login') }}" method="POST">
                         @csrf
                         <div class="col-12">

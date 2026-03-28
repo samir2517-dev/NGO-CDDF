@@ -18,7 +18,7 @@ class StrategicPlanController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'image' => 'required|mimes:jpg,jpeg,png,gif,webp|max:2048',
+            'image' => 'required|mimes:jpg,jpeg,png,gif,webp|max:10240',
             'pdf_file' => 'required|mimes:pdf|max:10240',
         ]);
 
@@ -65,7 +65,7 @@ class StrategicPlanController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'image' => (empty($strategicPlan->image) ? 'required' : 'nullable') . '|mimes:jpg,jpeg,png,gif,webp|max:2048',
+            'image' => (empty($strategicPlan->image) ? 'required' : 'nullable') . '|mimes:jpg,jpeg,png,gif,webp|max:10240',
             'pdf_file' => (empty($strategicPlan->pdf_file) ? 'required' : 'nullable') . '|mimes:pdf|max:10240',
         ]);
 

@@ -81,7 +81,7 @@ class PaymentMethodController extends Controller
         try {
             $validatedData = $request->validate([
                 'type' => 'required|string|max:50',
-                'icon_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'icon_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10240',
                 'account_name' => 'required|string|max:255',
                 'account_number' => 'required|string|max:255',
                 'bank_name' => 'nullable|string|max:255',

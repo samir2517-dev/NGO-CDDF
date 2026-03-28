@@ -19,7 +19,7 @@ class invokedController extends Controller
     {
         $validatedDate = $request->validate([
             'name' => 'required',
-            'file' => 'required|mimes:pdf,jpg,png,jpeg',
+            'file' => 'required|mimes:pdf,jpg,png,jpeg|max:10240',
         ]);
 
         $fileName = '';

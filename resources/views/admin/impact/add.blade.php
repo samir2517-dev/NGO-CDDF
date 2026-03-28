@@ -42,7 +42,7 @@
                             
                             <div class="col-md-12 mb-3">
                                 <label for="description" class="form-label">Description</label>
-                                <textarea id="description" name="description" class="form-control" rows="4" 
+                                <textarea id="description" name="description" class="form-control summernote" rows="4" 
                                           placeholder="Brief description about this impact metric">{{ old('description') }}</textarea>
                             </div>
                             

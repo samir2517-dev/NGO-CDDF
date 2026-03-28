@@ -20,9 +20,9 @@ class ProgramController extends Controller
         $validatedData = $request->validate([
             'title' => 'required',
             'description' => 'required',
-            'image' => 'required|mimes:jpg,png,jpeg,gif',
+            'image' => 'required|mimes:jpg,png,jpeg,gif|max:10240',
             'status' => 'required|in:active,completed,upcoming',
-            'gallery_images.*' => 'nullable|mimes:jpg,png,jpeg,gif|max:5120',
+            'gallery_images.*' => 'nullable|mimes:jpg,png,jpeg,gif|max:10240',
         ]);
 
         $imageName = '';
@@ -108,7 +108,7 @@ class ProgramController extends Controller
             'title' => 'required',
             'description' => 'required',
             'status' => 'required|in:active,completed,upcoming',
-            'gallery_images.*' => 'nullable|mimes:jpg,png,jpeg,gif|max:5120',
+            'gallery_images.*' => 'nullable|mimes:jpg,png,jpeg,gif|max:10240',
         ]);
 
         $item = DB::table('programs')->where('id', $id)->first();

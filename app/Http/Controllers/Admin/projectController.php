@@ -18,8 +18,8 @@ class projectController extends Controller
         $validated = $request->validate([
             'title' => 'required',
             'description' => 'required',
-            'image' => 'required|mimes:jpeg,png,jpg',
-            'gallery_images.*' => 'nullable|mimes:jpg,png,jpeg,gif|max:5120',
+            'image' => 'required|mimes:jpeg,png,jpg|max:10240',
+            'gallery_images.*' => 'nullable|mimes:jpg,png,jpeg,gif|max:10240',
         ]);
 
         $imageName = '';
@@ -98,7 +98,7 @@ class projectController extends Controller
         $validated = $request->validate([
             'title' => 'required',
             'description' => 'required',
-            'gallery_images.*' => 'nullable|mimes:jpg,png,jpeg,gif|max:5120',
+            'gallery_images.*' => 'nullable|mimes:jpg,png,jpeg,gif|max:10240',
         ]);
 
         $project = DB::table('ongoing_project')->where('id',$id)->first();

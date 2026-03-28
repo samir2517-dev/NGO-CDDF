@@ -19,8 +19,8 @@ class newsController extends Controller
         $validated = $request->validate([
             'title' => 'required',
             'description' => 'required',
-            'image' => 'required|mimes:jpg,png,jpeg,gif',
-            'gallery_images.*' => 'nullable|mimes:jpg,png,jpeg,gif|max:5120',
+            'image' => 'required|mimes:jpg,png,jpeg,gif|max:10240',
+            'gallery_images.*' => 'nullable|mimes:jpg,png,jpeg,gif|max:10240',
         ]);
 
         $imageName = '';
@@ -103,7 +103,7 @@ class newsController extends Controller
         $validated = $request->validate([
             'title' => 'required',
             'description' => 'required',
-            'gallery_images.*' => 'nullable|mimes:jpg,png,jpeg,gif|max:5120',
+            'gallery_images.*' => 'nullable|mimes:jpg,png,jpeg,gif|max:10240',
         ]);
 
         $news = DB::table('latest_news')->where('id',$id)->first();

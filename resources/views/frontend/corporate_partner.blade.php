@@ -7,7 +7,9 @@
     <div class="container bg-white py-5" data-aos="fade-up">
       <div class="section-title">
         <h2>Corporate Partnership</h2>
-            <img src="{{ asset('img/partner.png') }}" alt="" class="" width="20%">
+            <div class="mb-3">
+                <i class="bx bx-buildings" style="font-size: 72px; color: #0D47A1;"></i>
+            </div>
             <p class="fs-4 text-secondary">The content will be updated soon.</p>
       </div>
     </div>

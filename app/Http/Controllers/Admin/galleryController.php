@@ -19,7 +19,7 @@ class galleryController extends Controller
         $validatedData = $request->validate([
             'title' => 'required',
             'description' => 'required',
-            'image' => 'required|mimes:jpg,png,jpeg,gif',
+            'image' => 'required|mimes:jpg,png,jpeg,gif|max:10240',
         ]);
 
         $imageName = '';

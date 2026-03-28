@@ -10,8 +10,8 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     {{-- Favicon --}}
-    <link rel="shortcut icon" href="{{ asset('images/application/'.application()->fav_icon) }}" type="image/x-icon">
-    <link rel="icon" href="{{ asset('images/application/'.application()->fav_icon) }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('images/application/951510main_logo.png') }}" />
+    <link rel="icon" href="{{ asset('images/application/951510main_logo.png') }}" />
 
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 

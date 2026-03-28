@@ -29,7 +29,7 @@
                             {{ isset($news->created_at) ? date('F d, Y', strtotime($news->created_at)) : date('F d, Y') }}
                         </p>
                         <div style="text-align:justify; font-size: 1.05rem; line-height: 1.8; color: #555;">
-                            {{ $news->description }}
+                            {!! $news->description !!}
                         </div>
 
                         <!-- Photo Gallery -->

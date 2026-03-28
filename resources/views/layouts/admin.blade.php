@@ -12,9 +12,110 @@
     <link rel="stylesheet" href="{{ asset('admin-assets/vendors/ti-icons/css/themify-icons.css') }}">
     <link rel="stylesheet" href="{{ asset('admin-assets/vendors/css/vendor.bundle.base.css') }}">
     <link rel="stylesheet" href="{{ asset('admin-assets/vendors/font-awesome/css/font-awesome.min.css') }}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     
     <!-- Plugin css for this page -->
     <link rel="stylesheet" href="{{ asset('admin-assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css') }}">
+    
+    <!-- Summernote Rich Text Editor CSS from jsDelivr -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.css">
+    
+    <!-- Minimal Summernote Supplements -->
+    <style>
+        /* Style Summernote lite buttons */
+        .note-btn {
+            background: white !important;
+            border: 1px solid #dee2e6 !important;
+            color: #333 !important;
+            padding: 6px 10px !important;
+            margin: 2px !important;
+            border-radius: 3px !important;
+            cursor: pointer !important;
+        }
+        
+        .note-btn:hover {
+            background: #e9ecef !important;
+        }
+        
+        .note-btn.active {
+            background: #0D47A1 !important;
+            color: white !important;
+            border-color: #0D47A1 !important;
+        }
+        
+        /* Dropdown menus */
+        .note-dropdown-menu {
+            z-index: 1060 !important;
+            padding: 10px !important;
+            min-width: 140px !important;
+        }
+        
+        /* Hide all the extra junk: Transparent, Reset, Select buttons, tooltips, and extra history rows */
+        .note-dropdown-menu .note-color-reset,
+        .note-dropdown-menu .note-color-select,
+        .note-color-select ~ div,
+        .note-color-select ~ ul,
+        .note-color-select ~ .note-color-palette,
+        .note-color-palette .note-color-row:nth-child(n+3),
+        .tooltip,
+        .note-tooltip {
+            display: none !important;
+        }
+        
+        /* Form matters */
+        .note-dropdown-menu .note-color-title {
+            text-align: center;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+        
+        /* Fix the rows so colors don't overlap vertically */
+        .note-color-row {
+            height: auto !important;
+            display: flex !important;
+            justify-content: center !important;
+            margin-bottom: 5px !important;
+        }
+        
+        /* Fix the color buttons so their inline background-color works */
+        .note-color-btn {
+            width: 20px !important;
+            height: 20px !important;
+            padding: 0 !important;
+            margin: 0 4px !important;
+            border: 1px solid #ccc !important;
+            border-radius: 4px !important;
+            cursor: pointer !important;
+            display: inline-block !important;
+        }
+        
+        /* Add CSS variables to make colors visible if JS fails */
+        button[data-value="#FFFFFF"] { background-color: #FFFFFF !important; }
+        button[data-value="#000000"] { background-color: #000000 !important; }
+        button[data-value="#FF0000"] { background-color: #FF0000 !important; }
+        button[data-value="#00FF00"] { background-color: #00FF00 !important; }
+        button[data-value="#0000FF"] { background-color: #0000FF !important; }
+        button[data-value="#FFFF00"] { background-color: #FFFF00 !important; }
+        button[data-value="#FF00FF"] { background-color: #FF00FF !important; }
+        button[data-value="#00FFFF"] { background-color: #00FFFF !important; }
+        button[data-value="#808080"] { background-color: #808080 !important; }
+        button[data-value="#FFA500"] { background-color: #FFA500 !important; }
+        
+        .note-dropdown-menu .note-color-title {
+            text-align: center;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+        
+        .note-color-btn:hover {
+            border: 1px solid #000 !important;
+            transform: scale(1.1) !important;
+        }
+    </style>
     
     <!-- Layout styles -->
     <link rel="stylesheet" href="{{ asset('admin-assets/css/style.css') }}">
@@ -839,23 +940,6 @@
                         </div>
                     </li>
 
-                    <!-- Subscribe -->
-                    @php
-                        $isSubscribe = Request::is('admin/subscribe');
-                    @endphp
-                    <li class="nav-item @if($isSubscribe) active @endif">
-                        <a class="nav-link" data-bs-toggle="collapse" href="#subscribe" aria-expanded="@if($isSubscribe) true @else false @endif" aria-controls="subscribe">
-                            <span class="menu-title">Subscribe</span>
-                            <i class="menu-arrow"></i>
-                            <i class="mdi mdi-bell menu-icon"></i>
-                        </a>
-                        <div class="collapse @if($isSubscribe) show @endif" id="subscribe">
-                            <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a class="nav-link @if($isSubscribe) active @endif" href="{{ route('subscribe.all') }}">All Subscribe</a></li>
-                            </ul>
-                        </div>
-                    </li>
-
                     <!-- Donate Now -->
                     @php
                         $isDonate = Request::is('admin/payment-methods/*') || Request::is('admin/donations/*');
@@ -1048,24 +1132,6 @@
                             <ul class="nav flex-column sub-menu">
                                 <li class="nav-item"> <a class="nav-link @if(Request::is('admin/chief/message/add')) active @endif" href="{{ route('chief.message.add') }}">Add Message</a></li>
                                 <li class="nav-item"> <a class="nav-link @if(Request::is('admin/chief/message/index') || Request::is('admin/chief/message/edit/*')) active @endif" href="{{ route('chief.message.index') }}">All Message</a></li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <!-- FAQ -->
-                                        @php
-                        $isFAQ = Request::is('admin/faq/add') || Request::is('admin/faq/index') || Request::is('admin/faq/edit/*');
-                    @endphp
-                    <li class="nav-item @if($isFAQ) active @endif">
-                        <a class="nav-link" data-bs-toggle="collapse" href="#faq" aria-expanded="@if($isFAQ) true @else false @endif" aria-controls="faq">
-                            <span class="menu-title">FAQ</span>
-                            <i class="menu-arrow"></i>
-                            <i class="mdi mdi-help-circle menu-icon"></i>
-                        </a>
-                        <div class="collapse @if($isFAQ) show @endif" id="faq">
-                            <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a class="nav-link @if(Request::is('admin/faq/add')) active @endif" href="{{ route('faq.add') }}">Add FAQ</a></li>
-                                <li class="nav-item"> <a class="nav-link @if(Request::is('admin/faq/index') || Request::is('admin/faq/edit/*')) active @endif" href="{{ route('faq.index') }}">All FAQ</a></li>
                             </ul>
                         </div>
                     </li>
@@ -1313,11 +1379,64 @@
     <!-- Plugins JS -->
     <script src="{{ asset('admin-assets/vendors/js/vendor.bundle.base.js') }}"></script>
     
+    <!-- Popper.js for Bootstrap dropdowns -->
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    
     <!-- Plugin JS for this page -->
     <script src="{{ asset('admin-assets/vendors/chart.js/chart.umd.js') }}"></script>
     <script src="{{ asset('admin-assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
     
-    <!-- Inject JS -->
+    <!-- Summernote Rich Text Editor JS from jsDelivr -->
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js"></script>
+    
+    <!-- Summernote Initialization for 0.8.20 Lite -->
+    <script>
+        $(document).ready(function() {
+            console.log('Starting Summernote initialization...');
+            
+            // Define very basic color palette
+            var basicColors = [
+                ['#FFFFFF', '#000000', '#FF0000', '#00FF00', '#0000FF'],     // White, Black, Red, Green, Blue
+                ['#FFFF00', '#FF00FF', '#00FFFF', '#808080', '#FFA500']      // Yellow, Magenta, Cyan, Gray, Orange
+            ];
+            
+            if ($('.summernote').length === 0) {
+                console.warn('No elements with class "summernote" found');
+            } else {
+                console.log('Found ' + $('.summernote').length + ' Summernote elements');
+                
+                // Initialize all Summernote editors
+                $('.summernote').summernote({
+                    height: 300,
+                    minHeight: 200,
+                    maxHeight: 600,
+                    colors: basicColors,
+                    toolbar: [
+                        ['style', ['style']],
+                        ['font', ['bold', 'underline', 'italic', 'clear']],
+                        ['fontsize', ['fontsize']],
+                        ['color', ['color']],
+                        ['para', ['ul', 'ol', 'paragraph']],
+                        ['height', ['height']]
+                    ],
+                    prettifyHtml: true
+                });
+                
+                console.log('✓ All Summernote editors initialized successfully');
+                
+                // Backup script to forcibly add colors if Summernote fails to
+                setTimeout(function() {
+                    $('.note-color-btn').each(function() {
+                        var colorValue = $(this).attr('data-value');
+                        if(colorValue) {
+                            $(this).css('background-color', colorValue);
+                        }
+                    });
+                }, 1000);
+            }
+        });
+    </script>
+    
     <script src="{{ asset('admin-assets/js/off-canvas.js') }}"></script>
     <script src="{{ asset('admin-assets/js/misc.js') }}"></script>
     <script src="{{ asset('admin-assets/js/settings.js') }}"></script>
@@ -1326,8 +1445,8 @@
     
     <!-- Global delete confirmation modal -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            let deleteUrl = '';
+        // Delete confirmation modal and toast notifications
+        let deleteUrl = '';
             const deleteModalElement = document.getElementById('deleteConfirmModal');
             const deleteModal = new bootstrap.Modal(deleteModalElement);
             

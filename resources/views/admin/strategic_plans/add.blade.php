@@ -19,7 +19,7 @@
                         </div>
                         <div class="col-md-12">
                             <label for="description" class="form-label">Description</label>
-                            <textarea name="description" id="description" rows="4" class="form-control @error('description') is-invalid @enderror" placeholder="Enter Description (optional)">{{ old('description') }}</textarea>
+                            <textarea name="description" id="description" rows="10" class="form-control summernote @error('description') is-invalid @enderror" placeholder="Enter Description (optional)">{{ old('description') }}</textarea>
                             @error('description')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
@@ -27,7 +27,7 @@
                         <div class="col-md-12">
                             <label for="image" class="form-label">Image<span class="text-danger">*</span></label>
                             <input type="file" name="image" id="image" class="form-control @error('image') is-invalid @enderror">
-                            <span class="text-info">Image maximum size 2 MB. Supported formats: JPG, PNG, JPEG, GIF, WEBP</span>
+                            <span class="text-info">Image maximum size 10 MB. Supported formats: JPG, PNG, JPEG, GIF, WEBP</span>
                             @error('image')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror

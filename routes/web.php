@@ -13,15 +13,17 @@ require __DIR__.'/admin.php';
 
 Route::get('/', function () {
     $slider = DB::table('slider')->get();
-    $project = DB::table('ongoing_project')->orderBy('id', 'desc')->take(3)->get();
+    $ongoing_projects = DB::table('ongoing_project')->orderBy('id', 'desc')->take(4)->get();
     $news = DB::table('latest_news')->orderBy('id', 'desc')->take(6)->get();
-    $gallery = DB::table('gallery')->orderBy('id', 'desc')->take(12)->get();
+    $gallery = DB::table('gallery')->orderBy('id', 'desc')->take(9)->get();
     $application = DB::table('applications')->get()->first();
-    $programs = DB::table('programs')->orderBy('id', 'desc')->take(6)->get();
-    $stories = DB::table('stories')->orderBy('id', 'desc')->get();
+    $programs = DB::table('programs')->orderBy('id', 'desc')->take(3)->get();
+    $stories = DB::table('stories')->orderBy('id', 'desc')->take(2)->get();
     $mission_vision = DB::table('mission_vision')->first();
+    $partners = DB::table('partners')->orderBy('id', 'asc')->take(8)->get();
+    $impact = DB::table('impact')->orderBy('order', 'asc')->take(4)->get();
 
-    return view('home', compact('slider', 'project', 'news', 'gallery', 'application', 'programs', 'stories', 'mission_vision'));
+    return view('home', compact('slider', 'ongoing_projects', 'news', 'gallery', 'application', 'programs', 'stories', 'mission_vision', 'partners', 'impact'));
 });
 
 Route::post('user/subscribe', [frontController::class, 'subscribe'])->name('user.subscribe');
@@ -40,7 +42,8 @@ Route::get('about/impact', [frontController::class, 'impact'])->name('about.impa
 Route::get('key/focus', [frontController::class, 'key_focus'])->name('key.focus.area');
 Route::get('project/archieve', [frontController::class, 'proj_archieve'])->name('project.archieve');
 Route::get('ongoing/project', [frontController::class, 'ongoing_project'])->name('ongoing.project');
-Route::get('ongoing/project/view/{id}', [frontController::class, 'project_view'])->name('ongoing.project.view');
+Route::get('ongoing/project/view/{id}', [frontController::class, 'project_view'])->name('project.view');
+Route::get('ongoing/project/all', [frontController::class, 'ongoing_project'])->name('project.all');
 Route::get('latest/news/view/{id}', [frontController::class, 'news_view'])->name('latest.news.view');
 Route::get('latest/news/all', [frontController::class, 'news_all'])->name('latest.news.all');
 Route::get('youtube/video', [frontController::class, 'youtube'])->name('youtube.video');

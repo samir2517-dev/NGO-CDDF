@@ -8,7 +8,7 @@
         @yield('title')
     </title>
     {{-- favicon --}}
-    <link rel="shortcut icon" href="{{ asset('images/application/'.application()->fav_icon) }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('images/application/951510main_logo.png') }}" type="image/x-icon">
     
     {{-- Google Fonts --}}
     <link href="https://fonts.googleapis.com/css?family=Dosis:200,300,400,500,700" rel="stylesheet">
@@ -27,6 +27,75 @@
     <link rel="stylesheet" href="{{ asset('frontend-assets/css/flaticon.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend-assets/css/icomoon.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend-assets/css/style.css') }}?v={{ time() }}">
+    
+    {{-- Text Formatting Styles for Rich Content --}}
+    <style>
+        /* Ensure text formatting from rich editor displays correctly */
+        b, strong {
+            font-weight: 700 !important;
+        }
+        
+        em, i {
+            font-style: italic !important;
+        }
+        
+        u {
+            text-decoration: underline !important;
+        }
+        
+        mark, .mark, .highlight {
+            background-color: #fff3cd;
+            padding: 2px 4px;
+            border-radius: 2px;
+        }
+        
+        /* Ensure lists display properly */
+        ul, ol {
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Paragraph spacing */
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        /* Color text support */
+        span[style*="color"] {
+            display: inline;
+        }
+        
+        /* Summernote content styling */
+        .note-editable b,
+        .note-editable strong {
+            font-weight: 700 !important;
+        }
+        
+        .note-editable em,
+        .note-editable i {
+            font-style: italic !important;
+        }
+        
+        .note-editable u {
+            text-decoration: underline !important;
+        }
+        
+        /* Ensure inline styles from rich editor work */
+        [style*="font-weight"] {
+            font-weight: inherit !important;
+        }
+        
+        /* Description content - ensure all formatting is shown */
+        div[style*="color"],
+        p[style*="color"],
+        span[style*="color"] {
+            color: inherit !important;
+        }
+    </style>
     
     {{-- Boxicons for Impact and other admin-selected icons --}}
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>

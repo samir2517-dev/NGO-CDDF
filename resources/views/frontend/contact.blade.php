@@ -142,10 +142,17 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
-                            <button class="btn btn-lg w-100 text-white fw-bold" type="submit" style="background: linear-gradient(135deg, #0D47A1 0%, #1565C0 100%); border: none; border-radius: 10px; padding: 15px; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 20px rgba(13,71,161,0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                            <!-- reCAPTCHA v2 Checkbox -->
+                            <div class="g-recaptcha" data-sitekey="{{ config('services.recaptcha.site_key') }}" style="margin: 20px 0;"></div>
+                            @error('g-recaptcha-response')
+                                <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                            @enderror
+                            <button class="btn btn-lg w-100 text-white fw-bold" type="submit" style="background: linear-gradient(135deg, #0D47A1 0%, #1565C0 100%); border: none; border-radius: 10px; padding: 15px; transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 20px rgba(13,71,161,0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
                                 <i class="bx bx-send me-2"></i>Send Message
                             </button>
                         </form>
+                        <!-- reCAPTCHA v2 Script - Auto Renders Widget -->
+                        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
                     </div>
                 </div>
             </div>

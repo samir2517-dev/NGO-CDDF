@@ -14,6 +14,7 @@ Bakultali Mahila Sangshad
     height: 100vh;
     min-height: 600px;
     overflow: hidden;
+    margin-top: 60px;
 }
 
 .hero-slider-wrapper {
@@ -390,7 +391,7 @@ Bakultali Mahila Sangshad
             @endforeach
         @else
             <div class="hero-slide active" data-index="0">
-                <div class="hero-wrap" style="background-image: url('{{ asset('img/slider/slider-1.jpg') }}');">
+                <div class="hero-wrap" style="background: linear-gradient(135deg, #0D47A1 0%, #1565C0 45%, #42A5F5 100%);">
                     <div class="overlay"></div>
                     <div class="container">
                         <div class="row no-gutters slider-text align-items-center justify-content-center">
@@ -500,13 +501,12 @@ Bakultali Mahila Sangshad
     </div>
 </section>
 
-{{-- Mission & Vision Section --}}
+{{-- Mission, Vision & Values Section (2-Column Layout) --}}
 <section class="ftco-section bg-light" style="padding-top: 2rem;">
     <div class="container">
         <div class="row justify-content-center mb-5 pb-3">
             <div class="col-md-10 heading-section ftco-animate text-center" data-aos="fade-up">
-                <h2 class="mb-4">Our Mission & Vision</h2>
-                <p class="lead">Empowering communities, transforming lives, and building a just society for all</p>
+                <h2 class="mb-4"><span style="color: #0D47A1;">Our</span> Mission, Vision & Values</h2>
             </div>
         </div>
         
@@ -514,20 +514,20 @@ Bakultali Mahila Sangshad
         <div class="row align-items-stretch">
             {{-- Mission Card --}}
             <div class="col-lg-6 mb-4" data-aos="fade-right" data-aos-delay="100">
-                <div class="mission-vision-card h-100 bg-white shadow-sm" style="border-radius: 15px; overflow: hidden; border-left: 5px solid #0D47A1; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 15px 40px rgba(0,0,0,0.15)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 0.125rem 0.25rem rgba(0,0,0,0.075)'">
+                <div class="mission-vision-card h-100 bg-white shadow-sm" style="border-radius: 15px; overflow: hidden; border-top: 5px solid #0D47A1; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 15px 40px rgba(0,0,0,0.15)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 0.125rem 0.25rem rgba(0,0,0,0.075)'">
                     <div class="p-5">
-                        <div class="d-flex align-items-center mb-4">
-                            <div class="icon-circle d-flex align-items-center justify-content-center" style="width: 70px; height: 70px; background: linear-gradient(135deg, #0D47A1 0%, #1565C0 100%); border-radius: 50%; box-shadow: 0 5px 15px rgba(13, 71, 161,0.3);">
+                        <div class="text-center mb-4">
+                            <div class="icon-circle d-inline-flex align-items-center justify-content-center" style="width: 70px; height: 70px; background: linear-gradient(135deg, #0D47A1 0%, #1565C0 100%); border-radius: 50%; box-shadow: 0 5px 15px rgba(13, 71, 161,0.3);">
                                 <i class="icon-target" style="font-size: 2rem; color: white;"></i>
                             </div>
-                            <h3 class="mb-0" style="font-size: 1.8rem; font-weight: 700; color: #333; margin-left: 25px;">Our Mission</h3>
                         </div>
+                        <h3 class="text-center mb-4" style="font-size: 1.5rem; font-weight: 700; color: #333;">Our Mission</h3>
                         <div class="mission-content">
-                            <p style="font-size: 1.05rem; line-height: 1.9; color: #555; text-align: justify;">
+                            <p style="font-size: 1rem; line-height: 1.8; color: #555; text-align: center;">
                                 @if($mission_vision->mission)
                                     {{ $mission_vision->mission }}
                                 @else
-                                    To empower women and girls through education, economic self-reliance, and leadership training, while building community resilience against climate change and natural disasters.
+                                    To empower women and girls through education, economic self-reliance, and leadership training.
                                 @endif
                             </p>
                         </div>
@@ -537,20 +537,47 @@ Bakultali Mahila Sangshad
             
             {{-- Vision Card --}}
             <div class="col-lg-6 mb-4" data-aos="fade-left" data-aos-delay="200">
-                <div class="mission-vision-card h-100 bg-white shadow-sm" style="border-radius: 15px; overflow: hidden; border-left: 5px solid #5E35B1; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 15px 40px rgba(0,0,0,0.15)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 0.125rem 0.25rem rgba(0,0,0,0.075)'">
+                <div class="mission-vision-card h-100 bg-white shadow-sm" style="border-radius: 15px; overflow: hidden; border-top: 5px solid #5E35B1; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 15px 40px rgba(0,0,0,0.15)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 0.125rem 0.25rem rgba(0,0,0,0.075)'">
                     <div class="p-5">
-                        <div class="d-flex align-items-center mb-4">
-                            <div class="icon-circle d-flex align-items-center justify-content-center" style="width: 70px; height: 70px; background: linear-gradient(135deg, #5E35B1 0%, #7E57C2 100%); border-radius: 50%; box-shadow: 0 5px 15px rgba(94, 53, 177, 0.3);">
+                        <div class="text-center mb-4">
+                            <div class="icon-circle d-inline-flex align-items-center justify-content-center" style="width: 70px; height: 70px; background: linear-gradient(135deg, #5E35B1 0%, #7E57C2 100%); border-radius: 50%; box-shadow: 0 5px 15px rgba(94, 53, 177, 0.3);">
                                 <i class="bx bxs-bulb" style="font-size: 2.5rem; color: white;"></i>
                             </div>
-                            <h3 class="mb-0" style="font-size: 1.8rem; font-weight: 700; color: #333; margin-left: 25px;">Our Vision</h3>
                         </div>
+                        <h3 class="text-center mb-4" style="font-size: 1.5rem; font-weight: 700; color: #333;">Our Vision</h3>
                         <div class="vision-content">
-                            <p style="font-size: 1.05rem; line-height: 1.9; color: #555; text-align: justify;">
+                            <p style="font-size: 1rem; line-height: 1.8; color: #555; text-align: center;">
                                 @if($mission_vision->vision)
                                     {{ $mission_vision->vision }}
                                 @else
-                                    A society where every individual, regardless of gender or economic status, can realize their full potential in a vibrant and just environment.
+                                    A society where every individual can realize their full potential in a vibrant and just environment.
+                                @endif
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Values Card --}}
+            <div class="col-lg-4 mb-4" data-aos="fade-left" data-aos-delay="300">
+            {{-- Values Row --}}
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div class="values-section bg-white shadow-sm" style="border-radius: 15px; overflow: hidden; border-top: 5px solid #5E35B1; transition: all 0.3s; padding: 2rem;" data-aos="fade-up" data-aos-delay="300" onmouseover="this.style.boxShadow='0 15px 40px rgba(0,0,0,0.15)'" onmouseout="this.style.boxShadow='0 0.125rem 0.25rem rgba(0,0,0,0.075)'">
+                    <div class="row align-items-center">
+                        <div class="col-md-2 text-center">
+                            <div class="d-inline-flex align-items-center justify-content-center" style="width: 70px; height: 70px; background: linear-gradient(135deg, #5E35B1 0%, #7E57C2 100%); border-radius: 50%; box-shadow: 0 5px 15px rgba(94, 53, 177, 0.3);">
+                                <i class="icon-heart" style="font-size: 2rem; color: white;"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-10">
+                            <h3 class="mb-3" style="font-size: 1.5rem; font-weight: 700; color: #333;">Our Values</h3>
+                            <p style="font-size: 1rem; line-height: 1.8; color: #555; margin-bottom: 0;">
+                                @if($mission_vision->values)
+                                    {{ $mission_vision->values }}
+                                @else
+                                    Integrity, compassion, and commitment to community-led sustainable development.
                                 @endif
                             </p>
                         </div>
@@ -558,27 +585,6 @@ Bakultali Mahila Sangshad
                 </div>
             </div>
         </div>
-        
-        {{-- Core Values Section --}}
-        @if($mission_vision->values)
-        <div class="row mt-5" data-aos="fade-up" data-aos-delay="300">
-            <div class="col-12">
-                <div class="values-section bg-white shadow-sm p-5" style="border-radius: 15px; border-top: 4px solid #5E35B1; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 15px 40px rgba(0,0,0,0.15)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 0.125rem 0.25rem rgba(0,0,0,0.075)'">
-                    <div class="text-center mb-4">
-                        <div class="d-inline-flex align-items-center justify-content-center mb-3" style="width: 70px; height: 70px; background: linear-gradient(135deg, #5E35B1 0%, #7E57C2 100%); border-radius: 50%; box-shadow: 0 5px 15px rgba(94, 53, 177, 0.3);">
-                            <i class="icon-heart" style="font-size: 2rem; color: white;"></i>
-                        </div>
-                        <h3 style="font-size: 1.8rem; font-weight: 700; color: #333;">Our Core Values</h3>
-                    </div>
-                    <div class="values-content">
-                        <p style="font-size: 1.05rem; line-height: 1.9; color: #555; text-align: justify;">
-                            {{ $mission_vision->values }}
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        @endif
         @else
         <div class="row">
             <div class="col-12 text-center">
@@ -589,13 +595,12 @@ Bakultali Mahila Sangshad
     </div>
 </section>
 
-{{-- Featured Programs Section --}}
-<section class="ftco-section" style="background: linear-gradient(135deg, #E1F5FE 0%, #B3E5FC 100%);">
-    <div class="container">
+{{-- Featured Programs & Ongoing Projects Sections --}}
+<section class="ftco-section" style="background: #ffffff;">
+    <div class="container-fluid" style="max-width: 95%; margin: 0 auto;">
         <div class="row justify-content-center mb-5 pb-3">
             <div class="col-md-7 heading-section ftco-animate text-center" data-aos="fade-up">
-                <h2 class="mb-4">Featured Programs</h2>
-                <p>Empowering Women, Building Resilience: BMS's Featured Programs create pathways to economic independence and leadership for women and girls in disaster-prone communities.</p>
+                <h2 class="mb-4"><span style="color: #0D47A1;">Featured</span> Programs</h2>
             </div>
         </div>
         <div class="row d-flex">
@@ -604,23 +609,23 @@ Bakultali Mahila Sangshad
                 <div class="col-md-4 d-flex ftco-animate" data-aos="fade-up" data-aos-delay="{{ ($key + 1) * 100 }}">
                     <div class="blog-entry align-self-stretch w-100 shadow-sm">
                         <a href="{{ route('programs.view', $program->id) }}">
-                            @if($program->image && file_exists(public_path('images/programs/'.$program->image)))
-                            <img src="{{ asset('images/programs/'.$program->image) }}" alt="{{ $program->title }}" class="img-fluid" style="width: 100%; height: 270px; object-fit: cover;">
+                            @if(isset($program->image) && $program->image && file_exists(public_path('images/programs/'.$program->image)))
+                            <img src="{{ asset('images/programs/'.$program->image) }}" alt="{{ $program->title ?? 'Program' }}" class="img-fluid" style="width: 100%; height: 270px; object-fit: cover;">
                             @else
-                            <img src="https://images.pexels.com/photos/1371360/pexels-photo-1371360.jpeg" alt="{{ $program->title }}" class="img-fluid" style="width: 100%; height: 270px; object-fit: cover;">
+                            <img src="https://images.pexels.com/photos/1371360/pexels-photo-1371360.jpeg" alt="{{ $program->title ?? 'Program' }}" class="img-fluid" style="width: 100%; height: 270px; object-fit: cover;">
                             @endif
                         </a>
                         <div class="text p-4 d-block bg-white">
                             <div class="meta mb-3">
-                                @if($program->start_date)
+                                @if(isset($program->start_date) && $program->start_date)
                                 <div class="d-inline-block me-3"><a href="#" class="text-muted"><i class="fa fa-calendar"></i> {{ date('M d, Y', strtotime($program->start_date)) }}</a></div>
                                 @endif
-                                @if($program->status)
-                                <div class="d-inline-block"><span class="badge bg-{{ $program->status == 'active' ? 'success' : ($program->status == 'completed' ? 'secondary' : 'info') }}">{{ ucfirst($program->status) }}</span></div>
-                                @endif
                             </div>
-                            <h3 class="heading mt-2"><a href="{{ route('programs.view', $program->id) }}">{{ Str::limit($program->title, 50) }}</a></h3>
-                            <p class="text-muted">{{ Str::limit($program->description, 100) }}</p>
+                            <h3 class="heading mt-2"><a href="{{ route('programs.view', $program->id) }}">{{ Str::limit($program->title ?? '', 50) }}</a></h3>
+                            <p class="text-muted">{{ Str::limit($program->description ?? '', 100) }}</p>
+                            <div class="mt-3">
+                                <a href="{{ route('programs.view', $program->id) }}" class="btn btn-sm" style="background: #0D47A1; color: white; border: none;">Read More →</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -641,63 +646,91 @@ Bakultali Mahila Sangshad
     </div>
 </section>
 
-{{-- Photo Gallery Section --}}
-<section class="ftco-section-3 img bg-light" style="padding: 60px 0;">
-    <div class="container">
+{{-- Ongoing Projects Section --}}
+<section class="ftco-section" style="background: #ffffff;">
+    <div class="container-fluid" style="max-width: 95%; margin: 0 auto;">
         <div class="row justify-content-center mb-5 pb-3">
             <div class="col-md-7 heading-section ftco-animate text-center" data-aos="fade-up">
-                <h2 class="mb-4">Photo Gallery</h2>
-                <p>Capturing moments of change, hope, and empowerment across our programs and initiatives.</p>
+                <h2 class="mb-4"><span style="color: #0D47A1;">Ongoing</span> Projects</h2>
+            </div>
+        </div>
+        <div class="row d-flex">
+            @if(isset($ongoing_projects) && count($ongoing_projects) > 0)
+                @foreach($ongoing_projects->take(4) as $key => $project)
+                <div class="col-md-3 d-flex ftco-animate" data-aos="fade-up" data-aos-delay="{{ ($key + 1) * 100 }}">
+                    <div class="blog-entry align-self-stretch w-100 shadow-sm">
+                        <a href="{{ route('project.view', $project->id) }}">
+                            @if(isset($project->image) && $project->image && file_exists(public_path('images/project/'.$project->image)))
+                            <img src="{{ asset('images/project/'.$project->image) }}" alt="{{ $project->title }}" class="img-fluid" style="width: 100%; height: 250px; object-fit: cover;">
+                            @else
+                            <img src="https://images.pexels.com/photos/3807517/pexels-photo-3807517.jpeg" alt="{{ $project->title }}" class="img-fluid" style="width: 100%; height: 250px; object-fit: cover;">
+                            @endif
+                        </a>
+                        <div class="text p-4 d-block bg-white">
+                            <h3 class="heading mt-2"><a href="{{ route('project.view', $project->id) }}">{{ Str::limit($project->title, 45) }}</a></h3>
+                            <p class="text-muted">{{ Str::limit($project->description ?? '', 80) }}</p>
+                            <div class="mt-3">
+                                <a href="{{ route('project.view', $project->id) }}" class="btn btn-sm" style="background: #0D47A1; color: white; border: none;">Read More →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            @else
+                <div class="col-md-12 text-center">
+                    <p class="text-muted">No ongoing projects available at the moment.</p>
+                </div>
+            @endif
+        </div>
+        @if(isset($ongoing_projects) && count($ongoing_projects) > 0)
+        <div class="row mt-5">
+            <div class="col text-center">
+                <a href="{{ route('project.all') }}" class="btn btn-primary px-4 py-3">View All Projects</a>
+            </div>
+        </div>
+        @endif
+    </div>
+</section>
+
+{{-- Photo Gallery Section (3x3 Grid) --}}
+<section class="ftco-section-3 img" style="padding: 60px 0; background: #ffffff;">
+    <div class="container-fluid" style="max-width: 95%; margin: 0 auto;">
+        <div class="row justify-content-center mb-5 pb-3">
+            <div class="col-md-7 heading-section ftco-animate text-center" data-aos="fade-up">
+                <h2 class="mb-4"><span style="color: #0D47A1;">Photo</span> Gallery</h2>
             </div>
         </div>
         @if(isset($gallery) && count($gallery) > 0)
-        <div class="gallery-masonry" data-aos="fade-up">
-            @foreach($gallery->take(12) as $key => $photo)
+        <div class="row" data-aos="fade-up">
+            @foreach($gallery->take(9) as $key => $photo)
             @php
-                // Create dynamic sizing pattern for masonry effect
-                $sizeClasses = [
-                    'gallery-item-tall', // Image 1: tall
-                    'gallery-item-wide', // Image 2: wide
-                    'gallery-item-normal', // Image 3: normal
-                    'gallery-item-normal', // Image 4: normal
-                    'gallery-item-wide', // Image 5: wide
-                    'gallery-item-tall', // Image 6: tall
-                    'gallery-item-normal', // Image 7: normal
-                    'gallery-item-normal', // Image 8: normal
-                    'gallery-item-tall', // Image 9: tall
-                    'gallery-item-wide', // Image 10: wide
-                    'gallery-item-normal', // Image 11: normal
-                    'gallery-item-normal', // Image 12: normal
-                ];
-                $sizeClass = $sizeClasses[$key % 12];
-                
                 // Determine image path based on source type
                 $imagePath = 'images/gallery/' . $photo->image;
-                if ($photo->source_type === 'program') {
-                    $imagePath = $photo->image_type === 'cover' 
-                        ? 'images/programs/' . $photo->image 
-                        : 'images/programs/gallery/' . $photo->image;
-                } elseif ($photo->source_type === 'project') {
-                    $imagePath = $photo->image_type === 'cover' 
-                        ? 'images/project/' . $photo->image 
-                        : 'images/ongoing_project/gallery/' . $photo->image;
-                } elseif ($photo->source_type === 'news') {
-                    $imagePath = $photo->image_type === 'cover' 
-                        ? 'images/news/' . $photo->image 
-                        : 'images/news/gallery/' . $photo->image;
+                if (isset($photo->source_type)) {
+                    if ($photo->source_type === 'program') {
+                        $imagePath = isset($photo->image_type) && $photo->image_type === 'cover' 
+                            ? 'images/programs/' . $photo->image 
+                            : 'images/programs/gallery/' . $photo->image;
+                    } elseif ($photo->source_type === 'project') {
+                        $imagePath = isset($photo->image_type) && $photo->image_type === 'cover' 
+                            ? 'images/project/' . $photo->image 
+                            : 'images/ongoing_project/gallery/' . $photo->image;
+                    } elseif ($photo->source_type === 'news') {
+                        $imagePath = isset($photo->image_type) && $photo->image_type === 'cover' 
+                            ? 'images/news/' . $photo->image 
+                            : 'images/news/gallery/' . $photo->image;
+                    }
                 }
             @endphp
-            <div class="gallery-item-wrapper {{ $sizeClass }}" data-aos="zoom-in" data-aos-delay="{{ ($key + 1) * 100 }}">
+            <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="{{ ($key + 1) * 100 }}">
                 <a href="{{ asset($imagePath) }}" 
                    class="gallery-item image-popup d-block position-relative overflow-hidden" 
-                   data-title="{{ $photo->title }}" 
-                   data-description="{{ $photo->description }}">
-                    <img src="{{ asset($imagePath) }}" alt="{{ $photo->title }}" class="img-fluid w-100 h-100">
-                    <div class="gallery-overlay">
-                        <span class="icon-search"></span>
-                    </div>
-                    <div class="gallery-title-overlay">
-                        <h5>{{ $photo->title }}</h5>
+                   data-title="{{ $photo->title ?? '' }}" 
+                   data-description="{{ $photo->description ?? '' }}"
+                   style="border-radius: 10px; overflow: hidden; height: 280px;">
+                    <img src="{{ asset($imagePath) }}" alt="{{ $photo->title ?? 'Gallery' }}" class="img-fluid w-100 h-100" style="object-fit: cover;">
+                    <div class="gallery-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(13, 71, 161, 0.7); display: flex; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s ease;">
+                        <span class="icon-search" style="color: white; font-size: 2.5rem;"></span>
                     </div>
                 </a>
             </div>
@@ -718,65 +751,42 @@ Bakultali Mahila Sangshad
     </div>
 </section>
 
-{{-- Latest News Section --}}
-<section class="ftco-section" style="background: linear-gradient(135deg, #E8EAF6 0%, #C5CAE9 100%);">
-    <div class="container">
+{{-- Latest News & Events Section (3x2 Grid) --}}
+<section class="ftco-section" style="background: #ffffff;">
+    <div class="container-fluid" style="max-width: 95%; margin: 0 auto;">
         <div class="row justify-content-center mb-5 pb-3">
             <div class="col-md-7 heading-section ftco-animate text-center" data-aos="fade-up">
-                <h2 class="mb-4">Latest News & Events</h2>
-                <p>Stay updated with BMS's latest news and events, showcasing our work in women's empowerment, disaster preparedness, and community-led development initiatives.</p>
+                <h2 class="mb-4"><span style="color: #0D47A1;">Latest News</span> & Events</h2>
             </div>
         </div>
         <div class="row">
             @if(isset($news) && count($news) > 0)
-                @php $firstNews = $news->first(); $otherNews = $news->skip(1)->take(2); @endphp
-                {{-- Featured News (Left Large) --}}
-                <div class="col-lg-6 mb-4 ftco-animate" data-aos="fade-right">
-                    <div class="featured-news bg-white shadow-sm d-flex flex-column" style="border-radius: 10px; overflow: hidden; height: 100%; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.15)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow=''">
-                        <a href="{{ route('latest.news.view', $firstNews->id) }}" class="d-block position-relative overflow-hidden" style="height: 350px;">
-                            <img src="{{ asset('images/news/'.$firstNews->image) }}" alt="{{ $firstNews->title }}" class="img-fluid w-100 h-100" style="object-fit: cover; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                @foreach($news->take(6) as $key => $newsItem)
+                <div class="col-md-4 mb-4 ftco-animate" data-aos="fade-up" data-aos-delay="{{ ($key + 1) * 100 }}">
+                    <div class="news-card bg-white shadow-sm d-flex flex-column" style="border-radius: 10px; overflow: hidden; height: 100%; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.15)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow=''">
+                        <a href="{{ route('latest.news.view', $newsItem->id) }}" class="d-block position-relative overflow-hidden" style="height: 250px;">
+                            @if(isset($newsItem->image) && $newsItem->image && file_exists(public_path('images/news/'.$newsItem->image)))
+                            <img src="{{ asset('images/news/'.$newsItem->image) }}" alt="{{ $newsItem->title ?? 'News' }}" class="img-fluid w-100 h-100" style="object-fit: cover; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                            @else
+                            <div class="w-100 h-100" style="background: #f0f0f0; display: flex; align-items: center; justify-content: center;"><span style="color: #999;">No Image</span></div>
+                            @endif
                         </a>
                         <div class="p-4 d-flex flex-column flex-grow-1">
                             <div class="mb-3">
-                                <span class="badge bg-primary" style="font-size: 0.85rem; padding: 6px 14px; border-radius: 20px;">Recent</span>
-                                <span class="text-muted ms-2" style="font-size: 0.9rem;"><i class="fa fa-calendar"></i> {{ isset($firstNews->created_at) ? date('M d, Y', strtotime($firstNews->created_at)) : 'Recent' }}</span>
+                                <span class="badge bg-primary" style="font-size: 0.85rem; padding: 6px 14px; border-radius: 20px;">News</span>
+                                @if(isset($newsItem->created_at))
+                                <span class="text-muted ms-2" style="font-size: 0.9rem;"><i class="fa fa-calendar"></i> {{ date('M d, Y', strtotime($newsItem->created_at)) }}</span>
+                                @endif
                             </div>
-                            <h3 class="mb-3" style="font-size: 1.5rem; font-weight: 700; line-height: 1.4;">
-                                <a href="{{ route('latest.news.view', $firstNews->id) }}" style="color: #333; text-decoration: none;">{{ $firstNews->title }}</a>
-                            </h3>
-                            <p class="text-muted mb-4 flex-grow-1" style="font-size: 1rem; line-height: 1.7;">{{ Str::limit($firstNews->description, 180) }}</p>
-                            <a href="{{ route('latest.news.view', $firstNews->id) }}" class="text-primary" style="font-size: 1rem; font-weight: 600; text-decoration: none;">Read More <i class="fa fa-arrow-right"></i></a>
+                            <h4 class="mb-3" style="font-size: 1.2rem; font-weight: 700; line-height: 1.4;">
+                                <a href="{{ route('latest.news.view', $newsItem->id) }}" style="color: #333; text-decoration: none;">{{ Str::limit($newsItem->title ?? '', 60) }}</a>
+                            </h4>
+                            <p class="text-muted mb-4 flex-grow-1" style="font-size: 0.95rem; line-height: 1.6;">{{ Str::limit($newsItem->description ?? '', 100) }}</p>
+                            <a href="{{ route('latest.news.view', $newsItem->id) }}" class="text-primary" style="font-size: 0.95rem; font-weight: 600; text-decoration: none;">Read More <i class="fa fa-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
-                {{-- Other News (Right Stacked) --}}
-                <div class="col-lg-6">
-                    <div class="row">
-                        @foreach($otherNews as $key => $newsItem)
-                        <div class="col-12 mb-4 ftco-animate" data-aos="fade-left" data-aos-delay="{{ ($key + 1) * 100 }}">
-                            <div class="news-card-horizontal shadow-sm bg-white" style="border-radius: 10px; overflow: hidden;">
-                                <div class="row g-0">
-                                    <div class="col-5">
-                                        <a href="{{ route('latest.news.view', $newsItem->id) }}" class="d-block h-100">
-                                            <img src="{{ asset('images/news/'.$newsItem->image) }}" alt="{{ $newsItem->title }}" class="img-fluid w-100 h-100" style="object-fit: cover; min-height: 220px;">
-                                        </a>
-                                    </div>
-                                    <div class="col-7">
-                                        <div class="p-3 h-100 d-flex flex-column">
-                                            <div class="mb-2">
-                                                <span class="text-muted" style="font-size: 0.85rem;"><i class="fa fa-calendar"></i> {{ isset($newsItem->created_at) ? date('M d, Y', strtotime($newsItem->created_at)) : 'Recent' }}</span>
-                                            </div>
-                                            <h4 class="mb-2" style="font-size: 1.1rem; font-weight: 600;"><a href="{{ route('latest.news.view', $newsItem->id) }}" style="color: #333;">{{ Str::limit($newsItem->title, 60) }}</a></h4>
-                                            <p class="text-muted mb-auto" style="font-size: 0.9rem; line-height: 1.6;">{{ Str::limit($newsItem->description, 80) }}</p>
-                                            <a href="{{ route('latest.news.view', $newsItem->id) }}" class="text-primary mt-2" style="font-size: 0.9rem; font-weight: 500;">Read More <i class="fa fa-arrow-right"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        @endforeach
-                    </div>
-                </div>
+                @endforeach
             @else
                 <div class="col-md-12 text-center">
                     <p class="text-muted">No news available at the moment.</p>
@@ -787,6 +797,81 @@ Bakultali Mahila Sangshad
         <div class="row mt-5">
             <div class="col text-center">
                 <a href="{{ route('latest.news.all') }}" class="btn btn-primary px-4 py-3">View All News</a>
+            </div>
+        </div>
+        @endif
+    </div>
+</section>
+
+{{-- Success Stories Section - Alternating Layout --}}
+<section class="ftco-section bg-light">
+    <div class="row justify-content-center mb-5 pb-3">
+        <div class="col-md-7 heading-section ftco-animate text-center" data-aos="fade-up">
+            <h2 class="mb-4" style="color: #000000; text-transform: uppercase;">Sponsors for Growing Fund</h2>
+        </div>
+    </div>
+    <div class="container">
+        <div class="sponsorship-banner" style="padding: 50px 40px; border-radius: 12px; text-align: center; margin-bottom: 60px; background: #5E35B1; box-shadow: 0 10px 30px rgba(94, 53, 177, 0.2);">
+            <p style="color: #000000; font-size: 1.2rem; font-weight: 500; line-height: 1.8; margin-bottom: 0;">
+                Sponsor for our growing fund to support women's empowerment programs, educational initiatives, and disaster preparedness in rural Bangladesh. Your contribution creates lasting change.
+            </p>
+            <div class="mt-4">
+                <a href="{{ route('contact') }}" class="btn btn-light px-5 py-3" style="font-weight: 600; color: #5E35B1; border-radius: 30px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);">Become a Sponsor</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{-- Partners & Donors Section with Infinite Auto-Scrolling Carousel --}}
+<section class="ftco-section bg-white">
+    <div class="container">
+        <div class="row justify-content-center mb-5 pb-3">
+            <div class="col-md-7 heading-section ftco-animate text-center" data-aos="fade-up">
+                <h2 class="mb-4"><span style="color: #0D47A1;">Partners</span> & Donors</h2>
+            </div>
+        </div>
+        @if(isset($partners) && count($partners) > 0)
+        <div style="overflow: hidden; padding: 30px 0;">
+            <style>
+                .carousel-container {
+                    overflow: hidden;
+                    width: 100%;
+                }
+                
+                .carousel-track {
+                    display: flex;
+                    will-change: transform;
+                }
+                
+                .carousel-item {
+                    flex: 0 0 auto;
+                    width: 230px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+            </style>
+            
+            <div class="carousel-container">
+                <div class="carousel-track" id="carouselTrack">
+                    {{-- Original set of partners (no duplicates) --}}
+                    @foreach($partners as $partner)
+                    <div class="carousel-item">
+                        <div style="width: 180px; height: 100px; display: flex; align-items: center; justify-content: center; padding: 10px; border: 1px solid #e9ecef; border-radius: 10px; background: white; transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.boxShadow='0 10px 30px rgba(0,0,0,0.15)'; this.style.transform='scale(1.08)'" onmouseout="this.style.boxShadow='none'; this.style.transform='scale(1)'">
+                            @if(isset($partner->image) && $partner->image && file_exists(public_path('images/partner/'.$partner->image)))
+                            <img src="{{ asset('images/partner/'.$partner->image) }}" alt="{{ $partner->name ?? 'Partner' }}" class="img-fluid" style="max-height: 100%; max-width: 100%; object-fit: contain;">
+                            @else
+                            <span style="color: #666; font-size: 0.9rem; text-align: center; font-weight: 600;">{{ $partner->name ?? 'Partner' }}</span>
+                            @endif
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+        @else
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <p class="text-muted">No partners available at the moment.</p>
             </div>
         </div>
         @endif
@@ -813,23 +898,29 @@ Bakultali Mahila Sangshad
                             @if($key % 2 == 0)
                             <div class="col-lg-5">
                                 <div class="story-image-container position-relative" style="height: 400px; overflow: hidden;">
-                                    <img src="{{ asset('images/stories/'.$story->image) }}" alt="{{ $story->beneficiary_name }}" class="img-fluid w-100 h-100" style="object-fit: cover;">
+                                    @if(isset($story->image) && $story->image && file_exists(public_path('images/stories/'.$story->image)))
+                                    <img src="{{ asset('images/stories/'.$story->image) }}" alt="{{ $story->beneficiary_name ?? 'Story' }}" class="img-fluid w-100 h-100" style="object-fit: cover;">
+                                    @else
+                                    <div class="w-100 h-100" style="background: #f0f0f0; display: flex; align-items: center; justify-content: center;"><span style="color: #999;">No Image</span></div>
+                                    @endif
                                     {{-- Quote Icon Overlay --}}
                                     <div class="position-absolute d-flex align-items-center justify-content-center" style="top: 30px; right: 30px; width: 80px; height: 80px; background: linear-gradient(135deg, #5E35B1 0%, #7E57C2 100%); border-radius: 50%; box-shadow: 0 8px 20px rgba(94, 53, 177, 0.4);">
                                         <i class="icon-quote-left" style="font-size: 2rem; color: white;"></i>
                                     </div>
                                     {{-- Rating Badge --}}
+                                    @if(isset($story->rating))
                                     <div class="position-absolute" style="bottom: 20px; left: 20px;">
                                         <div class="rating bg-white px-3 py-2" style="border-radius: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.15);">
                                             @for($i = 1; $i <= 5; $i++)
                                                 @if($i <= $story->rating)
-                                                    <span style="color: #ffc107; font-size: 1.2rem;">★</span>
+                                                    <span style="color: #5E35B1; font-size: 1.2rem;">★</span>
                                                 @else
                                                     <span style="color: #e0e0e0; font-size: 1.2rem;">☆</span>
                                                 @endif
                                             @endfor
                                         </div>
                                     </div>
+                                    @endif
                                 </div>
                             </div>
                             @endif
@@ -841,15 +932,15 @@ Bakultali Mahila Sangshad
                                         <span class="badge" style="background: linear-gradient(135deg, #5E35B1 0%, #7E57C2 100%); color: white; font-size: 0.85rem; padding: 8px 16px; border-radius: 20px;">Success Story #{{ $key + 1 }}</span>
                                     </div>
                                     <p class="story-quote mb-4" style="font-size: 1.15rem; line-height: 1.8; font-style: italic; color: #555; position: relative; padding-left: 20px; border-left: 3px solid #5E35B1;">
-                                        "{{ $story->description }}"
+                                        "{{ $story->description ?? '' }}"
                                     </p>
                                     <div class="story-author d-flex align-items-center mt-4 pt-4" style="border-top: 2px solid #f8f9fa;">
                                         <div class="author-icon me-3 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px; background: linear-gradient(135deg, #5E35B1 0%, #7E57C2 100%); border-radius: 50%; flex-shrink: 0;">
                                             <i class="icon-user" style="font-size: 1.8rem; color: white;"></i>
                                         </div>
                                         <div>
-                                            <h5 class="mb-1" style="font-size: 1.2rem; font-weight: 700; color: #333;">{{ $story->beneficiary_name }}</h5>
-                                            <p class="mb-0 text-muted" style="font-size: 1rem;">{{ $story->beneficiary_title }}</p>
+                                            <h5 class="mb-1" style="font-size: 1.2rem; font-weight: 700; color: #333;">{{ $story->beneficiary_name ?? 'Beneficiary' }}</h5>
+                                            <p class="mb-0 text-muted" style="font-size: 1rem;">{{ $story->beneficiary_title ?? '' }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -859,23 +950,29 @@ Bakultali Mahila Sangshad
                             @if($key % 2 != 0)
                             <div class="col-lg-5">
                                 <div class="story-image-container position-relative" style="height: 400px; overflow: hidden;">
-                                    <img src="{{ asset('images/stories/'.$story->image) }}" alt="{{ $story->beneficiary_name }}" class="img-fluid w-100 h-100" style="object-fit: cover;">
+                                    @if(isset($story->image) && $story->image && file_exists(public_path('images/stories/'.$story->image)))
+                                    <img src="{{ asset('images/stories/'.$story->image) }}" alt="{{ $story->beneficiary_name ?? 'Story' }}" class="img-fluid w-100 h-100" style="object-fit: cover;">
+                                    @else
+                                    <div class="w-100 h-100" style="background: #f0f0f0; display: flex; align-items: center; justify-content: center;"><span style="color: #999;">No Image</span></div>
+                                    @endif
                                     {{-- Quote Icon Overlay --}}
                                     <div class="position-absolute d-flex align-items-center justify-content-center" style="top: 30px; left: 30px; width: 80px; height: 80px; background: linear-gradient(135deg, #0D47A1 0%, #1565C0 100%); border-radius: 50%; box-shadow: 0 8px 20px rgba(13, 71, 161, 0.4);">
                                         <i class="icon-quote-left" style="font-size: 2rem; color: white;"></i>
                                     </div>
                                     {{-- Rating Badge --}}
+                                    @if(isset($story->rating))
                                     <div class="position-absolute" style="bottom: 20px; right: 20px;">
                                         <div class="rating bg-white px-3 py-2" style="border-radius: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.15);">
                                             @for($i = 1; $i <= 5; $i++)
                                                 @if($i <= $story->rating)
-                                                    <span style="color: #ffc107; font-size: 1.2rem;">★</span>
+                                                    <span style="color: #5E35B1; font-size: 1.2rem;">★</span>
                                                 @else
                                                     <span style="color: #e0e0e0; font-size: 1.2rem;">☆</span>
                                                 @endif
                                             @endfor
                                         </div>
                                     </div>
+                                    @endif
                                 </div>
                             </div>
                             @endif
@@ -896,6 +993,58 @@ Bakultali Mahila Sangshad
             </div>
         </div>
         @endif
+    </div>
+</section>
+
+{{-- Our Impact Section --}}
+<section class="ftco-counter ftco-intro" id="section-counter" style="position: relative; overflow: hidden; background-color: #5E35B1; padding: 5em 0;">
+    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: url('{{ asset('frontend/images/bg_2.jpg') }}'); background-size: cover; background-position: center; opacity: 0.1;"></div>
+    <div class="container" style="position: relative; z-index: 2;">
+        <div class="row justify-content-center mb-5">
+            <div class="col-md-12 text-center heading-section heading-section-white ftco-animate" data-aos="fade-up">
+                <h2 class="mb-4" style="color: white; font-weight: 700; text-transform: uppercase; letter-spacing: 2px;">Our Impact</h2>
+            </div>
+        </div>
+        
+        <div class="row justify-content-center text-center">
+            @forelse($impact->sortBy('order') as $key => $item)
+            <div class="col-md-3 col-sm-6 col-6 mb-4 ftco-animate" data-aos="fade-up" data-aos-delay="{{ ($key % 4 + 1) * 100 }}">
+                <div class="block-18 d-flex justify-content-center align-items-center flex-column" style="background: rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 30px 20px; border: 1px solid rgba(255, 255, 255, 0.2); transition: transform 0.3s ease; height: 100%;">
+                    <div class="icon d-flex justify-content-center align-items-center mb-3 text-white" style="font-size: 45px;">
+                        @if(isset($item->icon) && $item->icon)
+                            <span class="{{ $item->icon }}"></span>
+                        @else
+                            @php
+                                $fallbackIcons = ['flaticon-charity', 'flaticon-donation', 'flaticon-ecology', 'flaticon-group'];
+                            @endphp
+                            <span class="{{ $fallbackIcons[$key % 4] }}"></span>
+                        @endif
+                    </div>
+                    <div class="text w-100">
+                        <span class="d-flex align-items-center justify-content-center text-white">
+                            @php
+                                $val = $item->metric_value ?? '0';
+                                $num = filter_var($val, FILTER_SANITIZE_NUMBER_INT) ?: '0';
+                                $extra = preg_replace('/[0-9,]/', '', $val);
+                            @endphp
+                            <strong class="number" data-number="{{ str_replace(',', '', $num) }}" style="font-size: 40px; font-weight: 700;">0</strong>
+                            @if($extra)
+                                <strong style="font-size: 30px; margin-left: 2px;">{{ $extra }}</strong>
+                            @endif
+                        </span>
+                        @if(isset($item->metric_unit) && $item->metric_unit)
+                            <span class="d-block mt-1" style="color: rgba(255, 255, 255, 0.9); font-size: 0.95rem;">{{ $item->metric_unit }}</span>
+                        @endif
+                        <span class="d-block mt-2" style="color: #ffffff; font-weight: 500; font-size: 1.1rem;">{{ $item->title ?? 'Impact' }}</span>
+                    </div>
+                </div>
+            </div>
+            @empty
+            <div class="col-12 text-center text-white">
+                <p>Impact data is being updated.</p>
+            </div>
+            @endforelse
+        </div>
     </div>
 </section>
 
@@ -942,50 +1091,72 @@ Bakultali Mahila Sangshad
                 </div>
             </div>
         </div>
-
-        {{-- Newsletter Banner --}}
-        <div class="row" data-aos="fade-right" data-aos-delay="300">
-            <div class="col-12">
-                <div class="join-banner d-flex align-items-center" style="background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%); border-radius: 15px; overflow: hidden; min-height: 180px; transition: all 0.3s; border-left: 8px solid #0D47A1;" onmouseover="this.style.transform='translateX(10px)'; this.style.boxShadow='0 10px 40px rgba(13,71,161,0.3)'" onmouseout="this.style.transform='translateX(0)'; this.style.boxShadow=''">
-                    <div class="banner-icon d-flex align-items-center justify-content-center" style="width: 200px; background: linear-gradient(135deg, #0D47A1 0%, #1565C0 100%); height: 100%; flex-shrink: 0;">
-                        <i class="icon-envelope" style="font-size: 4rem; color: white;"></i>
-                    </div>
-                    <div class="banner-content flex-grow-1 px-5 py-4">
-                        <h3 style="font-weight: 700; color: #333; font-size: 1.8rem; font-family: 'Work Sans', Arial, sans-serif; margin-bottom: 15px;">Subscribe to Our Newsletter</h3>
-                        <p style="color: #666; font-size: 1rem; line-height: 1.6; font-family: 'Work Sans', Arial, sans-serif; margin-bottom: 20px;">Stay updated with our latest news, stories, and impact reports delivered to your inbox.</p>
-                        
-                        @if (session()->has('success'))
-                        <div class="alert alert-success" style="border-radius: 10px; margin-bottom: 20px;">
-                            <i class="fa fa-check-circle"></i> {{ session()->get('success') }}
-                        </div>
-                        @endif
-                        
-                        <form action="{{ route('user.subscribe') }}" method="post">
-                            @csrf
-                            <div class="row">
-                                <div class="col-md-5 mb-3">
-                                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="Your Name" value="{{ old('name') }}" style="border-radius: 10px; padding: 12px 20px; border: 2px solid #e9ecef; font-size: 1rem; font-family: 'Work Sans', Arial, sans-serif;" onfocus="this.style.borderColor='#0D47A1'" onblur="this.style.borderColor='#e9ecef'">
-                                    @error('name')
-                                    <div class="text-danger mt-1" style="font-size: 0.875rem;">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                                <div class="col-md-5 mb-3">
-                                    <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Your Email" value="{{ old('email') }}" style="border-radius: 10px; padding: 12px 20px; border: 2px solid #e9ecef; font-size: 1rem; font-family: 'Work Sans', Arial, sans-serif;" onfocus="this.style.borderColor='#0D47A1'" onblur="this.style.borderColor='#e9ecef'">
-                                    @error('email')
-                                    <div class="text-danger mt-1" style="font-size: 0.875rem;">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                                <div class="col-md-2 mb-3">
-                                    <button type="submit" class="btn btn-lg w-100" style="background: linear-gradient(135deg, #0D47A1 0%, #1565C0 100%); color: white; border: none; border-radius: 10px; font-weight: 600; font-family: 'Work Sans', Arial, sans-serif; font-size: 1rem; padding: 12px 10px;">Subscribe →</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </section>
+
+<script>
+// Circular Queue Carousel
+function initCarousel() {
+    const track = document.getElementById('carouselTrack');
+    if (!track) return;
+    
+    const itemWidth = 230;
+    const items = track.querySelectorAll('.carousel-item');
+    const totalItems = items.length;
+    
+    // Only show 5 items at a time
+    const visibleItems = 5;
+    const visibleWidth = itemWidth * visibleItems;
+    
+    let currentX = 0;
+    let isMoving = true;
+    let lastTime = Date.now();
+    const animationDuration = 40000; // 40 seconds for full cycle
+    const pixelsPerMs = (itemWidth * totalItems) / animationDuration;
+    
+    function animate() {
+        if (isMoving) {
+            const now = Date.now();
+            const elapsed = now - lastTime;
+            currentX += pixelsPerMs * elapsed;
+            
+            // When an item scrolls out of view, move it to the end of the queue
+            while (currentX >= itemWidth) {
+                // Move first item to the end
+                const firstItem = track.querySelector('.carousel-item');
+                if (firstItem) {
+                    track.appendChild(firstItem);
+                    currentX -= itemWidth;
+                }
+            }
+            
+            track.style.transform = `translateX(-${currentX}px)`;
+            lastTime = now;
+        } else {
+            lastTime = Date.now();
+        }
+        
+        requestAnimationFrame(animate);
+    }
+    
+    // Pause on hover
+    track.parentElement.addEventListener('mouseenter', () => {
+        isMoving = false;
+    });
+    
+    track.parentElement.addEventListener('mouseleave', () => {
+        isMoving = true;
+        lastTime = Date.now();
+    });
+    
+    animate();
+}
+
+document.addEventListener('DOMContentLoaded', initCarousel);
+$(document).ready(function() {
+    initCarousel();
+});
+</script>
 
 @endsection
 

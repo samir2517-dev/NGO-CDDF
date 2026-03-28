@@ -99,13 +99,13 @@
                             box-shadow: 0 10px 40px rgba(0,0,0,0.08);
                             position: relative;
                         ">
-                            <p style="
+                            <div style="
                                 font-size: 16px;
                                 line-height: 1.8;
                                 color: #555;
                                 text-align: justify;
                                 margin: 0;
-                            ">{{ $item->description }}</p>
+                            ">{!! $item->description !!}</div>
                             
                             <!-- Decorative Bottom Border -->
                             <div style="

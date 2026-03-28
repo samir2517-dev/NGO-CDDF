@@ -20,7 +20,7 @@ class PublicationController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'thumbnail' => 'nullable|mimes:jpg,png,jpeg,gif|max:512',
+            'thumbnail' => 'nullable|mimes:jpg,png,jpeg,gif|max:10240',
             'pdf_file' => 'nullable|mimes:pdf|max:10240',
         ]);
 
@@ -67,7 +67,7 @@ class PublicationController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'thumbnail' => 'nullable|mimes:jpg,png,jpeg,gif|max:512',
+            'thumbnail' => 'nullable|mimes:jpg,png,jpeg,gif|max:10240',
             'pdf_file' => 'nullable|mimes:pdf|max:10240',
         ]);
 

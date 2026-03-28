@@ -44,13 +44,12 @@
                 </li>
 
                 <!-- Get Involved -->
-                <li class="nav-item dropdown {{ in_array(Route::currentRouteName(), ['volunterr.opportunities', 'donate', 'invoked.career']) ? 'active' : '' }}">
+                <li class="nav-item dropdown {{ in_array(Route::currentRouteName(), ['volunterr.opportunities', 'invoked.career']) ? 'active' : '' }}">
                     <a class="nav-link dropdown-toggle" href="#" id="involvedDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
                         Get Involved
                     </a>
                     <div class="dropdown-menu" aria-labelledby="involvedDropdown">
                         <a class="dropdown-item" href="{{ route('volunterr.opportunities') }}">Volunteer Opportunities</a>
-                        <a class="dropdown-item" href="{{ route('donate') }}">Donate</a>
                         <a class="dropdown-item" href="{{ route('invoked.career') }}">Career with BMS</a>
                     </div>
                 </li>
@@ -71,7 +70,7 @@
 
                 <!-- Contact -->
                 <li class="nav-item {{ Route::currentRouteName() == 'contact' ? 'active' : '' }}"><a href="{{ route('contact') }}" class="nav-link">Contact</a></li>
-                <li class="nav-item"><a href="{{ route('donate') }}" class="nav-link">Donate</a></li>
+                <li class="nav-item {{ Route::currentRouteName() == 'donate' ? 'active' : '' }}"><a href="{{ route('donate') }}" class="nav-link">Donate</a></li>
             </ul>
         </div>
     </div>

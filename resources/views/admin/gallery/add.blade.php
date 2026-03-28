@@ -13,7 +13,7 @@
                         <div class="col-md-12">
                             <label for="title" class="form-label">Title</label>
                             <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" id="title" value="" placeholder="Enter Slider Top Title">
-                            <span class="text-info">Image Dimension Must be (725 X 375) and maximum size 300 kb.</span>
+                            <span class="text-info">Image Dimension Must be (725 X 375) and maximum size 10 MB.</span>
                             @error('title')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
@@ -27,7 +27,7 @@
                         </div>
                         <div class="col-md-12">
                             <label for="description" class="form-label">Description</label>
-                            <textarea id="description" name="description" class="form-control @error('description') is-invalid @enderror" rows="3">
+                            <textarea id="description" name="description" class="form-control summernote @error('description') is-invalid @enderror" rows="3">
 
                             </textarea>
                             @error('description')

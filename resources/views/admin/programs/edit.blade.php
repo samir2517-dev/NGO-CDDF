@@ -58,7 +58,7 @@
                         
                         <div class="col-md-12">
                             <label for="description" class="form-label">Description</label>
-                            <textarea id="description" name="description" class="form-control @error('description') is-invalid @enderror" rows="5">{{ $data->description }}</textarea>
+                            <textarea id="description" name="description" class="form-control summernote @error('description') is-invalid @enderror" rows="10">{{ $data->description }}</textarea>
                             @error('description')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror

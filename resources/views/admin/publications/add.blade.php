@@ -20,7 +20,7 @@
                         <div class="col-md-12">
                             <label for="thumbnail" class="form-label">Thumbnail Image</label>
                             <input type="file" name="thumbnail" class="form-control @error('thumbnail') is-invalid @enderror" id="thumbnail">
-                            <span class="text-info">Thumbnail image maximum size 512 KB. Supported formats: JPG, PNG, JPEG, GIF</span>
+                            <span class="text-info">Thumbnail image maximum size 10 MB. Supported formats: JPG, PNG, JPEG, GIF</span>
                             @error('thumbnail')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
@@ -35,7 +35,7 @@
                         </div>
                         <div class="col-md-12">
                             <label for="description" class="form-label">Description</label>
-                            <textarea id="description" name="description" class="form-control @error('description') is-invalid @enderror" rows="5" placeholder="Enter publication description">{{ old('description') }}</textarea>
+                            <textarea id="description" name="description" class="form-control summernote @error('description') is-invalid @enderror" rows="10" placeholder="Enter publication description">{{ old('description') }}</textarea>
                             @error('description')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror

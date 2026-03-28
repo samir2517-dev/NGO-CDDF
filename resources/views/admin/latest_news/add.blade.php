@@ -20,7 +20,7 @@
                         <div class="col-md-12">
                             <label for="img" class="form-label">Cover Image (Required)</label>
                             <input type="file" name="image" class="form-control @error('image') is-invalid @enderror" id="img">
-                            <span class="text-info">This is the main cover image for the news. Image Dimension Must be (725 X 375) and maximum size 300 kb.</span>
+                            <span class="text-info">This is the main cover image for the news. Image Dimension Must be (725 X 375) and maximum size 10 MB.</span>
                             @error('image')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
@@ -32,7 +32,7 @@
                         </div>
                         <div class="col-md-12">
                             <label for="description" class="form-label">Description</label>
-                            <textarea id="description" name="description" class="form-control @error('description') is-invalid @enderror" rows="3">
+                            <textarea id="description" name="description" class="form-control summernote @error('description') is-invalid @enderror" rows="10">
 
                             </textarea>
                             @error('description')

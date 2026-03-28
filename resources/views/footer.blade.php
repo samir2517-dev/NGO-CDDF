@@ -70,7 +70,7 @@
         </div>
         <div class="row">
             <div class="col-md-12 text-center">
-                <p>Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved by <a href="{{ url('/') }}" target="_blank">BMS</a> | Developed By: <a href="#" title="Noakhali Science and Technology University">NSTU Software Development Team</a></p>
+                <p>Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved by <a href="{{ url('/') }}" target="_blank">BMS</a></p>
             </div>
         </div>
     </div>

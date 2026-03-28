@@ -40,8 +40,8 @@
                                         </div>
                                     @elseif($method->type == 'bank')
                                         <i class="bx bxs-bank" style="font-size: 60px;"></i>
-                                    @elseif(file_exists(public_path('img/'.$method->type.'.png')))
-                                        <img src="{{ asset('img/'.$method->type.'.png') }}" alt="{{ $method->type }}" style="max-width: 80px; max-height: 80px;">
+                                    @elseif(in_array(strtolower((string) $method->type), ['bkash', 'nagad', 'rocket', 'upay', 'visa']))
+                                        <i class="bx bxs-wallet" style="font-size: 60px;"></i>
                                     @else
                                         <i class="bx bx-money" style="font-size: 60px;"></i>
                                     @endif
@@ -199,10 +199,18 @@
                                 <span style="color: #1e3a8a;">Please make your donation first, then submit this form with the transaction details. We will verify your donation and contact you soon.</span>
                             </div>
 
-                            <button type="submit" class="btn btn-lg w-100 text-white fw-bold" style="background: linear-gradient(135deg, #0D47A1 0%, #1565C0 100%); border: none; border-radius: 10px; padding: 15px; font-size: 18px; transition: all 0.3s ease;">
+                            <!-- reCAPTCHA v2 Checkbox -->
+                            <div class="g-recaptcha" data-sitekey="{{ config('services.recaptcha.site_key') }}" style="margin: 20px 0;"></div>
+                            @error('g-recaptcha-response')
+                                <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                            @enderror
+
+                            <button type="submit" class="btn btn-lg w-100 text-white fw-bold" style="background: linear-gradient(135deg, #0D47A1 0%, #1565C0 100%); border: none; border-radius: 10px; padding: 15px; font-size: 18px; transition: all 0.3s ease; cursor: pointer;">
                                 <i class="bx bx-paper-plane me-2"></i>Submit Donation Information
                             </button>
                         </form>
+                        <!-- reCAPTCHA v2 Script - Auto Renders Widget -->
+                        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
                     </div>
                 </div>
             </div>

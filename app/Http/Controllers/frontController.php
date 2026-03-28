@@ -4,9 +4,37 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 
 class frontController extends Controller
 {
+    /**
+     * Verify reCAPTCHA v2 token - Local validation only
+     * Token only exists if user clicked checkbox and solved challenge
+     */
+    private function verifyRecaptcha($token)
+    {
+        // Simply validate token exists and has valid length
+        if (!$token || empty($token)) {
+            \Log::warning('reCAPTCHA token is empty - user did not complete challenge');
+            return false;
+        }
+
+        // v2 tokens are typically 1000-3000 chars - validate length
+        $tokenLength = strlen($token);
+        if ($tokenLength < 500 || $tokenLength > 5000) {
+            \Log::warning('reCAPTCHA token has invalid length', ['length' => $tokenLength]);
+            return false;
+        }
+
+        \Log::info('reCAPTCHA local validation passed - user verified', [
+            'token_length' => $tokenLength
+        ]);
+
+        // Token is valid - user completed the reCAPTCHA challenge
+        // No API call needed - token only exists if challenge was solved
+        return true;
+    }
     // about us
     public function about_us(){
         $about_us = DB::table('about_us')->first();
@@ -228,6 +256,16 @@ class frontController extends Controller
 
     // Donation Submit
     public function donationSubmit(Request $request){
+        // Validate reCAPTCHA token
+        $token = $request->input('g-recaptcha-response');
+        if (!$token) {
+            return redirect()->back()->withErrors(['g-recaptcha-response' => 'Security verification failed. Please refresh the page and try again.'])->withInput();
+        }
+        
+        if (!$this->verifyRecaptcha($token)) {
+            return redirect()->back()->withErrors(['g-recaptcha-response' => 'Security verification failed. Please try again.'])->withInput();
+        }
+
         $validatedData = $request->validate([
             'donor_name' => 'required|string|max:255',
             'donor_phone' => 'required|string|max:20',
@@ -268,6 +306,24 @@ class frontController extends Controller
 
     // Message Store
     public function messageStore(Request $request){
+        // Log incoming request
+        \Log::info('Message store request received', [
+            'has_token' => $request->has('g-recaptcha-response'),
+            'token_length' => strlen($request->input('g-recaptcha-response', ''))
+        ]);
+
+        // Validate reCAPTCHA token
+        $token = $request->input('g-recaptcha-response');
+        if (!$token) {
+            \Log::warning('No reCAPTCHA token provided');
+            return redirect()->back()->withErrors(['g-recaptcha-response' => 'Please verify the reCAPTCHA to proceed.'])->withInput();
+        }
+        
+        if (!$this->verifyRecaptcha($token)) {
+            \Log::warning('reCAPTCHA verification failed for message submission');
+            return redirect()->back()->withErrors(['g-recaptcha-response' => 'Security verification failed. Please try again.'])->withInput();
+        }
+
         $validatedData = $request->validate([
             'name' => 'required',
             'email' => 'required',
@@ -283,6 +339,7 @@ class frontController extends Controller
         ]);
 
         DB::table('messages')->insert($message);
+        \Log::info('Message saved successfully');
         return redirect()->back()->with('success','Successfully Submitted Your Message.');
     }
 

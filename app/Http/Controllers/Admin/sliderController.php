@@ -19,7 +19,7 @@ class sliderController extends Controller
         $validated = $request->validate([
             'title' => 'required',
             'description' => 'required',
-            'image' => 'required|mimes:jpeg,png,jpg',
+            'image' => 'required|mimes:jpeg,png,jpg|max:10240',
         ]);
 
         $imageName = '';

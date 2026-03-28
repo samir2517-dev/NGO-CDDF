@@ -20,7 +20,7 @@
                         <div class="col-md-12">
                             <label for="img" class="form-label">Image</label>
                             <input type="file" name="image" class="form-control" id="img">
-                            <span class="text-info">Image Dimension Must be (1920 X 700) and Size Maximum 500 kb</span>
+                            <span class="text-info">Image Dimension Must be (1920 X 700) and Size Maximum 10 MB</span>
                         </div>
                         <div class="col-md-12">
                             <label for="img" class="form-label">Old Image:</label>
@@ -28,7 +28,7 @@
                         </div>
                         <div class="col-md-12">
                             <label for="description" class="form-label">Description <span class="text-danger">*</span></label>
-                            <textarea id="description" name="description" class="form-control @error('description') is-invalid @enderror" rows="3">
+                            <textarea id="description" name="description" class="form-control summernote @error('description') is-invalid @enderror" rows="3">
                                 {{ $slider->description }}
                             </textarea>
                             @error('description')

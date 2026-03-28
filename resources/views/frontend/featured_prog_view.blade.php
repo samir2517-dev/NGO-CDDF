@@ -44,7 +44,7 @@
                     <!-- Program Content -->
                     <div class="card-body" style="padding: 50px;">
                         <div style="font-size: 18px; line-height: 1.9; color: #2c3e50; text-align: justify;">
-                            {!! nl2br(e($program->description)) !!}
+                            {!! $program->description !!}
                         </div>
 
                         <!-- Photo Gallery -->

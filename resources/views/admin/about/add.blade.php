@@ -12,7 +12,7 @@
                         @csrf
                         <div class="col-md-12">
                             <label for="description" class="form-label">Description</label>
-                            <textarea id="description" name="description" class="form-control @error('description') is-invalid @enderror" rows="3">
+                            <textarea id="description" name="description" class="form-control summernote @error('description') is-invalid @enderror" rows="10">
                                 {{ isset($about->description)?$about->description:'' }}
                             </textarea>
                             @error('description')

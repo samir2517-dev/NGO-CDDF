@@ -70,7 +70,7 @@
                                                 About This Opportunity
                                             </div>
                                             <div style="font-size: 15px; color: #2c3e50; line-height: 1.7;">
-                                                {{ $volunteer->description }}
+                                                {!! $volunteer->description !!}
                                             </div>
                                         </div>
                                     </div>
