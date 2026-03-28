@@ -121,11 +121,18 @@
     <link rel="stylesheet" href="{{ asset('admin-assets/css/style.css') }}">
     
     <!-- Favicon -->
-    @if(function_exists('application') && application() && isset(application()->fav_icon))
-        <link rel="shortcut icon" href="{{ asset('images/application/'.application()->fav_icon) }}" />
-    @else
-        <link rel="shortcut icon" href="{{ asset('admin-assets/images/favicon.png') }}" />
-    @endif
+    @php
+        $app = function_exists('application') ? application() : null;
+        if ($app && !empty($app->fav_icon)) {
+            $favIconPath = 'images/application/' . $app->fav_icon;
+        } elseif ($app && !empty($app->main_logo)) {
+            $favIconPath = 'images/application/' . $app->main_logo;
+        } else {
+            $favIconPath = 'images/application/951510main_logo.png';
+        }
+    @endphp
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset($favIconPath) }}?v={{ time() }}" />
+    <link rel="icon" type="image/png" href="{{ asset($favIconPath) }}?v={{ time() }}" />
     
     <!-- Dark Mode Styles -->
     <style>
